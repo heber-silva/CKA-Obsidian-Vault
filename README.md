@@ -1,2 +1,0 @@
-# CKA-Obsidian-Vault
- 
