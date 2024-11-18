@@ -1,0 +1,4 @@
+#prova
+- [[Control Plane Components]]: The control plane's components make global decisions about the cluster (for example, scheduling), as well as detecting and responding to cluster events (for example, starting up a new [pod](https://kubernetes.io/docs/concepts/workloads/pods/) when a Deployment's replicas field is unsatisfied)
+- [[Node Components]]: Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.
+- [[Addons]]: Addons use Kubernetes resources ([DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset), [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), etc) to implement cluster features. Because these are providing cluster-level features, namespaced resources for addons belong within the `kube-system` namespace.
