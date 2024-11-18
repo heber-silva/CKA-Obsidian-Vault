@@ -109,55 +109,17 @@
             "id": "8dc18246cc46c07d",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "diff-view",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "Storage/Volume.md",
+                "staged": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "6dd3b956766a03d4",
-            "type": "leaf",
-            "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": -1047,
-                  "y": 978,
-                  "zoom": 0
-                }
-              },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "dc9daba3f5657d75",
-            "type": "leaf",
-            "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 1421.5,
-                  "y": 571.5,
-                  "zoom": -2.410606049669954
-                }
-              },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "git-pull-request",
+              "title": "Diff View (Volume)"
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -248,12 +210,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Untitled"
+              "title": "Outgoing links"
             }
           },
           {
@@ -274,11 +235,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Untitled.canvas"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline"
             }
           },
           {
@@ -311,16 +270,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "698d7f6d5d598a85",
+  "active": "8dc18246cc46c07d",
   "lastOpenFiles": [
-    "Certified Kubernetes Administrator(CKA).md",
+    "Monitoring, Logging, and Debugging/Troubleshooting Applications/Debug Running Pods.md",
+    "Kubernetes Components/Kubernetes Components.md",
+    "Kubernetes Components/Control Plane Components.md",
     "Untitled.canvas",
+    "Storage/Volume.md",
+    "Workloads/Pod.md",
+    "Certified Kubernetes Administrator(CKA).md",
     "Kubernetes Achitecture/Cloud Controller Manager.md",
     "Kubernetes Achitecture/Node.md",
-    "Monitoring, Logging, and Debugging/Troubleshooting Applications/Debug Running Pods.md",
     "Storage/Storage.md",
-    "Workloads/Pod.md",
-    "Kubernetes Components/Control Plane Components.md",
     "Kubernetes Achitecture/Kubernetes Architecture.md",
     "Installation/Installation & Configuration.md",
     "Networking/Networking.md",
@@ -348,7 +309,6 @@
     "Images/Pasted image 20241117222423.png",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Metrics For Kubernetes System Components.md",
     "Security/Policies.md",
-    "Policies/Limit Ranges.md",
     "Policies",
     "Container",
     "Security",
