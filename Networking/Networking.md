@@ -65,7 +65,7 @@ In order for an [Ingress](https://kubernetes.io/docs/concepts/services-networki
 
 Gateway API is a family of API kinds that provide dynamic infrastructure provisioning and advanced traffic routing.
 
-##### [[EndpointSlices]]
+##### [[EndpointSlice]]s
 
 The EndpointSlice API is the mechanism that Kubernetes uses to let your Service scale to handle large numbers of backends, and allows the cluster to update its list of healthy backends efficiently.
 
