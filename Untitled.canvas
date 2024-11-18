@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"a30874eadcb10847","x":-186,"y":-149,"width":400,"height":400,"type":"file","file":"Workloads/Pod.md"},
+		{"id":"cea750fe904dc009","x":362,"y":-207,"width":400,"height":400,"type":"file","file":"Container/Container.md"},
+		{"id":"589e06bea7ddf177","x":-36,"y":-500,"width":250,"height":60,"type":"text","text":"Nodes\n"}
+	],
+	"edges":[
+		{"id":"0626a1fd481bac4d","fromNode":"a30874eadcb10847","fromSide":"right","toNode":"cea750fe904dc009","toSide":"left"},
+		{"id":"d336896f5d5f9ec4","fromNode":"589e06bea7ddf177","fromSide":"right","toNode":"cea750fe904dc009","toSide":"top"},
+		{"id":"d9aecc2e9d5d1aba","fromNode":"589e06bea7ddf177","fromSide":"bottom","toNode":"a30874eadcb10847","toSide":"top"}
+	]
+}
