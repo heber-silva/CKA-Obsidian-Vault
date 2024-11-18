@@ -26,7 +26,7 @@ The [[Secret]] API provides basic protection for configuration values that req
 
 Enforce [[Pod security standards]] to ensure that Pods and their containers are isolated appropriately. You can also use [[RuntimeClass]]es to define custom isolation if you need it.
 
-[[NetworkPolicy]] let you control network traffic between Pods, or between Pods and the network outside your cluster.
+[[NetworkPolicy]] let you control network traffic between Pods, or between [[Pod]]s and the [[Networking]] outside your cluster.
 
 You can deploy security controls from the wider ecosystem to implement preventative or detective controls around Pods, their containers, and the images that run in them.
 

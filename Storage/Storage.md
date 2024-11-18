@@ -1,5 +1,5 @@
 #prova 
-Ways to provide both long-term and temporary storage to Pods in your cluster.
+Ways to provide both long-term and temporary storage to [[Pod]]s in your cluster.
 
 ---
 

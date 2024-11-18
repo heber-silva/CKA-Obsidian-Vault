@@ -1,5 +1,5 @@
 
-Resources that Kubernetes provides for configuring Pods.
+Resources that Kubernetes provides for configuring [[Pod]]s.
 - [[Configuration Best Practices]]
 - [[ConfigMap]]
 - [[Secret]]
