@@ -91,7 +91,8 @@
               "title": "Troubleshooting Clusters"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -245,12 +246,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "83aa72a75f76907a",
+  "active": "698d7f6d5d598a85",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "Certified Kubernetes Administrator(CKA).md",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Troubleshooting Clusters.md",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Tools for Monitoring Resource.md",
     "Security/Security.md",
-    "Certified Kubernetes Administrator(CKA).md",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/System Logs.md",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Metrics for Kubernetes Object States.md",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Logging Architecture.md",
@@ -283,7 +285,6 @@
     "Security/Multi-tenancy.md",
     "Security/Good practices for Kubernetes Secrets.md",
     "Security/Controlling Access to the Kubernetes API.md",
-    "Security/PodSecurityPolicy.md",
     "Container",
     "Security",
     "Cluster Maintenance",
@@ -292,7 +293,6 @@
     "Monitoring, Logging, and Debugging",
     "Installation",
     "Cluster Administration",
-    "Scheduling, Preemption and Eviction/Assigning Pods to Nodes",
-    "Untitled.canvas"
+    "Scheduling, Preemption and Eviction/Assigning Pods to Nodes"
   ]
 }
