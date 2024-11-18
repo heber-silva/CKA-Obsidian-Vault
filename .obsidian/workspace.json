@@ -109,13 +109,14 @@
             "id": "8dc18246cc46c07d",
             "type": "leaf",
             "state": {
-              "type": "diff-view",
+              "type": "markdown",
               "state": {
-                "file": "Storage/Volume.md",
-                "staged": false
+                "file": "Certified Kubernetes Administrator(CKA).md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "git-pull-request",
-              "title": "Diff View (Volume)"
+              "icon": "lucide-file",
+              "title": "Certified Kubernetes Administrator(CKA)"
             }
           }
         ],
@@ -210,11 +211,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Certified Kubernetes Administrator(CKA).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from Certified Kubernetes Administrator(CKA)"
             }
           },
           {
@@ -235,9 +237,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Certified Kubernetes Administrator(CKA).md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Certified Kubernetes Administrator(CKA)"
             }
           },
           {
@@ -272,10 +276,10 @@
   },
   "active": "8dc18246cc46c07d",
   "lastOpenFiles": [
+    "Untitled.canvas",
     "Monitoring, Logging, and Debugging/Troubleshooting Applications/Debug Running Pods.md",
     "Kubernetes Components/Kubernetes Components.md",
     "Kubernetes Components/Control Plane Components.md",
-    "Untitled.canvas",
     "Storage/Volume.md",
     "Workloads/Pod.md",
     "Certified Kubernetes Administrator(CKA).md",
@@ -308,7 +312,6 @@
     "Images/4d96d6db2f5565f8b417480591e35b52_MD5.jpeg",
     "Images/Pasted image 20241117222423.png",
     "Monitoring, Logging, and Debugging/Troubleshooting Clusters/Metrics For Kubernetes System Components.md",
-    "Security/Policies.md",
     "Policies",
     "Container",
     "Security",
