@@ -1,8 +1,8 @@
 [Docs](https://kubernetes.io/docs/concepts/containers/images/)
 
-A [[container]] image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
+A [Container](container.md) image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
 
-You typically create a container image of your application and push it to a registry before referring to it in a [[Pod]].
+You typically create a container image of your application and push it to a registry before referring to it in a [Pod](Pod.md).
 
 This page provides an outline of the container image concept.
 

@@ -1,4 +1,4 @@
-Because [[Pod]] represent processes running on [[Node]] in the cluster, it is important to allow those processes to gracefully terminate when they are no longer needed (rather than being abruptly stopped with a `KILL` signal and having no chance to clean up).
+Because [Pod](Pod.md) represent processes running on [Node](Node.md) in the cluster, it is important to allow those processes to gracefully terminate when they are no longer needed (rather than being abruptly stopped with a `KILL` signal and having no chance to clean up).
 
 The design aim is for you to be able to request deletion and know when processes terminate, but also be able to ensure that deletes eventually complete. When you request deletion of a Pod, the cluster records and tracks the intended grace period before the Pod is allowed to be forcefully killed. With that forceful shutdown tracking in place, the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) attempts graceful shutdown.
 
@@ -77,4 +77,4 @@ Additionally, PodGC cleans up any Pods which satisfy any of the following condit
 2. are unscheduled terminating Pods,
 3. are terminating Pods, bound to a non-ready node tainted with [`node.kubernetes.io/out-of-service`](https://kubernetes.io/docs/reference/labels-annotations-taints/#node-kubernetes-io-out-of-service), when the `NodeOutOfServiceVolumeDetach` feature gate is enabled.
 
-Along with cleaning up the Pods, PodGC will also mark them as failed if they are in a non-terminal phase. Also, PodGC adds a Pod disruption (ref: [[Scheduling]]) condition when cleaning up an orphan Pod. See [Pod disruption conditions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-conditions) for more details.
+Along with cleaning up the Pods, PodGC will also mark them as failed if they are in a non-terminal phase. Also, PodGC adds a Pod disruption (ref: [Scheduling](Scheduling.md)) condition when cleaning up an orphan Pod. See [Pod disruption conditions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-conditions) for more details.

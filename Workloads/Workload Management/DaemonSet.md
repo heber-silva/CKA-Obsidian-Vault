@@ -1,6 +1,6 @@
-A [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) defines [[Pod]]s that provide node-local facilities. These might be fundamental to the operation of your cluster, such as a networking helper tool, or be part of an add-on.
+A [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) defines [Pod](Pod.md)s that provide node-local facilities. These might be fundamental to the operation of your cluster, such as a networking helper tool, or be part of an add-on.
 
-A _DaemonSet_ ensures that all (or some) [[Node]]s run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
+A _DaemonSet_ ensures that all (or some) [Node](Node.md)s run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
 
 Some typical uses of a DaemonSet are:
 

@@ -1,4 +1,4 @@
-With autoscaling, you can automatically update your workloads ([[Pod]]s) in one way or another. This allows your cluster to react to changes in resource demand more elastically and efficiently.
+With autoscaling, you can automatically update your workloads ([Pod](Pod.md)s) in one way or another. This allows your cluster to react to changes in resource demand more elastically and efficiently.
 
 In Kubernetes, you can _scale_ a workload depending on the current demand of resources. This allows your cluster to react to changes in resource demand more elastically and efficiently.
 
@@ -21,7 +21,7 @@ See below for examples of both strategies.
 
 Kubernetes also supports _automatic scaling_ of workloads, which is the focus of this page.
 
-The concept of _Autoscaling_ in Kubernetes refers to the ability to automatically update an object that manages a set of Pods (for example a [[Deployment]]).
+The concept of _Autoscaling_ in Kubernetes refers to the ability to automatically update an object that manages a set of Pods (for example a [Deployment](Deployment.md)).
 
 ### Scaling workloads horizontally[](https://kubernetes.io/docs/concepts/workloads/autoscaling/#scaling-workloads-horizontally)
 

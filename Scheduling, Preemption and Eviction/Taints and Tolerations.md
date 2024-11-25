@@ -1,4 +1,4 @@
-[_Node affinity_](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) ([[Assigning Pods to Nodes]]) is a property of [[Pod]]s that _attracts_ them to a set of [[Node]]s (either as a preference or a hard requirement). _Taints_ are the opposite -- they allow a node to repel a set of pods.
+[_Node affinity_](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) ([Assigning Pods to Nodes](Assigning%20Pods%20to%20Nodes.md)) is a property of [Pod](Pod.md)s that _attracts_ them to a set of [Node](Node.md)s (either as a preference or a hard requirement). _Taints_ are the opposite -- they allow a node to repel a set of pods.
 
 _Tolerations_ are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling but don't guarantee scheduling: the scheduler also [evaluates other parameters](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) as part of its function.
 
@@ -189,7 +189,7 @@ Kubernetes automatically adds a toleration for `node.kubernetes.io/not-ready` 
 
 These automatically-added tolerations mean that Pods remain bound to Nodes for 5 minutes after one of these problems is detected.
 
-[[DaemonSet]] pods are created with `NoExecute` tolerations for the following taints with no `tolerationSeconds`:
+[DaemonSet](DaemonSet.md) pods are created with `NoExecute` tolerations for the following taints with no `tolerationSeconds`:
 
 - `node.kubernetes.io/unreachable`
 - `node.kubernetes.io/not-ready`
@@ -198,7 +198,7 @@ This ensures that DaemonSet pods are never evicted due to these problems.
 
 ## Taint Nodes by Condition[](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition)
 
-The control plane, using the node [[controller]], automatically creates taints with a `NoSchedule` effect for [node conditions](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions).
+The control plane, using the node [Controller](controller.md), automatically creates taints with a `NoSchedule` effect for [node conditions](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions).
 
 The scheduler checks taints, not node conditions, when it makes scheduling decisions. This ensures that node conditions don't directly affect scheduling. For example, if the `DiskPressure` node condition is active, the control plane adds the `node.kubernetes.io/disk-pressure` taint and does not schedule new pods onto the affected node. If the `MemoryPressure` node condition is active, the control plane adds the `node.kubernetes.io/memory-pressure` taint.
 

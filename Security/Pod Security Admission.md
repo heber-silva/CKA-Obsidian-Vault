@@ -3,7 +3,7 @@ An overview of the Pod Security Admission Controller, which can enforce the Pod 
 
 FEATURE STATE: `Kubernetes v1.25 [stable]`
 
-The Kubernetes [[Pod Security Standards]] define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion.
+The Kubernetes [Pod Security Standards](Pod%20Security%20Standards.md) define different isolation levels for Pods. These standards let you define how you want to restrict the behavior of pods in a clear, consistent fashion.
 
 Kubernetes offers a built-in _Pod Security_ [admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) to enforce the Pod Security Standards. Pod security restrictions are applied at the [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces) level when pods are created.
 

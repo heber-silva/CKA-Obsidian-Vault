@@ -1,6 +1,6 @@
 FEATURE STATE: `Kubernetes v1.24 [stable]`
 
-When you run a [[Pod]] on a [[Node]], the Pod itself takes an amount of system resources. These resources are additional to the resources needed to run the [[Container]](s) inside the Pod. In Kubernetes, _Pod Overhead_ is a way to account for the resources consumed by the Pod infrastructure on top of the container requests & limits.
+When you run a [Pod](Pod.md) on a [Node](Node.md), the Pod itself takes an amount of system resources. These resources are additional to the resources needed to run the [Container](Container.md)(s) inside the Pod. In Kubernetes, _Pod Overhead_ is a way to account for the resources consumed by the Pod infrastructure on top of the container requests & limits.
 
 In Kubernetes, the Pod's overhead is set at [admission](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) time according to the overhead associated with the Pod's [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/).
 

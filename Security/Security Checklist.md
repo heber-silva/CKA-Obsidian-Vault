@@ -20,7 +20,7 @@ Checklists are **not** sufficient for attaining a good security posture on the
 - [ ]  The root certificate is protected (either an offline CA, or a managed online CA with effective access controls).
 - [ ]  Intermediate and leaf certificates have an expiry date no more than 3 years in the future.
 - [ ]  A process exists for periodic access review, and reviews occur no more than 24 months apart.
-- [ ]  The [[Role Based Access Control Good Practices]] are followed for guidance related to authentication and authorization.
+- [ ]  The [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md) are followed for guidance related to authentication and authorization.
 
 After bootstrapping, neither users nor components should authenticate to the Kubernetes API as `system:masters`. Similarly, running all of kube-controller-manager as `system:masters` should be avoided. In fact, `system:masters` should only be used as a break-glass mechanism, as opposed to an admin user.
 
@@ -34,7 +34,7 @@ After bootstrapping, neither users nor components should authenticate to the Kub
 - [ ]  Access from the workloads to the cloud metadata API is filtered.
 - [ ]  Use of LoadBalancer and ExternalIPs is restricted.
 
-A number of [Container Network Interface (CNI) plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) plugins provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [[NetworkPolicy]] which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
+A number of [Container Network Interface (CNI) plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) plugins provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [NetworkPolicy](NetworkPolicy.md) which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
 
 Not all CNI plugins provide encryption in transit. If the chosen plugin lacks this feature, an alternative solution could be to use a service mesh to provide that functionality.
 
@@ -59,7 +59,7 @@ For restricted LoadBalancer and ExternalIPs use, see [CVE-2020-8554: Man in the
 
 RBAC authorization is crucial but [cannot be granular enough to have authorization on the Pods' resources](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#workload-creation) (or on any resource that manages Pods). The only granularity is the API verbs on the resource itself, for example, `create` on Pods. Without additional admission, the authorization to create these resources allows direct unrestricted access to the schedulable nodes of a cluster.
 
-The [[Pod Security Standards]] define three different policies, privileged, baseline and restricted that limit how fields can be set in the `PodSpec` regarding security. These standards can be enforced at the namespace level with the new [[Pod Security Admission]] admission, enabled by default, or by third-party admission webhook. Please note that, contrary to the removed PodSecurityPolicy admission it replaces, [Pod Security](https://kubernetes.io/docs/concepts/security/pod-security-admission/) admission can be easily combined with admission webhooks and external services.
+The [Pod Security Standards](Pod%20Security%20Standards.md) define three different policies, privileged, baseline and restricted that limit how fields can be set in the `PodSpec` regarding security. These standards can be enforced at the namespace level with the new [Pod Security Admission](Pod%20Security%20Admission.md) admission, enabled by default, or by third-party admission webhook. Please note that, contrary to the removed PodSecurityPolicy admission it replaces, [Pod Security](https://kubernetes.io/docs/concepts/security/pod-security-admission/) admission can be easily combined with admission webhooks and external services.
 
 Pod Security admission `restricted` policy, the most restrictive policy of the [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/) set, [can operate in several modes](https://kubernetes.io/docs/concepts/security/pod-security-admission/#pod-security-admission-labels-for-namespaces), `warn`, `audit` or `enforce` to gradually apply the most appropriate [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) according to security best practices. Nevertheless, pods' [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) should be separately investigated to limit the privileges and access pods may have on top of the predefined security standards, for specific use cases.
 
@@ -112,7 +112,7 @@ SELinux is only available on Linux nodes, and enabled in [some Linux distributi
 
 Pods that are on different tiers of sensitivity, for example, an application pod and the Kubernetes API server, should be deployed onto separate nodes. The purpose of node isolation is to prevent an application container breakout to directly providing access to applications with higher level of sensitivity to easily pivot within the cluster. This separation should be enforced to prevent pods accidentally being deployed onto the same node. This could be enforced with the following features:
 
-[[Assigning Pods to Nodes]]
+[Assigning Pods to Nodes](Assigning%20Pods%20to%20Nodes.md)
 
 Key-value pairs, as part of the pod specification, that specify which nodes to deploy onto. These can be enforced at the namespace and cluster level with the [PodNodeSelector](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podnodeselector) admission controller.
 
@@ -120,7 +120,7 @@ Key-value pairs, as part of the pod specification, that specify which nodes to d
 
 An admission controller that allows administrators to restrict permitted [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) within a namespace. Pods within a namespace may only utilize the tolerations specified on the namespace object annotation keys that provide a set of default and allowed tolerations.
 
-[[RuntimeClass]]
+[RuntimeClass](RuntimeClass.md)
 RuntimeClass is a feature for selecting the container runtime configuration. The container runtime configuration is used to run a Pod's containers and can provide more or less isolation from the host at the cost of performance overhead.
 
 ## Secrets[](https://kubernetes.io/docs/concepts/security/security-checklist/#secrets)
@@ -219,7 +219,7 @@ Allows enforcing additional controls for images through webhooks.
 ## What's next[](https://kubernetes.io/docs/concepts/security/security-checklist/#what-s-next)
 
 - [Privilege escalation via Pod creation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#privilege-escalation-via-pod-creation) warns you about a specific access control risk; check how you're managing that threat.
-    - If you use Kubernetes RBAC, read [[Role Based Access Control Good Practices]] for further information on authorization.
+    - If you use Kubernetes RBAC, read [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md) for further information on authorization.
 - [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/) for information on protecting a cluster from accidental or malicious access.
-- [[Multi-tenancy]] for configuration options recommendations and best practices on multi-tenancy.
+- [Multi-tenancy](Multi-tenancy.md) for configuration options recommendations and best practices on multi-tenancy.
 - [Blog post "A Closer Look at NSA/CISA Kubernetes Hardening Guidance"](https://kubernetes.io/blog/2021/10/05/nsa-cisa-kubernetes-hardening-guidance/#building-secure-container-images) for complementary resource on hardening Kubernetes clusters.

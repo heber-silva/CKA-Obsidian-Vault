@@ -1,4 +1,4 @@
-A _probe_ is a diagnostic performed periodically by the [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) on a [[Container]]. To perform a diagnostic, the kubelet either executes code within the container, or makes a network request.
+A _probe_ is a diagnostic performed periodically by the [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) on a [Container](Container.md). To perform a diagnostic, the kubelet either executes code within the container, or makes a network request.
 
 ### Check mechanisms[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#probe-check-methods)
 
@@ -41,7 +41,7 @@ The container failed the diagnostic.
 The diagnostic failed (no action should be taken, and the kubelet will make further checks).
 
 ### Types of probe[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe)
-[[Liveness, Readiness, and Startup Probes]]
+[Liveness, Readiness, and Startup Probes](Liveness,%20Readiness,%20and%20Startup%20Probes.md)
 The kubelet can optionally perform and react to three kinds of probes on running containers:
 
 `livenessProbe`

@@ -1,8 +1,8 @@
-A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) runs a group of [[Pod]]s, and maintains a sticky identity for each of those Pods. This is useful for managing applications that need persistent storage or a stable, unique network identity.
+A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) runs a group of [Pod](Pod.md)s, and maintains a sticky identity for each of those Pods. This is useful for managing applications that need persistent storage or a stable, unique network identity.
 
 StatefulSet is the workload API object used to manage stateful applications.
 
-Manages the [[Deployment]] and scaling of a set of [Pods](https://kubernetes.io/docs/concepts/workloads/pods/), _and provides guarantees about the ordering and uniqueness_ of these Pods.
+Manages the [Deployment](Deployment.md) and scaling of a set of [Pods](https://kubernetes.io/docs/concepts/workloads/pods/), _and provides guarantees about the ordering and uniqueness_ of these Pods.
 
 Like a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of its Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
 

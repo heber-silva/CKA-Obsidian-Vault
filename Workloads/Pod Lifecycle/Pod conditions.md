@@ -1,4 +1,4 @@
-A [[Pod]] has a PodStatus, which has an array of [PodConditions](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podcondition-v1-core) through which the Pod has or has not passed. Kubelet manages the following PodConditions:
+A [Pod](Pod.md) has a PodStatus, which has an array of [PodConditions](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podcondition-v1-core) through which the Pod has or has not passed. Kubelet manages the following PodConditions:
 
 - `PodScheduled`: the Pod has been scheduled to a node.
 - `PodReadyToStartContainers`: (beta feature; enabled by [default](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network)) the Pod sandbox has been successfully created and networking configured.

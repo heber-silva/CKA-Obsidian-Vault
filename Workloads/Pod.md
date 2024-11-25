@@ -1,9 +1,10 @@
 #prova
 _Pods_ are the smallest deployable units of computing that you can create and manage in Kubernetes.
 
-A _Pod_ (as in a pod of whales or pea pod) is a group of one or more [[Container]]s, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context. A Pod models an application-specific "logical host": it contains one or more application containers which are relatively tightly coupled. In non-cloud contexts, applications executed on the same physical or virtual machine are analogous to cloud applications executed on the same logical host.
 
-As well as application containers, a Pod can contain [[init container]]s that run during Pod startup. You can also inject [[Ephemeral Container]]s for debugging a running Pod.
+A _Pod_ (as in a pod of whales or pea pod) is a group of one or more [Container](Container.md)s, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context. A Pod models an application-specific "logical host": it contains one or more application containers which are relatively tightly coupled. In non-cloud contexts, applications executed on the same physical or virtual machine are analogous to cloud applications executed on the same logical host.
+
+As well as application containers, a Pod can contain [Init Container](init%20container.md)s that run during Pod startup. You can also inject [Ephemeral Container](Ephemeral%20Container.md)s for debugging a running Pod.
 
 ---
 Kubernetes provides several built-in workload resources:
@@ -17,7 +18,7 @@ Kubernetes provides several built-in workload resources:
 **Note:**
 You need to install a [container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) into each node in the cluster so that Pods can run there.
 
-The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a [[Container]]. Within a Pod's context, the individual applications may have further sub-isolations applied.
+The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a [Container](Container.md). Within a Pod's context, the individual applications may have further sub-isolations applied.
 
 A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
 
@@ -200,8 +201,8 @@ Pods in a Kubernetes cluster are used in two main ways:
 
 For example, you might have a container that acts as a web server for files in a shared volume, and a separate [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) that updates those files from a remote source, as in the following diagram:
 
-[[Images/32993132cd12abab3dbf454d0c1df022_MD5.jpeg|Open: Pasted image 20241117155641.png]]
-![[Images/32993132cd12abab3dbf454d0c1df022_MD5.jpeg]]
+[Open: Pasted image 20241117155641.png](Images/32993132cd12abab3dbf454d0c1df022_MD5.jpeg)
+![32993132cd12abab3dbf454d0c1df022_MD5](Images/32993132cd12abab3dbf454d0c1df022_MD5.jpeg)
 
 Some Pods have [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) as well as [app containers](https://kubernetes.io/docs/reference/glossary/?all=true#term-app-container). By default, init containers run and complete before the app containers are started.
 

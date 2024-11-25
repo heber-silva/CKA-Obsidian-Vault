@@ -1,5 +1,5 @@
 #prova 
-Make your HTTP (or HTTPS) network [[Service]] available using a protocol-aware configuration mechanism, that understands web concepts like URIs, hostnames, paths, and more. The Ingress concept lets you map traffic to different backends based on rules you define via the Kubernetes API.
+Make your HTTP (or HTTPS) network [Service](Service.md) available using a protocol-aware configuration mechanism, that understands web concepts like URIs, hostnames, paths, and more. The Ingress concept lets you map traffic to different backends based on rules you define via the Kubernetes API.
 
 FEATURE STATE: `Kubernetes v1.19 [stable]`
 
@@ -27,7 +27,7 @@ For clarity, this guide defines the following terms:
 
 Here is a simple example where an Ingress sends all its traffic to one Service:
 
-![[f32e9282def1a5c2bc54da0fc1bae503_MD5.svg]]
+![f32e9282def1a5c2bc54da0fc1bae503_MD5](f32e9282def1a5c2bc54da0fc1bae503_MD5.svg)
 
 An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting. An [Ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) is responsible for fulfilling the Ingress, usually with a load balancer, though it may also configure your edge router or additional frontends to help handle the traffic.
 

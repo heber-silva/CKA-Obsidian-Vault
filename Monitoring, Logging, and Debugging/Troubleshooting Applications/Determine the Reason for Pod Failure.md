@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/determine-reason-pod-failure/) 
 
-This page shows how to write and read a [[Container]] termination message.
+This page shows how to write and read a [Container](Container.md) termination message.
 
 Termination messages provide a way for containers to write information about fatal events to a location where it can be easily retrieved and surfaced by tools like dashboards and monitoring software. In most cases, information that you put in a termination message should also be written to the general [Kubernetes logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/).
 

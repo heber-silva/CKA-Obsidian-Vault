@@ -1,6 +1,6 @@
 [Docs](https://kubernetes.io/docs/concepts/containers/container-environment/)
 
-This page describes the resources available to [[Container]]s in the Container environment.
+This page describes the resources available to [Container](Container.md)s in the Container environment.
 
 ## Container environment[](https://kubernetes.io/docs/concepts/containers/container-environment/#container-environment)
 

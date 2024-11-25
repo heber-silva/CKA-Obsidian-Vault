@@ -136,8 +136,8 @@ node4   Ready    <none>   2m43s   v1.16.0   node=node4,zone=zoneB
 ```
 
 Then the cluster is logically viewed as below:
-[[0b52b758464681bacc878153c3dcf22d_MD5.jpeg]]
-![[0b52b758464681bacc878153c3dcf22d_MD5.jpeg]]
+[0b52b758464681bacc878153c3dcf22d_MD5](0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
+![0b52b758464681bacc878153c3dcf22d_MD5](0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
 
 ## Consistency[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#consistency)
 
@@ -153,8 +153,8 @@ You need a mechanism to ensure that all the nodes in a topology domain (such as 
 
 Suppose you have a 4-node cluster where 3 Pods labeled `foo: bar` are located in node1, node2 and node3 respectively:
 
-[[Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg|Open: Pasted image 20241117151945.png]]
-![[Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg]]
+[Open: Pasted image 20241117151945.png](Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
+![726c900910ecc65016d362a32a30e07f_MD5](Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
 
 If you want an incoming Pod to be evenly spread with existing Pods across zones, you can use a manifest similar to:
 
@@ -182,13 +182,13 @@ From that manifest, `topologyKey: zone` implies the even distribution will onl
 
 If the scheduler placed this incoming Pod into zone `A`, the distribution of Pods would become `[3, 1]`. That means the actual skew is then 2 (calculated as `3 - 1`), which violates `maxSkew: 1`. To satisfy the constraints and context for this example, the incoming Pod can only be placed onto a node in zone `B`:
 
-[[Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg|Open: Pasted image 20241117152208.png]]
-![[Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg]]
+[Open: Pasted image 20241117152208.png](Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
+![78f75b95d827e4ed4c40298dedb79fcf_MD5](Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
 
 OR
 
-[[Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg|Open: Pasted image 20241117152247.png]]
-![[Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg]]
+[Open: Pasted image 20241117152247.png](Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
+![49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5](Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
 
 You can tweak the Pod spec to meet various kinds of requirements:
 
@@ -200,8 +200,8 @@ You can tweak the Pod spec to meet various kinds of requirements:
 
 This builds upon the previous example. Suppose you have a 4-node cluster where 3 existing Pods labeled `foo: bar` are located on node1, node2 and node3 respectively:
 
-[[Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg|Open: Pasted image 20241117152322.png]]
-![[Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg]]
+[Open: Pasted image 20241117152322.png](Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
+![4dec2a9584d12fee066b553ac1b367e5_MD5](Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
 
 You can combine two topology spread constraints to control the spread of Pods both by node and by zone:
 
@@ -237,8 +237,8 @@ In this case, to match the first constraint, the incoming Pod can only be placed
 
 Multiple constraints can lead to conflicts. Suppose you have a 3-node cluster across 2 zones:
 
-[[Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg|Open: Pasted image 20241117152418.png]]
-![[Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg]]
+[Open: Pasted image 20241117152418.png](Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
+![28cf0dd18c7750a1bb305a061e565eff_MD5](Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
 
 If you were to apply [`two-constraints.yaml`](https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/pods/topology-spread-constraints/two-constraints.yaml) (the manifest from the previous example) to **this** cluster, you would see that the Pod `mypod` stays in the `Pending` state. This happens because: to satisfy the first constraint, the Pod `mypod` can only be placed into zone `B`; while in terms of the second constraint, the Pod `mypod` can only schedule to node `node2`. The intersection of the two constraints returns an empty set, and the scheduler cannot place the Pod.
 
@@ -252,8 +252,8 @@ The scheduler will skip the non-matching nodes from the skew calculations if the
 
 Suppose you have a 5-node cluster ranging across zones A to C:
 
-[[Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg|Open: Pasted image 20241117152456.png]]
-![[Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg]]
+[Open: Pasted image 20241117152456.png](Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
+![6094a89a811608a9e6a57c53b4b0d3c7_MD5](Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
 
 and you know that zone `C` must be excluded. In this case, you can compose a manifest as below, so that Pod `mypod` will be placed into zone `B` instead of zone `C`. Similarly, Kubernetes also respects `spec.nodeSelector`.
 

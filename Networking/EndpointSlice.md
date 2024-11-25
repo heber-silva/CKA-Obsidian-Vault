@@ -1,4 +1,4 @@
-The [EndpointSlice](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) API is the mechanism that Kubernetes uses to let your [[Service]] scale to handle large numbers of backends, and allows the cluster to update its list of healthy backends efficiently.
+The [EndpointSlice](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) API is the mechanism that Kubernetes uses to let your [Service](Service.md) scale to handle large numbers of backends, and allows the cluster to update its list of healthy backends efficiently.
 
 FEATURE STATE: `Kubernetes v1.21 [stable]`
 

@@ -6,7 +6,7 @@ In Kubernetes, a Secret is an object that stores sensitive information, such as 
 
 Secrets give you more control over how sensitive information is used and reduces the risk of accidental exposure. Secret values are encoded as base64 strings and are stored unencrypted by default, but can be configured to be [encrypted at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted).
 
-A [[Pod]] can reference the Secret in a variety of ways, such as in a volume mount or as an environment variable. Secrets are designed for confidential data and [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) are designed for non-confidential data.
+A [Pod](Pod.md) can reference the Secret in a variety of ways, such as in a volume mount or as an environment variable. Secrets are designed for confidential data and [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) are designed for non-confidential data.
 
 The following good practices are intended for both cluster administrators and application developers. Use these guidelines to improve the security of your sensitive information in Secret objects, as well as to more effectively manage your Secrets.
 
@@ -20,7 +20,7 @@ By default, Secret objects are stored unencrypted in [etcd](https://kubernetes.
 
 ### Configure least-privilege access to Secrets[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#least-privilege-secrets)
 
-When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [[Role Based Access Control Good Practices]].
+When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md).
 
 - **Components**: Restrict `watch` or `list` access to only the most privileged, system-level components. Only grant `get` access for Secrets if the component's normal behavior requires it.
 - **Humans**: Restrict `get`, `watch`, or `list` access to Secrets. Only allow cluster administrators to access `etcd`. This includes read-only access. For more complex access control, such as restricting access to Secrets with specific annotations, consider using third-party authorization mechanisms.

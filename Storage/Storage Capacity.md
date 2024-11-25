@@ -19,8 +19,8 @@ There are two API extensions for this feature:
 
 Storage capacity information is used by the Kubernetes scheduler if:
 
-- a [[Pod]] uses a [[volume]] that has not been created yet,
-- that volume uses a [[StorageClass]] which references a CSI driver and uses `WaitForFirstConsumer` [volume binding mode](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode), and
+- a [Pod](Pod.md) uses a [Volume](volume.md) that has not been created yet,
+- that volume uses a [StorageClass](StorageClass.md) which references a CSI driver and uses `WaitForFirstConsumer` [volume binding mode](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode), and
 - the `CSIDriver` object for the driver has `StorageCapacity` set to true.
 
 In that case, the scheduler only considers nodes for the Pod which have enough storage available to them. This check is very simplistic and only compares the size of the volume against the capacity listed in `CSIStorageCapacity` objects with a topology that includes the node.

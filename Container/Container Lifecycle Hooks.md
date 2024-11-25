@@ -1,6 +1,6 @@
 [Docs](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
 
-This page describes how kubelet managed [[Container]]s can use the Container lifecycle hook framework to run code triggered by events during their management lifecycle.
+This page describes how kubelet managed [Container](Container.md)s can use the Container lifecycle hook framework to run code triggered by events during their management lifecycle.
 
 ## Overview[](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#overview)
 

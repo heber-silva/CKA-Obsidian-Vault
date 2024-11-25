@@ -1,4 +1,4 @@
-Just like [[StorageClass]] provides a way for administrators to describe the "classes" of storage they offer when provisioning a volume, VolumeSnapshotClass provides a way to describe the "classes" of storage when provisioning a volume snapshot.
+Just like [StorageClass](StorageClass.md) provides a way for administrators to describe the "classes" of storage they offer when provisioning a volume, VolumeSnapshotClass provides a way to describe the "classes" of storage when provisioning a volume snapshot.
 
 ## The VolumeSnapshotClass Resource[](https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/#the-volumesnapshotclass-resource)
 
@@ -20,7 +20,7 @@ deletionPolicy: Delete
 parameters:
 ```
 
-Administrators can specify a default VolumeSnapshotClass for [[VolumeSnapshot]]s that don't request any particular class to bind to by adding the `snapshot.storage.kubernetes.io/is-default-class: "true"` annotation:
+Administrators can specify a default VolumeSnapshotClass for [VolumeSnapshot](VolumeSnapshot.md)s that don't request any particular class to bind to by adding the `snapshot.storage.kubernetes.io/is-default-class: "true"` annotation:
 
 ```yaml
 apiVersion: snapshot.storage.k8s.io/v1

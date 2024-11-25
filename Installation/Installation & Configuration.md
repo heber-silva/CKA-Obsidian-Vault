@@ -38,7 +38,7 @@ The default behavior of a kubelet is to fail to start if swap memory is detected
 
 ## Installing a container runtime[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime)
 
-To run containers in Pods, Kubernetes uses a [[container runtime]].
+To run containers in Pods, Kubernetes uses a [Container Runtime](container%20runtime.md).
 
 By default, Kubernetes uses the [Container Runtime Interface](https://kubernetes.io/docs/concepts/architecture/#container-runtime) (CRI) to interface with your chosen container runtime.
 
@@ -154,11 +154,11 @@ Both the container runtime and the kubelet have a property called ["cgroup driv
 
 Matching the container runtime and kubelet cgroup drivers is required or otherwise the kubelet process will fail.
 
-See [[Configuring a cgroup driver]] for more details.
+See [Configuring a cgroup driver](Configuring%20a%20cgroup%20driver.md) for more details.
 
 ## Troubleshooting[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#troubleshooting)
 
-If you are running into difficulties with kubeadm, please consult [[Troubleshooting kubeadm]].
+If you are running into difficulties with kubeadm, please consult [Troubleshooting kubeadm](Troubleshooting%20kubeadm.md).
 
 ## Creating a Cluster with Kubeadm
 

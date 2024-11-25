@@ -1,6 +1,6 @@
 [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) is a family of API kinds that provide dynamic infrastructure provisioning and advanced traffic routing.
 
-Make network [[service]]s available by using an extensible, role-oriented, protocol-aware configuration mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an [add-on](https://kubernetes.io/docs/concepts/cluster-administration/addons/) containing API [kinds](https://gateway-api.sigs.k8s.io/references/spec/) that provide dynamic infrastructure provisioning and advanced traffic routing.
+Make network [Service](service.md)s available by using an extensible, role-oriented, protocol-aware configuration mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an [add-on](https://kubernetes.io/docs/concepts/cluster-administration/addons/) containing API [kinds](https://gateway-api.sigs.k8s.io/references/spec/) that provide dynamic infrastructure provisioning and advanced traffic routing.
 
 ## Design principles[](https://kubernetes.io/docs/concepts/services-networking/gateway/#design-principles)
 
@@ -29,7 +29,7 @@ Gateway API is organized into different API kinds that have interdependent relat
 
 The following figure illustrates the relationships of the three stable Gateway API kinds:
 
-![[8a51c2d90449a918a4692db42c6cce74_MD5.svg]]
+![8a51c2d90449a918a4692db42c6cce74_MD5](8a51c2d90449a918a4692db42c6cce74_MD5.svg)
 
 ### GatewayClass[](https://kubernetes.io/docs/concepts/services-networking/gateway/#api-kind-gateway-class)
 
@@ -107,7 +107,7 @@ See the [HTTPRoute](https://gateway-api.sigs.k8s.io/references/spec/#gateway.ne
 
 Here is a simple example of HTTP traffic being routed to a Service by using a Gateway and an HTTPRoute:
 
-![[6008a915f3496d9576548be6428316c5_MD5.svg]]
+![6008a915f3496d9576548be6428316c5_MD5](6008a915f3496d9576548be6428316c5_MD5.svg)
 
 In this example, the request flow for a Gateway implemented as a reverse proxy is:
 

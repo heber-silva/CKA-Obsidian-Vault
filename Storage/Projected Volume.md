@@ -2,9 +2,9 @@ A [projected](https://kubernetes.io/docs/concepts/storage/projected-volumes/) 
 
 Currently, the following types of volume sources can be projected:
 
-- [[Secret]]
+- [Secret](Secret.md)
 - [`downwardAPI`](https://kubernetes.io/docs/concepts/storage/volumes/#downwardapi)
-- [[ConfigMap]]
+- [ConfigMap](ConfigMap.md)
 - [`serviceAccountToken`](https://kubernetes.io/docs/concepts/storage/projected-volumes/#serviceaccounttoken)
 - [`clusterTrustBundle`](https://kubernetes.io/docs/concepts/storage/projected-volumes/#clustertrustbundle)
 

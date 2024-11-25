@@ -1,6 +1,6 @@
 FEATURE STATE: `Kubernetes v1.14 [stable]`
 
-[[Pod]]s can have _priority_. Priority indicates the importance of a Pod relative to other Pods. If a Pod cannot be scheduled, the scheduler tries to preempt (evict) lower priority Pods to make [[scheduling]] of the pending Pod possible.
+[Pod](Pod.md)s can have _priority_. Priority indicates the importance of a Pod relative to other Pods. If a Pod cannot be scheduled, the scheduler tries to preempt (evict) lower priority Pods to make [Scheduling](scheduling.md) of the pending Pod possible.
 
 #### Warning:
 

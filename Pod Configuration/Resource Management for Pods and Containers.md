@@ -1,4 +1,4 @@
-When you specify a [[Pod]], you can optionally specify how much of each resource a [[Container]] needs. The most common resources to specify are CPU and memory (RAM); there are others.
+When you specify a [Pod](Pod.md), you can optionally specify how much of each resource a [Container](Container.md) needs. The most common resources to specify are CPU and memory (RAM); there are others.
 
 When you specify the resource _request_ for containers in a Pod, the [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) uses this information to decide which node to place the Pod on. When you specify a resource _limit_ for a container, the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) enforces those limits so that the running container is not allowed to use more of that resource than the limit you set. The kubelet also reserves at least the _request_ amount of that system resource specifically for that container to use.
 

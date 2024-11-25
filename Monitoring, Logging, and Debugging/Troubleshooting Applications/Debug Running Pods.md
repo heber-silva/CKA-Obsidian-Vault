@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/)
 
-This page explains how to debug [[Pod]]s running (or crashing) on a [[Node]].
+This page explains how to debug [Pod](Pod.md)s running (or crashing) on a [Node](Node.md).
 
 ## Before you begin[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#before-you-begin)
 

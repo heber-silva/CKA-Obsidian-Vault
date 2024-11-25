@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/)
 
-This page shows how to use `kubectl exec` to get a shell to a running [[Container]].
+This page shows how to use `kubectl exec` to get a shell to a running [Container](Container.md).
 
 ## Before you begin[](https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/#before-you-begin)
 

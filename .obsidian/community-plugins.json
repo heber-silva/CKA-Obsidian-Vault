@@ -5,5 +5,6 @@
   "dataview",
   "templater-obsidian",
   "shiki-highlighter",
-  "obsidian-outliner"
+  "obsidian-outliner",
+  "obsidian-link-converter"
 ]

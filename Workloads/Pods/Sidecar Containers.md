@@ -1,6 +1,6 @@
 FEATURE STATE: `Kubernetes v1.29 [beta]`
 
-Sidecar containers are the secondary [[Container]] that run along with the main application container within the same [[Pod]]. These containers are used to enhance or to extend the functionality of the primary _app container_ by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
+Sidecar containers are the secondary [Container](Container.md) that run along with the main application container within the same [Pod](Pod.md). These containers are used to enhance or to extend the functionality of the primary _app container_ by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
 
 Typically, you only have one app container in a Pod. For example, if you have a web application that requires a local webserver, the local webserver is a sidecar and the web application itself is the app container.
 
@@ -55,7 +55,7 @@ spec:
           emptyDir: {}
 ```
 
-## Sidecar containers and [[Pod Lifecycle]][](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/#sidecar-containers-and-pod-lifecycle)
+## Sidecar containers and [Pod Lifecycle](Pod%20Lifecycle.md)[](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/#sidecar-containers-and-pod-lifecycle)
 
 If an init container is created with its `restartPolicy` set to `Always`, it will start and remain running during the entire life of the Pod. This can be helpful for running supporting services separated from the main application containers.
 

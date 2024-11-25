@@ -11,8 +11,8 @@ You can also view the resource metrics using the [`kubectl top`](https://kubern
 The Metrics API, and the metrics pipeline that it enables, only offers the minimum CPU and memory metrics to enable automatic scaling using HPA and / or VPA. If you would like to provide a more complete set of metrics, you can complement the simpler Metrics API by deploying a second [metrics pipeline](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline) that uses the _Custom Metrics API_.
 
 Figure 1 illustrates the architecture of the resource metrics pipeline.
-[[Images/2882b7037952f36372683160953ec9f2_MD5.jpeg|Open: Pasted image 20241117190407.png]]
-![[Images/2882b7037952f36372683160953ec9f2_MD5.jpeg]]
+[Open: Pasted image 20241117190407.png](Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
+![2882b7037952f36372683160953ec9f2_MD5](Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
 Figure 1. Resource Metrics Pipeline
 
 The architecture components, from right to left in the figure, consist of the following:

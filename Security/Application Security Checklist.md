@@ -36,7 +36,7 @@ The following checklist provides base security hardening recommendations that wo
 - [ ]  Set `runAsNonRoot: true`.
 - [ ]  Configure the container to execute as a less privileged user (for example, using `runAsUser` and `runAsGroup`), and configure appropriate permissions on files or directories inside the container image.
 - [ ]  Optionally add a supplementary group with `fsGroup` to access persistent volumes.
-- [ ]  The application deploys into a namespace that enforces an appropriate [[Pod Security Standards]]. If you cannot control this enforcement for the cluster(s) where the application is deployed, take this into account either through documentation or additional defense in depth.
+- [ ]  The application deploys into a namespace that enforces an appropriate [Pod Security Standards](Pod%20Security%20Standards.md). If you cannot control this enforcement for the cluster(s) where the application is deployed, take this into account either through documentation or additional defense in depth.
 
 ### Container-level `securityContext` recommendations[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#security-context-container)
 
@@ -62,7 +62,7 @@ For sensitive workloads, consider providing a recommended ValidatingAdmissionPol
 
 ### Network policies[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#network-policies)
 
-- [ ]  Configure [[NetworkPolicy]] to only allow expected ingress and egress traffic from the pods.
+- [ ]  Configure [NetworkPolicy](NetworkPolicy.md) to only allow expected ingress and egress traffic from the pods.
 
 Make sure that your cluster provides and enforces NetworkPolicy. If you are writing an application that users will deploy to different clusters, consider whether you can assume that NetworkPolicy is available and enforced.
 

@@ -1,8 +1,8 @@
-A [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a [[Pod]] specification or in a [[Container]] [image](https://kubernetes.io/docs/reference/glossary/?all=true#term-image). Using a Secret means that you don't need to include confidential data in your application code.
+A [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a [Pod](Pod.md) specification or in a [Container](Container.md) [image](https://kubernetes.io/docs/reference/glossary/?all=true#term-image). Using a Secret means that you don't need to include confidential data in your application code.
 
 Because Secrets can be created independently of the Pods that use them, there is less risk of the Secret (and its data) being exposed during the workflow of creating, viewing, and editing Pods. Kubernetes, and applications that run in your cluster, can also take additional precautions with Secrets, such as avoiding writing sensitive data to nonvolatile storage.
 
-Secrets are similar to [[ConfigMap]]s but are specifically intended to hold confidential data.
+Secrets are similar to [ConfigMap](ConfigMap.md)s but are specifically intended to hold confidential data.
 
 #### Caution:
 

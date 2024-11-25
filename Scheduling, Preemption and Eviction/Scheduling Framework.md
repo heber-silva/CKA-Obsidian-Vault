@@ -24,8 +24,8 @@ One plugin may implement multiple interfaces to perform more complex or stateful
 
 Some interfaces match the scheduler extension points which can be configured through [Scheduler Configuration](https://kubernetes.io/docs/reference/scheduling/config/#extension-points).
 
-[[Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg|Open: Pasted image 20241117153631.png]]
-![[Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg]]
+[Open: Pasted image 20241117153631.png](Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
+![fef6bb50c29bde94bde0e57bbe58d9ae_MD5](Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
 
 #### Scheduling framework extension points
 

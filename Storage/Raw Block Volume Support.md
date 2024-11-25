@@ -11,7 +11,7 @@ The following volume plugins support raw block volumes, including dynamic provis
 - RBD (Ceph Block Device; deprecated)
 - VsphereVolume
 
-### [[PersistentVolume]] using a Raw Block Volume[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volume-using-a-raw-block-volume)
+### [PersistentVolume](PersistentVolume.md) using a Raw Block Volume[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volume-using-a-raw-block-volume)
 
 ```yaml
 apiVersion: v1
@@ -31,7 +31,7 @@ spec:
     readOnly: false
 ```
 
-### [[PersistentVolumeClaim]] requesting a Raw Block Volume[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volume-claim-requesting-a-raw-block-volume)
+### [PersistentVolumeClaim](PersistentVolumeClaim.md) requesting a Raw Block Volume[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volume-claim-requesting-a-raw-block-volume)
 
 ```yaml
 apiVersion: v1

@@ -64,7 +64,7 @@ Decoupling policy definition from policy instantiation allows for a common under
 
 As mechanisms mature, they will be defined below on a per-policy basis. The methods of enforcement of individual policies are not defined here.
 
-**[[Pod Security Admission]]Controller**
+**[Pod Security Admission](Pod%20Security%20Admission.md)Controller**
 
 - [Privileged namespace](https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/security/podsecurity-privileged.yaml)
 - [Baseline namespace](https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/security/podsecurity-baseline.yaml)

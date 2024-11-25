@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/debug-init-containers/)
 
-This page shows how to investigate problems related to the execution of [[Init Container]]s. The example command lines below refer to the Pod as `<pod-name>` and the Init Containers as `<init-container-1>` and `<init-container-2>`.
+This page shows how to investigate problems related to the execution of [Init Container](Init%20Container.md)s. The example command lines below refer to the Pod as `<pod-name>` and the Init Containers as `<init-container-1>` and `<init-container-2>`.
 
 ## Before you begin[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-init-containers/#before-you-begin)
 

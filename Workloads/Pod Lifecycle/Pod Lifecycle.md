@@ -1,8 +1,8 @@
-Like individual application containers, [[Pod]] are considered to be relatively ephemeral (rather than durable) entities. Pods are created, assigned a unique ID ([UID](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids)), and scheduled to run on nodes where they remain until termination (according to restart policy) or deletion. If a [[Node]] dies, the Pods running on (or scheduled to run on) that node are [marked for deletion](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-garbage-collection). The control plane marks the Pods for removal after a timeout period.
+Like individual application containers, [Pod](Pod.md) are considered to be relatively ephemeral (rather than durable) entities. Pods are created, assigned a unique ID ([UID](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids)), and scheduled to run on nodes where they remain until termination (according to restart policy) or deletion. If a [Node](Node.md) dies, the Pods running on (or scheduled to run on) that node are [marked for deletion](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-garbage-collection). The control plane marks the Pods for removal after a timeout period.
 
 ## Pod lifetime[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-lifetime)
 
-Whilst a [[Pod]] is running, the kubelet is able to restart containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container [states](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states) and determines what action to take to make the Pod healthy again.
+Whilst a [Pod](Pod.md) is running, the kubelet is able to restart containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container [states](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states) and determines what action to take to make the Pod healthy again.
 
 In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of [Pod conditions](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions). You can also inject [custom readiness information](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-gate) into the condition data for a Pod, if that is useful to your application.
 
@@ -16,9 +16,9 @@ If one of the containers in the Pod fails, then Kubernetes may try to restart th
 
 Pods can however fail in a way that the cluster cannot recover from, and in that case Kubernetes does not attempt to heal the Pod further; instead, Kubernetes deletes the Pod and relies on other components to provide automatic healing.
 
-If a Pod is scheduled to a [[Node]] and that node then fails, the Pod is treated as unhealthy and Kubernetes eventually deletes the Pod. A Pod won't survive an [eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/) due to a lack of resources or Node maintenance.
+If a Pod is scheduled to a [Node](Node.md) and that node then fails, the Pod is treated as unhealthy and Kubernetes eventually deletes the Pod. A Pod won't survive an [eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/) due to a lack of resources or Node maintenance.
 
-Kubernetes uses a higher-level abstraction, called a [[Controller]], that handles the work of managing the relatively disposable Pod instances.
+Kubernetes uses a higher-level abstraction, called a [Controller](Controller.md), that handles the work of managing the relatively disposable Pod instances.
 
 A given Pod (as defined by a UID) is never "rescheduled" to a different node; instead, that Pod can be replaced by a new, near-identical Pod. If you make a replacement Pod, it can even have same name (as in `.metadata.name`) that the old Pod had, but the replacement would have a different `.metadata.uid` from the old Pod.
 
@@ -28,7 +28,7 @@ Kubernetes does not guarantee that a replacement for an existing Pod would be sc
 
 When something is said to have the same lifetime as a Pod, such as a [volume](https://kubernetes.io/docs/concepts/storage/volumes/), that means that the thing exists as long as that specific Pod (with that exact UID) exists. If that Pod is deleted for any reason, and even if an identical replacement is created, the related thing (a volume, in this example) is also destroyed and created anew.
 
-![[c24fe148fb7c359eb7952b15c2729fdb_MD5.svg]]
+![c24fe148fb7c359eb7952b15c2729fdb_MD5](c24fe148fb7c359eb7952b15c2729fdb_MD5.svg)
 
 #### Figure 1.
 

@@ -2,7 +2,7 @@ Legacy API for managing workloads that can scale horizontally. Superseded by the
 
 #### Note:
 
-A [[Deployment]] that configures a [[ReplicaSet]] is now the recommended way to set up replication.
+A [Deployment](Deployment.md) that configures a [ReplicaSet](ReplicaSet.md) is now the recommended way to set up replication.
 
 A _ReplicationController_ ensures that a specified number of pod replicas are running at any one time. In other words, a ReplicationController makes sure that a pod or a homogeneous set of pods is always up and available.
 

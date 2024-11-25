@@ -5,7 +5,7 @@ There are two main ways to have Nodes added to the [API server](https://kuberne
 1. The kubelet on a node self-registers to the control plane
 2. You (or another human user) manually add a Node object
 
-Kubernetes creates a Node object internally (the representation). Kubernetes checks that a kubelet has registered to the API server that matches the `metadata.name` field of the Node. If the node is healthy (i.e. all necessary services are running), then it is eligible to run a [[Pod]]. Otherwise, that node is ignored for any cluster activity until it becomes healthy.
+Kubernetes creates a Node object internally (the representation). Kubernetes checks that a kubelet has registered to the API server that matches the `metadata.name` field of the Node. If the node is healthy (i.e. all necessary services are running), then it is eligible to run a [Pod](Pod.md). Otherwise, that node is ignored for any cluster activity until it becomes healthy.
 
 ### **Node name uniqueness:**
 

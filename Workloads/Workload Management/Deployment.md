@@ -1,5 +1,5 @@
 #prova 
-A [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) manages a set of [[Pod]] to run an application workload, usually one that doesn't maintain state.
+A [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) manages a set of [Pod](Pod.md) to run an application workload, usually one that doesn't maintain state.
 
 A _Deployment_ provides declarative updates for [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) and [ReplicaSets](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/).
 
@@ -7,7 +7,7 @@ You describe a _desired state_ in a Deployment, and the Deployment [Controlle
 
 #### Note:
 
-Do not manage [[ReplicaSet]]s owned by a Deployment. Consider opening an issue in the main Kubernetes repository if your use case is not covered below.
+Do not manage [ReplicaSet](ReplicaSet.md)s owned by a Deployment. Consider opening an issue in the main Kubernetes repository if your use case is not covered below.
 
 ## Use Case[](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#use-case)
 

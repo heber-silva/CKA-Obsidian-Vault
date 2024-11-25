@@ -1,6 +1,6 @@
-You can specify init containers in the [[Pod]] specification alongside the [[Container]] array (which describes app containers).
+You can specify init containers in the [Pod](Pod.md) specification alongside the [Container](Container.md) array (which describes app containers).
 
-In Kubernetes, a [[Sidecar Containers]] is a container that starts before the main application container and _continues to run_. This document is about init containers: containers that run to completion during Pod initialization.
+In Kubernetes, a [Sidecar Containers](Sidecar%20Containers.md) is a container that starts before the main application container and _continues to run_. This document is about init containers: containers that run to completion during Pod initialization.
 
 ## Understanding init containers[](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#understanding-init-containers)
 

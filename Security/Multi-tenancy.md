@@ -36,7 +36,7 @@ By contrast, if each team deploys dedicated workloads for each new client, they 
 
 In many cases, the same organization may use both definitions of "tenants" in different contexts. For example, a platform team may offer shared services such as security tools and databases to multiple internal “customers” and a SaaS vendor may also have multiple teams sharing a development cluster. Finally, hybrid architectures are also possible, such as a SaaS provider using a combination of per-customer workloads for sensitive data, combined with multi-tenant shared services.
 
-![[Images/51a38ca65de765017b67fcdc01b2a64e_MD5.png]]
+![51a38ca65de765017b67fcdc01b2a64e_MD5](Images/51a38ca65de765017b67fcdc01b2a64e_MD5.png)
 
 #### A cluster showing coexisting tenancy models
 
@@ -101,7 +101,7 @@ Data plane isolation ensures that pods and workloads for different tenants are s
 
 By default, all pods in a Kubernetes cluster are allowed to communicate with each other, and all network traffic is unencrypted. This can lead to security vulnerabilities where traffic is accidentally or maliciously sent to an unintended destination, or is intercepted by a workload on a compromised node.
 
-Pod-to-pod communication can be controlled using [[NetworkPolicy]]], which restrict communication between pods using namespace labels or IP address ranges. In a multi-tenant environment where strict network isolation between tenants is required, starting with a default policy that denies communication between pods is recommended with another rule that allows all pods to query the DNS server for name resolution. With such a default policy in place, you can begin adding more permissive rules that allow for communication within a namespace. It is also recommended not to use empty label selector '{}' for namespaceSelector field in network policy definition, in case traffic need to be allowed between namespaces. This scheme can be further refined as required. Note that this only applies to pods within a single control plane; pods that belong to different virtual control planes cannot talk to each other via Kubernetes networking.
+Pod-to-pod communication can be controlled using [NetworkPolicy](NetworkPolicy.md)], which restrict communication between pods using namespace labels or IP address ranges. In a multi-tenant environment where strict network isolation between tenants is required, starting with a default policy that denies communication between pods is recommended with another rule that allows all pods to query the DNS server for name resolution. With such a default policy in place, you can begin adding more permissive rules that allow for communication within a namespace. It is also recommended not to use empty label selector '{}' for namespaceSelector field in network policy definition, in case traffic need to be allowed between namespaces. This scheme can be further refined as required. Note that this only applies to pods within a single control plane; pods that belong to different virtual control planes cannot talk to each other via Kubernetes networking.
 
 Namespace management tools may simplify the creation of default or common network policies. In addition, some of these tools allow you to enforce a consistent set of namespace labels across your cluster, ensuring that they are a trusted basis for your policies.
 
@@ -115,9 +115,9 @@ More advanced network isolation may be provided by service meshes, which provide
 
 Kubernetes offers several types of volumes that can be used as persistent storage for workloads. For security and data-isolation, [dynamic volume provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) is recommended and volume types that use node resources should be avoided.
 
-[[StorageClass]]es allow you to describe custom "classes" of storage offered by your cluster, based on quality-of-service levels, backup policies, or custom policies determined by the cluster administrators.
+[StorageClass](StorageClass.md)es allow you to describe custom "classes" of storage offered by your cluster, based on quality-of-service levels, backup policies, or custom policies determined by the cluster administrators.
 
-Pods can request storage using a [[PersistentVolumeClaim]]. A PersistentVolumeClaim is a namespaced resource, which enables isolating portions of the storage system and dedicating it to tenants within the shared Kubernetes cluster. However, it is important to note that a PersistentVolume is a cluster-wide resource and has a lifecycle independent of workloads and namespaces.
+Pods can request storage using a [PersistentVolumeClaim](PersistentVolumeClaim.md). A PersistentVolumeClaim is a namespaced resource, which enables isolating portions of the storage system and dedicating it to tenants within the shared Kubernetes cluster. However, it is important to note that a PersistentVolume is a cluster-wide resource and has a lifecycle independent of workloads and namespaces.
 
 For example, you can configure a separate StorageClass for each tenant and use this to strengthen isolation. If a StorageClass is shared, you should set a [reclaim policy of `Delete`](https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy) to ensure that a PersistentVolume cannot be reused across different namespaces.
 

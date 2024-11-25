@@ -1,4 +1,4 @@
-In order for an [[Ingress]] to work in your cluster, there must be an [_ingress controller_](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. You need to select at least one ingress controller and make sure it is set up in your cluster. This page lists common ingress controllers that you can deploy.
+In order for an [Ingress](Ingress.md) to work in your cluster, there must be an [_ingress controller_](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. You need to select at least one ingress controller and make sure it is set up in your cluster. This page lists common ingress controllers that you can deploy.
 
 In order for the Ingress resource to work, the cluster must have an ingress controller running.
 

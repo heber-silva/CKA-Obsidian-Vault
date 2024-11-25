@@ -9,11 +9,11 @@ Each container that you run is repeatable; the standardization from having depen
 
 Containers decouple applications from the underlying host infrastructure. This makes deployment easier in different cloud or OS environments.
 
-Each [[node]] in a Kubernetes cluster runs the containers that form the [[Pod]]s assigned to that node. Containers in a Pod are co-located and co-scheduled to run on the same node.
+Each [Node](node.md) in a Kubernetes cluster runs the containers that form the [Pod](Pod.md)s assigned to that node. Containers in a Pod are co-located and co-scheduled to run on the same node.
 
 ## Container images[](https://kubernetes.io/docs/concepts/containers/#container-images)
 
-A container [[image]] is a ready-to-run software package containing everything needed to run an application: the code and any runtime it requires, application and system libraries, and default values for any essential settings.
+A container [Image](image.md) is a ready-to-run software package containing everything needed to run an application: the code and any runtime it requires, application and system libraries, and default values for any essential settings.
 
 Containers are intended to be stateless and [immutable](https://glossary.cncf.io/immutable-infrastructure/): you should not change the code of a container that is already running. If you have a containerized application and want to make changes, the correct process is to build a new image that includes the change, then recreate the container to start from the updated image.
 
@@ -29,6 +29,6 @@ You can also use RuntimeClass to run different Pods with the same container runt
 
 ---
 
-##### [[Container Environment]]
+##### [Container Environment](Container%20Environment.md)
 
 ##### [Container Lifecycle Hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)

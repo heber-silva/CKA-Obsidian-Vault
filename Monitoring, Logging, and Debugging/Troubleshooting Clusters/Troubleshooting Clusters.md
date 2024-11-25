@@ -297,14 +297,14 @@ This is an incomplete list of things that could go wrong, and how to adjust your
 
 ## What's next[](https://kubernetes.io/docs/tasks/debug/debug-cluster/#what-s-next)
 
-- Learn about the metrics available in the [[Resource Metrics Pipeline]]
-- Discover additional [[Tools for Monitoring Resource]] usage
-- Use Node Problem Detector to [[monitor node health]]
-- [[Debugging Kubernetes Nodes With Kubectl]]
-- [[Debugging Kubernetes nodes with crictl]]
-- Get more information about Kubernetes [[auditing]]
+- Learn about the metrics available in the [Resource metrics pipeline](Resource%20Metrics%20Pipeline.md)
+- Discover additional [Tools for Monitoring Resource](Tools%20for%20Monitoring%20Resource.md) usage
+- Use Node Problem Detector to [Monitor Node Health](monitor%20node%20health.md)
+- [Debugging Kubernetes Nodes With Kubectl](Debugging%20Kubernetes%20Nodes%20With%20Kubectl.md)
+- [Debugging Kubernetes nodes with crictl](Debugging%20Kubernetes%20nodes%20with%20crictl.md)
+- Get more information about Kubernetes [Auditing](auditing.md)
 - Use `telepresence` to [develop and debug services locally](https://kubernetes.io/docs/tasks/debug/debug-cluster/local-debugging/)
-- [[System Logs]]
-- [[Metrics For Kubernetes System Components]]
-- [[Metrics for Kubernetes Object States]]
-- [[Logging Architecture]]
+- [System Logs](System%20Logs.md)
+- [Metrics For Kubernetes System Components](Metrics%20For%20Kubernetes%20System%20Components.md)
+- [Metrics for Kubernetes Object States](Metrics%20for%20Kubernetes%20Object%20States.md)
+- [Logging Architecture](Logging%20Architecture.md)
