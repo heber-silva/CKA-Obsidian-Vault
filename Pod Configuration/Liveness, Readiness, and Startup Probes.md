@@ -1,8 +1,8 @@
 Kubernetes has various types of [probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/):
 
-- [Liveness probe](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#liveness-probe)
-- [Readiness probe](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#readiness-probe)
-- [Startup probe](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#startup-probe)
+- [](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#liveness-probe)
+- [](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#readiness-probe)
+- [](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#startup-probe)
 
 ## Liveness probe[](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#liveness-probe)
 
@@ -10,7 +10,7 @@ Liveness probes determine when to restart a container. For example, liveness pro
 
 If a container fails its liveness probe repeatedly, the kubelet restarts the container.
 
-Liveness probes do not wait for readiness probes to succeed. If you want to wait before executing a liveness probe you can either define `initialDelaySeconds`, or use a [startup probe](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#startup-probe).
+Liveness probes do not wait for readiness probes to succeed. If you want to wait before executing a liveness probe you can either define `initialDelaySeconds`, or use a [](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#startup-probe).
 
 ## Readiness probe[](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/#readiness-probe)
 

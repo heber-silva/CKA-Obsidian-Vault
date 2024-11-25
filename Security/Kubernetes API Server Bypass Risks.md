@@ -15,13 +15,13 @@ The [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) on each 
 
 Static Pods are restricted from accessing other objects in the Kubernetes API. For example, you can't configure a static Pod to mount a Secret from the cluster. However, these Pods can take other security sensitive actions, such as using `hostPath` mounts from the underlying node.
 
-By default, the kubelet creates a [mirror pod](https://kubernetes.io/docs/reference/glossary/?all=true#term-mirror-pod) so that the static Pods are visible in the Kubernetes API. However, if the attacker uses an invalid namespace name when creating the Pod, it will not be visible in the Kubernetes API and can only be discovered by tooling that has access to the affected host(s).
+By default, the kubelet creates a [](https://kubernetes.io/docs/reference/glossary/?all=true#term-mirror-pod) so that the static Pods are visible in the Kubernetes API. However, if the attacker uses an invalid namespace name when creating the Pod, it will not be visible in the Kubernetes API and can only be discovered by tooling that has access to the affected host(s).
 
-If a static Pod fails admission control, the kubelet won't register the Pod with the API server. However, the Pod still runs on the node. For more information, refer to [kubeadm issue #1541](https://github.com/kubernetes/kubeadm/issues/1541#issuecomment-487331701).
+If a static Pod fails admission control, the kubelet won't register the Pod with the API server. However, the Pod still runs on the node. For more information, refer to [](https://github.com/kubernetes/kubeadm/issues/1541#1541](https://github.com/kubernetes/kubeadm/issues/1541#1541](https://github.com/kubernetes/kubeadm/issues/1541#issuecomment-487331701).
 
 ### Mitigations[](https://kubernetes.io/docs/concepts/security/api-server-bypass-risks/#static-pods-mitigations)
 
-- Only [enable the kubelet static Pod manifest functionality](https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/#static-pod-creation) if required by the node.
+- Only [](https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/#static-pod-creation) if required by the node.
 - If a node uses the static Pod functionality, restrict filesystem access to the static Pod manifest directory or URL to users who need the access.
 - Restrict access to kubelet configuration parameters and files to prevent an attacker setting a static Pod path or URL.
 - Regularly audit and centrally report all access to directories or web storage locations that host static Pod manifests and kubelet configuration files.
@@ -30,7 +30,7 @@ If a static Pod fails admission control, the kubelet won't register the Pod with
 
 The kubelet provides an HTTP API that is typically exposed on TCP port 10250 on cluster worker nodes. The API might also be exposed on control plane nodes depending on the Kubernetes distribution in use. Direct access to the API allows for disclosure of information about the pods running on a node, the logs from those pods, and execution of commands in every container running on the node.
 
-When Kubernetes cluster users have RBAC access to `Node` object sub-resources, that access serves as authorization to interact with the kubelet API. The exact access depends on which sub-resource access has been granted, as detailed in [kubelet authorization](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/#kubelet-authorization).
+When Kubernetes cluster users have RBAC access to `Node` object sub-resources, that access serves as authorization to interact with the kubelet API. The exact access depends on which sub-resource access has been granted, as detailed in [](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/#kubelet-authorization).
 
 Direct access to the kubelet API is not subject to admission control and is not logged by Kubernetes audit logging. An attacker with direct access to this API may be able to bypass controls that detect or prevent certain actions.
 
@@ -40,7 +40,7 @@ The kubelet API can be configured to authenticate requests in a number of ways. 
 
 - Restrict access to sub-resources of the `nodes` API object using mechanisms such as [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/). Only grant this access when required, such as by monitoring services.
 - Restrict access to the kubelet port. Only allow specified and trusted IP address ranges to access the port.
-- Ensure that [kubelet authentication](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/#kubelet-authentication). is set to webhook or certificate mode.
+- Ensure that [](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/#kubelet-authentication). is set to webhook or certificate mode.
 - Ensure that the unauthenticated "read-only" Kubelet port is not enabled on the cluster.
 
 ## The etcd API[](https://kubernetes.io/docs/concepts/security/api-server-bypass-risks/#the-etcd-api)
@@ -69,5 +69,5 @@ At the cluster level, the impact of this access depends on whether the container
 
 - Ensure that you tightly control filesystem access to container runtime sockets. When possible, restrict this access to the `root` user.
 - Isolate the kubelet from other components running on the node, using mechanisms such as Linux kernel namespaces.
-- Ensure that you restrict or forbid the use of [`hostPath` mounts](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) that include the container runtime socket, either directly or by mounting a parent directory. Also `hostPath` mounts must be set as read-only to mitigate risks of attackers bypassing directory restrictions.
+- Ensure that you restrict or forbid the use of [](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) that include the container runtime socket, either directly or by mounting a parent directory. Also `hostPath` mounts must be set as read-only to mitigate risks of attackers bypassing directory restrictions.
 - Restrict user access to nodes, and especially restrict superuser access to nodes.

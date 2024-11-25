@@ -22,10 +22,10 @@ The following picture shows the scheduling context of a Pod and the interfaces t
 
 One plugin may implement multiple interfaces to perform more complex or stateful tasks.
 
-Some interfaces match the scheduler extension points which can be configured through [Scheduler Configuration](https://kubernetes.io/docs/reference/scheduling/config/#extension-points).
+Some interfaces match the scheduler extension points which can be configured through [](https://kubernetes.io/docs/reference/scheduling/config/#extension-points).
 
-[Open: Pasted image 20241117153631.png](Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
-![fef6bb50c29bde94bde0e57bbe58d9ae_MD5](Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
+[Open: Pasted image 20241117153631.png](../Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
+![fef6bb50c29bde94bde0e57bbe58d9ae_MD5](../Images/fef6bb50c29bde94bde0e57bbe58d9ae_MD5.jpeg)
 
 #### Scheduling framework extension points
 
@@ -73,11 +73,11 @@ These plugins are used to perform "pre-scoring" work, which generates a sharable
 
 ### Score[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#scoring)
 
-These plugins are used to rank nodes that have passed the filtering phase. The scheduler will call each scoring plugin for each node. There will be a well defined range of integers representing the minimum and maximum scores. After the [NormalizeScore](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#normalize-scoring) phase, the scheduler will combine node scores from all plugins according to the configured plugin weights.
+These plugins are used to rank nodes that have passed the filtering phase. The scheduler will call each scoring plugin for each node. There will be a well defined range of integers representing the minimum and maximum scores. After the [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#normalize-scoring) phase, the scheduler will combine node scores from all plugins according to the configured plugin weights.
 
 ### NormalizeScore[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#normalize-scoring)
 
-These plugins are used to modify scores before the scheduler computes a final ranking of Nodes. A plugin that registers for this extension point will be called with the [Score](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#scoring) results from the same plugin. This is called once per plugin per scheduling cycle.
+These plugins are used to modify scores before the scheduler computes a final ranking of Nodes. A plugin that registers for this extension point will be called with the [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#scoring) results from the same plugin. This is called once per plugin per scheduling cycle.
 
 For example, suppose a plugin `BlinkingLightScorer` ranks Nodes based on how many blinking lights they have.
 
@@ -127,21 +127,21 @@ _Permit_ plugins are invoked at the end of the scheduling cycle for each Pod, t
     Once all Permit plugins approve a Pod, it is sent for binding.
     
 2. **deny**  
-    If any Permit plugin denies a Pod, it is returned to the scheduling queue. This will trigger the Unreserve phase in [Reserve plugins](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve).
+    If any Permit plugin denies a Pod, it is returned to the scheduling queue. This will trigger the Unreserve phase in [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve).
     
 3. **wait** (with a timeout)  
-    If a Permit plugin returns "wait", then the Pod is kept in an internal "waiting" Pods list, and the binding cycle of this Pod starts but directly blocks until it gets approved. If a timeout occurs, **wait** becomes **deny** and the Pod is returned to the scheduling queue, triggering the Unreserve phase in [Reserve plugins](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve).
+    If a Permit plugin returns "wait", then the Pod is kept in an internal "waiting" Pods list, and the binding cycle of this Pod starts but directly blocks until it gets approved. If a timeout occurs, **wait** becomes **deny** and the Pod is returned to the scheduling queue, triggering the Unreserve phase in [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve).
     
 
 #### Note:
 
-While any plugin can access the list of "waiting" Pods and approve them (see [`FrameworkHandle`](https://git.k8s.io/enhancements/keps/sig-scheduling/624-scheduling-framework#frameworkhandle)), we expect only the permit plugins to approve binding of reserved Pods that are in "waiting" state. Once a Pod is approved, it is sent to the [PreBind](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#pre-bind) phase.
+While any plugin can access the list of "waiting" Pods and approve them (see [](https://git.k8s.io/enhancements/keps/sig-scheduling/624-scheduling-framework#frameworkhandle)), we expect only the permit plugins to approve binding of reserved Pods that are in "waiting" state. Once a Pod is approved, it is sent to the [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#pre-bind) phase.
 
 ### PreBind[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#pre-bind)
 
 These plugins are used to perform any work required before a Pod is bound. For example, a pre-bind plugin may provision a network volume and mount it on the target node before allowing the Pod to run there.
 
-If any PreBind plugin returns an error, the Pod is [rejected](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve) and returned to the scheduling queue.
+If any PreBind plugin returns an error, the Pod is [](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#reserve) and returned to the scheduling queue.
 
 ### Bind[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#bind)
 
@@ -175,8 +175,8 @@ type PreFilterPlugin interface {
 
 ## Plugin configuration[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/#plugin-configuration)
 
-You can enable or disable plugins in the scheduler configuration. If you are using Kubernetes v1.18 or later, most scheduling [plugins](https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins) are in use and enabled by default.
+You can enable or disable plugins in the scheduler configuration. If you are using Kubernetes v1.18 or later, most scheduling [](https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins) are in use and enabled by default.
 
 In addition to default plugins, you can also implement your own scheduling plugins and get them configured along with default plugins. You can visit [scheduler-plugins](https://github.com/kubernetes-sigs/scheduler-plugins) for more details.
 
-If you are using Kubernetes v1.18 or later, you can configure a set of plugins as a scheduler profile and then define multiple profiles to fit various kinds of workload. Learn more at [multiple profiles](https://kubernetes.io/docs/reference/scheduling/config/#multiple-profiles).
+If you are using Kubernetes v1.18 or later, you can configure a set of plugins as a scheduler profile and then define multiple profiles to fit various kinds of workload. Learn more at [](https://kubernetes.io/docs/reference/scheduling/config/#multiple-profiles).

@@ -1,5 +1,5 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/debug-statefulset/)
-This task shows you how to debug a [StatefulSet](StatefulSet.md).
+This task shows you how to debug a [StatefulSet](../../Workloads/Workload%20Management/StatefulSet.md).
 
 ## Before you begin[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-statefulset/#before-you-begin)
 

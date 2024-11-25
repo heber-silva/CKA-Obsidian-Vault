@@ -1,7 +1,7 @@
-A [Pod](Pod.md) has a PodStatus, which has an array of [PodConditions](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podcondition-v1-core) through which the Pod has or has not passed. Kubelet manages the following PodConditions:
+A [Pod](../Pod.md) has a PodStatus, which has an array of [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podcondition-v1-core) through which the Pod has or has not passed. Kubelet manages the following PodConditions:
 
 - `PodScheduled`: the Pod has been scheduled to a node.
-- `PodReadyToStartContainers`: (beta feature; enabled by [default](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network)) the Pod sandbox has been successfully created and networking configured.
+- `PodReadyToStartContainers`: (beta feature; enabled by [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network)) the Pod sandbox has been successfully created and networking configured.
 - `ContainersReady`: all containers in the Pod are ready.
 - `Initialized`: all [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) have completed successfully.
 - `Ready`: the Pod is able to serve requests and should be added to the load balancing pools of all matching Services.
@@ -47,7 +47,7 @@ status:
 ...
 ```
 
-The Pod conditions you add must have names that meet the Kubernetes [label key format](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set).
+The Pod conditions you add must have names that meet the Kubernetes [](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set).
 
 ### Status for Pod readiness[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-status)
 
@@ -58,7 +58,7 @@ For a Pod that uses custom conditions, that Pod is evaluated to be ready **only
 - All containers in the Pod are ready.
 - All conditions specified in `readinessGates` are `True`.
 
-When a Pod's containers are Ready but at least one custom condition is missing or `False`, the kubelet sets the Pod's [condition](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) to `ContainersReady`.
+When a Pod's containers are Ready but at least one custom condition is missing or `False`, the kubelet sets the Pod's [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) to `ContainersReady`.
 
 ### Pod network readiness[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network)
 
@@ -68,7 +68,7 @@ FEATURE STATE: `Kubernetes v1.29 [beta]`
 
 During its early development, this condition was named `PodHasNetwork`.
 
-After a Pod gets scheduled on a node, it needs to be admitted by the kubelet and to have any required storage volumes mounted. Once these phases are complete, the kubelet works with a container runtime (using [Container runtime interface (CRI)](https://kubernetes.io/docs/concepts/architecture/#container-runtime)) to set up a runtime sandbox and configure networking for the Pod. If the `PodReadyToStartContainersCondition` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) is enabled (it is enabled by default for Kubernetes 1.31), the `PodReadyToStartContainers` condition will be added to the `status.conditions` field of a Pod.
+After a Pod gets scheduled on a node, it needs to be admitted by the kubelet and to have any required storage volumes mounted. Once these phases are complete, the kubelet works with a container runtime (using [](https://kubernetes.io/docs/concepts/architecture/#container-runtime)) to set up a runtime sandbox and configure networking for the Pod. If the `PodReadyToStartContainersCondition` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) is enabled (it is enabled by default for Kubernetes 1.31), the `PodReadyToStartContainers` condition will be added to the `status.conditions` field of a Pod.
 
 The `PodReadyToStartContainers` condition is set to `False` by the Kubelet when it detects a Pod does not have a runtime sandbox with networking configured. This occurs in the following scenarios:
 

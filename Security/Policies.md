@@ -6,13 +6,13 @@ Kubernetes policies are configurations that manage other configurations or runti
 
 Some API objects act as policies. Here are some examples:
 
-- [NetworkPolicy](NetworkPolicy.md) can be used to restrict ingress and egress traffic for a workload.
+- [NetworkPolicy](../Networking/NetworkPolicy.md) can be used to restrict ingress and egress traffic for a workload.
 - [LimitRanges](https://kubernetes.io/docs/concepts/policy/limit-range/) manage resource allocation constraints across different object kinds.
 - [ResourceQuotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) limit resource consumption for a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces).
 
 ## Apply policies using admission controllers[](https://kubernetes.io/docs/concepts/policy/#apply-policies-using-admission-controllers)
 
-An [admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) runs in the API server and can validate or mutate API requests. Some admission controllers act to apply policies. For example, the [AlwaysPullImages](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller modifies a new Pod to set the image pull policy to `Always`.
+An [admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) runs in the API server and can validate or mutate API requests. Some admission controllers act to apply policies. For example, the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller modifies a new Pod to set the image pull policy to `Always`.
 
 Kubernetes has several built-in admission controllers that are configurable via the API server `--enable-admission-plugins` flag.
 
@@ -42,7 +42,7 @@ Details on dynamic admission control are documented in a dedicated section:
 
 ### Implementations[](https://kubernetes.io/docs/concepts/policy/#implementations-admission-control)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/policy/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/policy/#third-party-content-disclaimer)
 
 Dynamic Admission Controllers that act as flexible policy engines are being developed in the Kubernetes ecosystem, such as:
 
@@ -60,4 +60,4 @@ Kubernetes allows configuring the Kubelet on each worker node. Some Kubelet conf
 
 Items on this page refer to third party products or projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for those third-party products or projects. See the [CNCF website guidelines](https://github.com/cncf/foundation/blob/master/website-guidelines.md) for more details.
 
-You should read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.
+You should read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.

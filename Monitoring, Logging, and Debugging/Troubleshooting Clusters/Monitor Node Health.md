@@ -1,6 +1,6 @@
 [Docs](https://kubernetes.io/docs/tasks/debug/debug-cluster/monitor-node-health/)
 
-_Node Problem Detector_ is a daemon for monitoring and reporting about a node's health. You can run Node Problem Detector as a `DaemonSet` or as a standalone daemon. Node Problem Detector collects information about node problems from various daemons and reports these conditions to the API server as Node [Condition](https://kubernetes.io/docs/concepts/architecture/nodes/#condition)s or as [Event](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/event-v1/)s.
+_Node Problem Detector_ is a daemon for monitoring and reporting about a node's health. You can run Node Problem Detector as a `DaemonSet` or as a standalone daemon. Node Problem Detector collects information about node problems from various daemons and reports these conditions to the API server as Node [](https://kubernetes.io/docs/concepts/architecture/nodes/#condition)s or as [Event](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/event-v1/)s.
 
 To learn how to install and use Node Problem Detector, see [Node Problem Detector project documentation](https://github.com/kubernetes/node-problem-detector).
 
@@ -13,7 +13,7 @@ You need to have a Kubernetes cluster, and the kubectl command-line tool must be
 
 ## Limitations[](https://kubernetes.io/docs/tasks/debug/debug-cluster/monitor-node-health/#limitations)
 
-- Node Problem Detector uses the kernel log format for reporting kernel issues. To learn how to extend the kernel log format, see [Add support for another log format](https://kubernetes.io/docs/tasks/debug/debug-cluster/monitor-node-health/#support-other-log-format).
+- Node Problem Detector uses the kernel log format for reporting kernel issues. To learn how to extend the kernel log format, see [](https://kubernetes.io/docs/tasks/debug/debug-cluster/monitor-node-health/#support-other-log-format).
 
 ## Enabling Node Problem Detector[](https://kubernetes.io/docs/tasks/debug/debug-cluster/monitor-node-health/#enabling-node-problem-detector)
 
@@ -201,4 +201,4 @@ It is recommended to run the Node Problem Detector in your cluster to monitor no
 
 - The kernel log grows relatively slowly.
 - A resource limit is set for the Node Problem Detector.
-- Even under high load, the resource usage is acceptable. For more information, see the Node Problem Detector [benchmark result](https://github.com/kubernetes/node-problem-detector/issues/2#issuecomment-220255629).
+- Even under high load, the resource usage is acceptable. For more information, see the Node Problem Detector [](https://github.com/kubernetes/node-problem-detector/issues/2#issuecomment-220255629).

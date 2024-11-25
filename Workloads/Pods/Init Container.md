@@ -1,4 +1,4 @@
-You can specify init containers in the [Pod](Pod.md) specification alongside the [Container](Container.md) array (which describes app containers).
+You can specify init containers in the [Pod](../Pod.md) specification alongside the [Container](../../Container/Container.md) array (which describes app containers).
 
 In Kubernetes, a [Sidecar Containers](Sidecar%20Containers.md) is a container that starts before the main application container and _continues to run_. This document is about init containers: containers that run to completion during Pod initialization.
 
@@ -13,13 +13,13 @@ Init containers are exactly like regular containers, except:
 
 If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a `restartPolicy` of Never, and an init container fails during startup of that Pod, Kubernetes treats the overall Pod as failed.
 
-To specify an init container for a Pod, add the `initContainers` field into the [Pod specification](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec), as an array of `container` items (similar to the app `containers` field and its contents). See [Container](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) in the API reference for more details.
+To specify an init container for a Pod, add the `initContainers` field into the [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec), as an array of `container` items (similar to the app `containers` field and its contents). See [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) in the API reference for more details.
 
 The status of the init containers is returned in `.status.initContainerStatuses` field as an array of the container statuses (similar to the `.status.containerStatuses` field).
 
 ### Differences from regular containers[](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#differences-from-regular-containers)
 
-Init containers support all the fields and features of app containers, including resource limits, [volumes](https://kubernetes.io/docs/concepts/storage/volumes/), and security settings. However, the resource requests and limits for an init container are handled differently, as documented in [Resource sharing within containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#resource-sharing-within-containers).
+Init containers support all the fields and features of app containers, including resource limits, [volumes](https://kubernetes.io/docs/concepts/storage/volumes/), and security settings. However, the resource requests and limits for an init container are handled differently, as documented in [](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#resource-sharing-within-containers).
 
 Regular init containers (in other words: excluding sidecar containers) do not support the `lifecycle`, `livenessProbe`, `readinessProbe`, or `startupProbe` fields. Init containers must run to completion before the Pod can be ready; sidecar containers continue running during a Pod's lifetime, and _do_ support some probes. See [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) for further details about sidecar containers.
 
@@ -31,7 +31,7 @@ Init containers run and complete their tasks before the main application contain
 
 Init containers run to completion sequentially, and the main container does not start until all the init containers have successfully completed.
 
-init containers do not support `lifecycle`, `livenessProbe`, `readinessProbe`, or `startupProbe` whereas sidecar containers support all these [probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe) to control their lifecycle.
+init containers do not support `lifecycle`, `livenessProbe`, `readinessProbe`, or `startupProbe` whereas sidecar containers support all these [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe) to control their lifecycle.
 
 Init containers share the same resources (CPU, memory, network) with the main application containers but do not interact directly with them. They can, however, use shared volumes for data exchange.
 
@@ -225,7 +225,7 @@ NAME        READY     STATUS    RESTARTS   AGE
 myapp-pod   1/1       Running   0          9m
 ```
 
-This simple example should provide some inspiration for you to create your own init containers. [What's next](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#what-s-next) contains a link to a more detailed example.
+This simple example should provide some inspiration for you to create your own init containers. [](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#what-s-next) contains a link to a more detailed example.
 
 ## Detailed behavior[](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#detailed-behavior)
 
@@ -235,11 +235,11 @@ Each init container must exit successfully before the next container starts. If 
 
 A Pod cannot be `Ready` until all init containers have succeeded. The ports on an init container are not aggregated under a Service. A Pod that is initializing is in the `Pending` state but should have a condition `Initialized` set to false.
 
-If the Pod [restarts](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#pod-restart-reasons), or is restarted, all init containers must execute again.
+If the Pod [](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#pod-restart-reasons), or is restarted, all init containers must execute again.
 
 Changes to the init container spec are limited to the container image field. Directly altering the `image` field of an init container does _not_ restart the Pod or trigger its recreation. If the Pod has yet to start, that change may have an effect on how the Pod boots up.
 
-For a [pod template](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates) you can typically change any field for an init container; the impact of making that change depends on where the pod template is used.
+For a [](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates) you can typically change any field for an init container; the impact of making that change depends on where the pod template is used.
 
 Because init containers can be restarted, retried, or re-executed, init container code should be idempotent. In particular, code that writes into any `emptyDir` volume should be prepared for the possibility that an output file already exists.
 

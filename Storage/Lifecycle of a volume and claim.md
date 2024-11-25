@@ -2,7 +2,7 @@ Managing storage is a distinct problem from managing compute instances. The Pers
 
 A [PersistentVolume](PersistentVolume.md) (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using [StorageClass](StorageClass.md)es. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes, but have a lifecycle independent of any individual Pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
 
-A [PersistentVolumeClaim](PersistentVolumeClaim.md) (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany, ReadWriteMany, or ReadWriteOncePod, see [AccessModes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)).
+A [PersistentVolumeClaim](PersistentVolumeClaim.md) (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany, ReadWriteMany, or ReadWriteOncePod, see [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)).
 
 While PersistentVolumeClaims allow a user to consume abstract storage resources, it is common that users need PersistentVolumes with varying properties, such as performance, for different problems. Cluster administrators need to be able to offer a variety of PersistentVolumes that differ in more ways than size and access modes, without exposing users to the details of how those volumes are implemented. For these needs, there is the _StorageClass_ resource.
 
@@ -22,7 +22,7 @@ A cluster administrator creates a number of PVs. They carry the details of the r
 
 When none of the static PVs the administrator created match a user's PersistentVolumeClaim, the cluster may try to dynamically provision a volume specially for the PVC. This provisioning is based on StorageClasses: the PVC must request a [storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/) and the administrator must have created and configured that class for dynamic provisioning to occur. Claims that request the class `""` effectively disable dynamic provisioning for themselves.
 
-To enable dynamic storage provisioning based on storage class, the cluster administrator needs to enable the `DefaultStorageClass` [admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass) on the API server. This can be done, for example, by ensuring that `DefaultStorageClass` is among the comma-delimited, ordered list of values for the `--enable-admission-plugins` flag of the API server component. For more information on API server command-line flags, check [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) documentation.
+To enable dynamic storage provisioning based on storage class, the cluster administrator needs to enable the `DefaultStorageClass` [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass) on the API server. This can be done, for example, by ensuring that `DefaultStorageClass` is among the comma-delimited, ordered list of values for the `--enable-admission-plugins` flag of the API server component. For more information on API server command-line flags, check [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) documentation.
 
 ### Binding[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#binding)
 
@@ -34,7 +34,7 @@ Claims will remain unbound indefinitely if a matching volume does not exist. Cla
 
 Pods use claims as volumes. The cluster inspects the claim to find the bound volume and mounts that volume for a Pod. For volumes that support multiple access modes, the user specifies which mode is desired when using their claim as a volume in a Pod.
 
-Once a user has a claim and that claim is bound, the bound PV belongs to the user for as long as they need it. Users schedule Pods and access their claimed PVs by including a `persistentVolumeClaim` section in a Pod's `volumes` block. See [Claims As Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) for more details on this.
+Once a user has a claim and that claim is bound, the bound PV belongs to the user for as long as they need it. Users schedule Pods and access their claimed PVs by including a `persistentVolumeClaim` section in a Pod's `volumes` block. See [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes) for more details on this.
 
 ### Storage Object in Use Protection[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection)
 
@@ -100,7 +100,7 @@ If you want to reuse the same storage asset, create a new PersistentVolume with 
 
 #### Delete[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#delete)
 
-For volume plugins that support the `Delete` reclaim policy, deletion removes both the PersistentVolume object from Kubernetes, as well as the associated storage asset in the external infrastructure. Volumes that were dynamically provisioned inherit the [reclaim policy of their StorageClass](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaim-policy), which defaults to `Delete`. The administrator should configure the StorageClass according to users' expectations; otherwise, the PV must be edited or patched after it is created. See [Change the Reclaim Policy of a PersistentVolume](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
+For volume plugins that support the `Delete` reclaim policy, deletion removes both the PersistentVolume object from Kubernetes, as well as the associated storage asset in the external infrastructure. Volumes that were dynamically provisioned inherit the [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaim-policy), which defaults to `Delete`. The administrator should configure the StorageClass according to users' expectations; otherwise, the PV must be edited or patched after it is created. See [Change the Reclaim Policy of a PersistentVolume](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
 
 #### Recycle[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#recycle)
 
@@ -205,7 +205,7 @@ The finalizers ensure that the PV object is removed only after the volume is del
 
 ### Reserving a PersistentVolume[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reserving-a-persistentvolume)
 
-The control plane can [bind PersistentVolumeClaims to matching PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#binding) in the cluster. However, if you want a PVC to bind to a specific PV, you need to pre-bind them.
+The control plane can [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#binding) in the cluster. However, if you want a PVC to bind to a specific PV, you need to pre-bind them.
 
 By specifying a PersistentVolume in a PersistentVolumeClaim, you declare a binding between that specific PV and PVC. If the PersistentVolume exists and has not reserved PersistentVolumeClaims through its `claimRef` field, then the PersistentVolume and PersistentVolumeClaim will be bound.
 
@@ -247,7 +247,7 @@ FEATURE STATE: `Kubernetes v1.24 [stable]`
 Support for expanding PersistentVolumeClaims (PVCs) is enabled by default. You can expand the following types of volumes:
 
 - azureFile (deprecated)
-- [csi](https://kubernetes.io/docs/concepts/storage/volumes/#csi)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#csi)
 - flexVolume (deprecated)
 - rbd (deprecated)
 - portworxVolume (deprecated)
@@ -304,8 +304,8 @@ FlexVolume resize is possible only when the underlying driver supports resize.
 
 If a user specifies a new size that is too big to be satisfied by underlying storage system, expansion of PVC will be continuously retried until user or cluster administrator takes some action. This can be undesirable and hence Kubernetes provides following methods of recovering from such failures.
 
-- [Manually with Cluster Administrator access](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#recovery-methods-0)
-- [By requesting expansion to smaller size](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#recovery-methods-1)
+- [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#recovery-methods-0)
+- [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#recovery-methods-1)
 
 If expanding underlying storage fails, the cluster administrator can manually recover the Persistent Volume Claim (PVC) state and cancel the resize requests. Otherwise, the resize requests are continuously retried by the controller without administrator intervention.
 

@@ -33,7 +33,7 @@ To achieve this, you can:
 3. Adopt and follow processes to update dependencies when updates are available, especially in response to security announcements.
 4. Use validation mechanisms such as digital certificates for supply chain assurance.
 5. Subscribe to feeds and other mechanisms to alert you to security risks.
-6. Restrict access to artifacts. Place container images in a [private registry](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry) that only allows authorized clients to pull images.
+6. Restrict access to artifacts. Place container images in a [](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry) that only allows authorized clients to pull images.
 
 ## _Deploy_ lifecycle phase[](https://kubernetes.io/docs/concepts/security/cloud-native-security/#lifecycle-phase-deploy)
 
@@ -43,7 +43,7 @@ When you deploy Kubernetes, you also set the foundation for your applications' r
 
 ## _Runtime_ lifecycle phase[](https://kubernetes.io/docs/concepts/security/cloud-native-security/#lifecycle-phase-runtime)
 
-The Runtime phase comprises three critical areas: [access](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-access), [compute](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-compute), and [storage](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-storage).
+The Runtime phase comprises three critical areas: [](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-access), [](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-compute), and [](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-storage).
 
 ### Runtime protection: access[](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-access)
 
@@ -51,9 +51,9 @@ The Kubernetes API is what makes your cluster work. Protecting this API is key t
 
 Other pages in the Kubernetes documentation have more detail about how to set up specific aspects of access control. The [security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/) has a set of suggested basic checks for your cluster.
 
-Beyond that, securing your cluster means implementing effective [authentication](https://kubernetes.io/docs/concepts/security/controlling-access/#authentication) and [authorization](https://kubernetes.io/docs/concepts/security/controlling-access/#authorization) for API access. Use [ServiceAccounts](https://kubernetes.io/docs/concepts/security/service-accounts/) to provide and manage security identities for workloads and cluster components.
+Beyond that, securing your cluster means implementing effective [](https://kubernetes.io/docs/concepts/security/controlling-access/#authentication) and [](https://kubernetes.io/docs/concepts/security/controlling-access/#authorization) for API access. Use [ServiceAccounts](https://kubernetes.io/docs/concepts/security/service-accounts/) to provide and manage security identities for workloads and cluster components.
 
-Kubernetes uses TLS to protect API traffic; make sure to deploy the cluster using TLS (including for traffic between nodes and the control plane), and protect the encryption keys. If you use Kubernetes' own API for [CertificateSigningRequests](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#certificate-signing-requests), pay special attention to restricting misuse there.
+Kubernetes uses TLS to protect API traffic; make sure to deploy the cluster using TLS (including for traffic between nodes and the control plane), and protect the encryption keys. If you use Kubernetes' own API for [](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#certificate-signing-requests), pay special attention to restricting misuse there.
 
 ### Runtime protection: compute[](https://kubernetes.io/docs/concepts/security/cloud-native-security/#protection-runtime-compute)
 
@@ -71,7 +71,7 @@ To protect your compute at runtime, you can:
     
 3. Define [ResourceQuotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) to fairly allocate shared resources, and use mechanisms such as [LimitRanges](https://kubernetes.io/docs/concepts/policy/limit-range/) to ensure that Pods specify their resource requirements.
     
-4. Partition workloads across different nodes. Use [node isolation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-isolation-restriction) mechanisms, either from Kubernetes itself or from the ecosystem, to ensure that Pods with different trust contexts are run on separate sets of nodes.
+4. Partition workloads across different nodes. Use [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-isolation-restriction) mechanisms, either from Kubernetes itself or from the ecosystem, to ensure that Pods with different trust contexts are run on separate sets of nodes.
     
 5. Use a [container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes) that provides security restrictions.
     

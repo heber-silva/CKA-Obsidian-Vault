@@ -1,6 +1,6 @@
 [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) is a family of API kinds that provide dynamic infrastructure provisioning and advanced traffic routing.
 
-Make network [Service](service.md)s available by using an extensible, role-oriented, protocol-aware configuration mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an [add-on](https://kubernetes.io/docs/concepts/cluster-administration/addons/) containing API [kinds](https://gateway-api.sigs.k8s.io/references/spec/) that provide dynamic infrastructure provisioning and advanced traffic routing.
+Make network [Service](Service.md)s available by using an extensible, role-oriented, protocol-aware configuration mechanism. [Gateway API](https://gateway-api.sigs.k8s.io/) is an [add-on](https://kubernetes.io/docs/concepts/cluster-administration/addons/) containing API [kinds](https://gateway-api.sigs.k8s.io/references/spec/) that provide dynamic infrastructure provisioning and advanced traffic routing.
 
 ## Design principles[](https://kubernetes.io/docs/concepts/services-networking/gateway/#design-principles)
 
@@ -29,7 +29,7 @@ Gateway API is organized into different API kinds that have interdependent relat
 
 The following figure illustrates the relationships of the three stable Gateway API kinds:
 
-![8a51c2d90449a918a4692db42c6cce74_MD5](8a51c2d90449a918a4692db42c6cce74_MD5.svg)
+![8a51c2d90449a918a4692db42c6cce74_MD5](../Images/8a51c2d90449a918a4692db42c6cce74_MD5.svg)
 
 ### GatewayClass[](https://kubernetes.io/docs/concepts/services-networking/gateway/#api-kind-gateway-class)
 
@@ -48,7 +48,7 @@ spec:
 
 In this example, a controller that has implemented Gateway API is configured to manage GatewayClasses with the controller name `example.com/gateway-controller`. Gateways of this class will be managed by the implementation's controller.
 
-See the [GatewayClass](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.GatewayClass) reference for a full definition of this API kind.
+See the [](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.GatewayClass) reference for a full definition of this API kind.
 
 ### Gateway[](https://kubernetes.io/docs/concepts/services-networking/gateway/#api-kind-gateway)
 
@@ -71,7 +71,7 @@ spec:
 
 In this example, an instance of traffic handling infrastructure is programmed to listen for HTTP traffic on port 80. Since the `addresses` field is unspecified, an address or hostname is assigned to the Gateway by the implementation's controller. This address is used as a network endpoint for processing traffic of backend network endpoints defined in routes.
 
-See the [Gateway](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.Gateway) reference for a full definition of this API kind.
+See the [](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.Gateway) reference for a full definition of this API kind.
 
 ### HTTPRoute[](https://kubernetes.io/docs/concepts/services-networking/gateway/#api-kind-httproute)
 
@@ -101,13 +101,13 @@ spec:
 
 In this example, HTTP traffic from Gateway `example-gateway` with the Host: header set to `www.example.com` and the request path specified as `/login` will be routed to Service `example-svc` on port `8080`.
 
-See the [HTTPRoute](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.HTTPRoute) reference for a full definition of this API kind.
+See the [](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1.HTTPRoute) reference for a full definition of this API kind.
 
 ## Request flow[](https://kubernetes.io/docs/concepts/services-networking/gateway/#request-flow)
 
 Here is a simple example of HTTP traffic being routed to a Service by using a Gateway and an HTTPRoute:
 
-![6008a915f3496d9576548be6428316c5_MD5](6008a915f3496d9576548be6428316c5_MD5.svg)
+![6008a915f3496d9576548be6428316c5_MD5](../Images/6008a915f3496d9576548be6428316c5_MD5.svg)
 
 In this example, the request flow for a Gateway implemented as a reverse proxy is:
 
@@ -128,11 +128,11 @@ See the [conformance](https://gateway-api.sigs.k8s.io/concepts/conformance/) d
 
 Gateway API is the successor to the [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) API. However, it does not include the Ingress kind. As a result, a one-time conversion from your existing Ingress resources to Gateway API resources is necessary.
 
-Refer to the [ingress migration](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#migrating-from-ingress) guide for details on migrating Ingress resources to Gateway API resources.
+Refer to the [](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#migrating-from-ingress) guide for details on migrating Ingress resources to Gateway API resources.
 
 ## What's next[](https://kubernetes.io/docs/concepts/services-networking/gateway/#what-s-next)
 
-Instead of Gateway API resources being natively implemented by Kubernetes, the specifications are defined as [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) supported by a wide range of [implementations](https://gateway-api.sigs.k8s.io/implementations/). [Install](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api) the Gateway API CRDs or follow the installation instructions of your selected implementation. After installing an implementation, use the [Getting Started](https://gateway-api.sigs.k8s.io/guides/) guide to help you quickly start working with Gateway API.
+Instead of Gateway API resources being natively implemented by Kubernetes, the specifications are defined as [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) supported by a wide range of [implementations](https://gateway-api.sigs.k8s.io/implementations/). [](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api) the Gateway API CRDs or follow the installation instructions of your selected implementation. After installing an implementation, use the [Getting Started](https://gateway-api.sigs.k8s.io/guides/) guide to help you quickly start working with Gateway API.
 
 #### Note:
 

@@ -36,7 +36,7 @@ By contrast, if each team deploys dedicated workloads for each new client, they 
 
 In many cases, the same organization may use both definitions of "tenants" in different contexts. For example, a platform team may offer shared services such as security tools and databases to multiple internal “customers” and a SaaS vendor may also have multiple teams sharing a development cluster. Finally, hybrid architectures are also possible, such as a SaaS provider using a combination of per-customer workloads for sensitive data, combined with multi-tenant shared services.
 
-![51a38ca65de765017b67fcdc01b2a64e_MD5](Images/51a38ca65de765017b67fcdc01b2a64e_MD5.png)
+![51a38ca65de765017b67fcdc01b2a64e_MD5](../Images/51a38ca65de765017b67fcdc01b2a64e_MD5.png)
 
 #### A cluster showing coexisting tenancy models
 
@@ -75,7 +75,7 @@ The namespace isolation model requires configuration of several other Kubernetes
 
 The most important type of isolation for the control plane is authorization. If teams or their workloads can access or modify each others' API resources, they can change or disable all other types of policies thereby negating any protection those policies may offer. As a result, it is critical to ensure that each tenant has the appropriate access to only the namespaces they need, and no more. This is known as the "Principle of Least Privilege."
 
-Role-based access control (RBAC) is commonly used to enforce authorization in the Kubernetes control plane, for both users and workloads (service accounts). [Roles](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) and [RoleBindings](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) are Kubernetes objects that are used at a namespace level to enforce access control in your application; similar objects exist for authorizing access to cluster-level objects, though these are less useful for multi-tenant clusters.
+Role-based access control (RBAC) is commonly used to enforce authorization in the Kubernetes control plane, for both users and workloads (service accounts). [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) and [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) are Kubernetes objects that are used at a namespace level to enforce access control in your application; similar objects exist for authorizing access to cluster-level objects, though these are less useful for multi-tenant clusters.
 
 In a multi-team environment, RBAC must be used to restrict tenants' access to the appropriate namespaces, and ensure that cluster-wide resources can only be accessed or modified by privileged users such as cluster administrators.
 
@@ -101,13 +101,13 @@ Data plane isolation ensures that pods and workloads for different tenants are s
 
 By default, all pods in a Kubernetes cluster are allowed to communicate with each other, and all network traffic is unencrypted. This can lead to security vulnerabilities where traffic is accidentally or maliciously sent to an unintended destination, or is intercepted by a workload on a compromised node.
 
-Pod-to-pod communication can be controlled using [NetworkPolicy](NetworkPolicy.md)], which restrict communication between pods using namespace labels or IP address ranges. In a multi-tenant environment where strict network isolation between tenants is required, starting with a default policy that denies communication between pods is recommended with another rule that allows all pods to query the DNS server for name resolution. With such a default policy in place, you can begin adding more permissive rules that allow for communication within a namespace. It is also recommended not to use empty label selector '{}' for namespaceSelector field in network policy definition, in case traffic need to be allowed between namespaces. This scheme can be further refined as required. Note that this only applies to pods within a single control plane; pods that belong to different virtual control planes cannot talk to each other via Kubernetes networking.
+Pod-to-pod communication can be controlled using [NetworkPolicy](../Networking/NetworkPolicy.md)], which restrict communication between pods using namespace labels or IP address ranges. In a multi-tenant environment where strict network isolation between tenants is required, starting with a default policy that denies communication between pods is recommended with another rule that allows all pods to query the DNS server for name resolution. With such a default policy in place, you can begin adding more permissive rules that allow for communication within a namespace. It is also recommended not to use empty label selector '{}' for namespaceSelector field in network policy definition, in case traffic need to be allowed between namespaces. This scheme can be further refined as required. Note that this only applies to pods within a single control plane; pods that belong to different virtual control planes cannot talk to each other via Kubernetes networking.
 
 Namespace management tools may simplify the creation of default or common network policies. In addition, some of these tools allow you to enforce a consistent set of namespace labels across your cluster, ensuring that they are a trusted basis for your policies.
 
 #### Warning:
 
-Network policies require a [CNI plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni) that supports the implementation of network policies. Otherwise, NetworkPolicy resources will be ignored.
+Network policies require a [](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni) that supports the implementation of network policies. Otherwise, NetworkPolicy resources will be ignored.
 
 More advanced network isolation may be provided by service meshes, which provide OSI Layer 7 policies based on workload identity, in addition to namespaces. These higher-level policies can make it easier to manage namespace-based multi-tenancy, especially when multiple namespaces are dedicated to a single tenant. They frequently also offer encryption using mutual TLS, protecting your data even in the presence of a compromised node, and work across dedicated or virtual clusters. However, they can be significantly more complex to manage and may not be appropriate for all users.
 
@@ -115,15 +115,15 @@ More advanced network isolation may be provided by service meshes, which provide
 
 Kubernetes offers several types of volumes that can be used as persistent storage for workloads. For security and data-isolation, [dynamic volume provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/) is recommended and volume types that use node resources should be avoided.
 
-[StorageClass](StorageClass.md)es allow you to describe custom "classes" of storage offered by your cluster, based on quality-of-service levels, backup policies, or custom policies determined by the cluster administrators.
+[StorageClass](../Storage/StorageClass.md)es allow you to describe custom "classes" of storage offered by your cluster, based on quality-of-service levels, backup policies, or custom policies determined by the cluster administrators.
 
-Pods can request storage using a [PersistentVolumeClaim](PersistentVolumeClaim.md). A PersistentVolumeClaim is a namespaced resource, which enables isolating portions of the storage system and dedicating it to tenants within the shared Kubernetes cluster. However, it is important to note that a PersistentVolume is a cluster-wide resource and has a lifecycle independent of workloads and namespaces.
+Pods can request storage using a [PersistentVolumeClaim](../Storage/PersistentVolumeClaim.md). A PersistentVolumeClaim is a namespaced resource, which enables isolating portions of the storage system and dedicating it to tenants within the shared Kubernetes cluster. However, it is important to note that a PersistentVolume is a cluster-wide resource and has a lifecycle independent of workloads and namespaces.
 
-For example, you can configure a separate StorageClass for each tenant and use this to strengthen isolation. If a StorageClass is shared, you should set a [reclaim policy of `Delete`](https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy) to ensure that a PersistentVolume cannot be reused across different namespaces.
+For example, you can configure a separate StorageClass for each tenant and use this to strengthen isolation. If a StorageClass is shared, you should set a [](https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy) to ensure that a PersistentVolume cannot be reused across different namespaces.
 
 ### Sandboxing containers[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#sandboxing-containers)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
 
 Kubernetes pods are composed of one or more containers that execute on worker nodes. Containers utilize OS-level virtualization and hence offer a weaker isolation boundary than virtual machines that utilize hardware-based virtualization.
 
@@ -160,7 +160,7 @@ Using API priority and fairness will not be very common in SaaS environments unl
 
 When you’re running a SaaS application, you may want the ability to offer different Quality-of-Service (QoS) tiers of service to different tenants. For example, you may have freemium service that comes with fewer performance guarantees and features and a for-fee service tier with specific performance guarantees. Fortunately, there are several Kubernetes constructs that can help you accomplish this within a shared cluster, including network QoS, storage classes, and pod priority and preemption. The idea with each of these is to provide tenants with the quality of service that they paid for. Let’s start by looking at networking QoS.
 
-Typically, all pods on a node share a network interface. Without network QoS, some pods may consume an unfair share of the available bandwidth at the expense of other pods. The Kubernetes [bandwidth plugin](https://www.cni.dev/plugins/current/meta/bandwidth/) creates an [extended resource](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#extended-resources) for networking that allows you to use Kubernetes resources constructs, i.e. requests/limits, to apply rate limits to pods by using Linux tc queues. Be aware that the plugin is considered experimental as per the [Network Plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#support-traffic-shaping) documentation and should be thoroughly tested before use in production environments.
+Typically, all pods on a node share a network interface. Without network QoS, some pods may consume an unfair share of the available bandwidth at the expense of other pods. The Kubernetes [bandwidth plugin](https://www.cni.dev/plugins/current/meta/bandwidth/) creates an [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#extended-resources) for networking that allows you to use Kubernetes resources constructs, i.e. requests/limits, to apply rate limits to pods by using Linux tc queues. Be aware that the plugin is considered experimental as per the [](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#support-traffic-shaping) documentation and should be thoroughly tested before use in production environments.
 
 For storage QoS, you will likely want to create different storage classes or profiles with different performance characteristics. Each storage profile can be associated with a different tier of service that is optimized for different workloads such IO, redundancy, or throughput. Additional logic might be necessary to allow the tenant to associate the appropriate storage profile with their workload.
 
@@ -170,9 +170,9 @@ Finally, there’s [pod priority and preemption](https://kubernetes.io/docs/con
 
 Kubernetes clusters include a Domain Name System (DNS) service to provide translations from names to IP addresses, for all Services and Pods. By default, the Kubernetes DNS service allows lookups across all namespaces in the cluster.
 
-In multi-tenant environments where tenants can access pods and other Kubernetes resources, or where stronger isolation is required, it may be necessary to prevent pods from looking up services in other Namespaces. You can restrict cross-namespace DNS lookups by configuring security rules for the DNS service. For example, CoreDNS (the default DNS service for Kubernetes) can leverage Kubernetes metadata to restrict queries to Pods and Services within a namespace. For more information, read an [example](https://github.com/coredns/policy#kubernetes-metadata-multi-tenancy-policy) of configuring this within the CoreDNS documentation.
+In multi-tenant environments where tenants can access pods and other Kubernetes resources, or where stronger isolation is required, it may be necessary to prevent pods from looking up services in other Namespaces. You can restrict cross-namespace DNS lookups by configuring security rules for the DNS service. For example, CoreDNS (the default DNS service for Kubernetes) can leverage Kubernetes metadata to restrict queries to Pods and Services within a namespace. For more information, read an [](https://github.com/coredns/policy#kubernetes-metadata-multi-tenancy-policy) of configuring this within the CoreDNS documentation.
 
-When a [Virtual Control Plane per tenant](https://kubernetes.io/docs/concepts/security/multi-tenancy/#virtual-control-plane-per-tenant) model is used, a DNS service must be configured per tenant or a multi-tenant DNS service must be used. Here is an example of a [customized version of CoreDNS](https://github.com/kubernetes-sigs/cluster-api-provider-nested/blob/main/virtualcluster/doc/tenant-dns.md) that supports multiple tenants.
+When a [](https://kubernetes.io/docs/concepts/security/multi-tenancy/#virtual-control-plane-per-tenant) model is used, a DNS service must be configured per tenant or a multi-tenant DNS service must be used. Here is an example of a [customized version of CoreDNS](https://github.com/kubernetes-sigs/cluster-api-provider-nested/blob/main/virtualcluster/doc/tenant-dns.md) that supports multiple tenants.
 
 ### Operators[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#operators)
 
@@ -186,7 +186,7 @@ Operators used in a multi-tenant environment should follow a stricter set of gui
 
 ## Implementations[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#implementations)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
 
 There are two primary ways to share a Kubernetes cluster for multi-tenancy: using Namespaces (that is, a Namespace per tenant) or by virtualizing the control plane (that is, virtual control plane per tenant).
 
@@ -204,13 +204,13 @@ As previously mentioned, you should consider isolating each workload in its own 
 
 Conversely, there are also advantages to assigning namespaces at the tenant level, not just the workload level, since there are often policies that apply to all workloads owned by a single tenant. However, this raises its own problems. Firstly, this makes it difficult or impossible to customize policies to individual workloads, and secondly, it may be challenging to come up with a single level of "tenancy" that should be given a namespace. For example, an organization may have divisions, teams, and subteams - which should be assigned a namespace?
 
-To solve this, Kubernetes provides the [Hierarchical Namespace Controller (HNC)](https://github.com/kubernetes-sigs/hierarchical-namespaces), which allows you to organize your namespaces into hierarchies, and share certain policies and resources between them. It also helps you manage namespace labels, namespace lifecycles, and delegated management, and share resource quotas across related namespaces. These capabilities can be useful in both multi-team and multi-customer scenarios.
+To solve this, Kubernetes provides the [Hierarchical Namespace Controller (HNC)](HNC)), which allows you to organize your namespaces into hierarchies, and share certain policies and resources between them. It also helps you manage namespace labels, namespace lifecycles, and delegated management, and share resource quotas across related namespaces. These capabilities can be useful in both multi-team and multi-customer scenarios.
 
 Other projects that provide similar capabilities and aid in managing namespaced resources are listed below.
 
 #### Multi-team tenancy[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#multi-team-tenancy)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/security/multi-tenancy/#third-party-content-disclaimer)
 
 - [Capsule](https://github.com/clastix/capsule)
 - [Multi Tenant Operator](https://docs.stakater.com/mto/)
@@ -228,7 +228,7 @@ Policy engines provide features to validate and generate tenant configurations:
 
 ### Virtual control plane per tenant[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#virtual-control-plane-per-tenant)
 
-Another form of control-plane isolation is to use Kubernetes extensions to provide each tenant a virtual control-plane that enables segmentation of cluster-wide API resources. [Data plane isolation](https://kubernetes.io/docs/concepts/security/multi-tenancy/#data-plane-isolation) techniques can be used with this model to securely manage worker nodes across tenants.
+Another form of control-plane isolation is to use Kubernetes extensions to provide each tenant a virtual control-plane that enables segmentation of cluster-wide API resources. [](https://kubernetes.io/docs/concepts/security/multi-tenancy/#data-plane-isolation) techniques can be used with this model to securely manage worker nodes across tenants.
 
 The virtual control plane based multi-tenancy model extends namespace-based multi-tenancy by providing each tenant with dedicated control plane components, and hence complete control over cluster-wide resources and add-on services. Worker nodes are shared across all tenants, and are managed by a Kubernetes cluster that is normally inaccessible to tenants. This cluster is often referred to as a _super-cluster_ (or sometimes as a _host-cluster_). Since a tenant’s control-plane is not directly associated with underlying compute resources it is referred to as a _virtual control plane_.
 
@@ -238,7 +238,7 @@ By using per-tenant dedicated control planes, most of the isolation problems due
 
 The improved isolation comes at the cost of running and maintaining an individual virtual control plane per tenant. In addition, per-tenant control planes do not solve isolation problems in the data plane, such as node-level noisy neighbors or security threats. These must still be addressed separately.
 
-The Kubernetes [Cluster API - Nested (CAPN)](https://github.com/kubernetes-sigs/cluster-api-provider-nested/tree/main/virtualcluster) project provides an implementation of virtual control planes.
+The Kubernetes [Cluster API - Nested (CAPN)](CAPN)) project provides an implementation of virtual control planes.
 
 #### Other implementations[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#other-implementations)
 
@@ -247,4 +247,4 @@ The Kubernetes [Cluster API - Nested (CAPN)](https://github.com/kubernetes-sigs
 
 Items on this page refer to third party products or projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for those third-party products or projects. See the [CNCF website guidelines](https://github.com/cncf/foundation/blob/master/website-guidelines.md) for more details.
 
-You should read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.
+You should read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.

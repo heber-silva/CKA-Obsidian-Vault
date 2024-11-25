@@ -1,8 +1,8 @@
 [Docs](https://kubernetes.io/docs/concepts/containers/images/)
 
-A [Container](container.md) image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
+A [Container](Container.md) image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
 
-You typically create a container image of your application and push it to a registry before referring to it in a [Pod](Pod.md).
+You typically create a container image of your application and push it to a registry before referring to it in a [Pod](../Workloads/Pod.md).
 
 This page provides an outline of the container image concept.
 
@@ -18,9 +18,9 @@ If you don't specify a registry hostname, Kubernetes assumes that you mean the 
 
 After the image name part you can add a _tag_ or _digest_ (in the same way you would when using with commands like `docker` or `podman`). Tags let you identify different versions of the same series of images. Digests are a unique identifier for a specific version of an image. Digests are hashes of the image's content, and are immutable. Tags can be moved to point to different images, but digests are fixed.
 
-Image tags consist of lowercase and uppercase letters, digits, underscores (`_`), periods (`.`), and dashes (`-`). It can be up to 128 characters long. And must follow the next regex pattern: `[a-zA-Z0-9_][a-zA-Z0-9._-]{0,127}` You can read more about and find validation regex in the [OCI Distribution Specification](https://github.com/opencontainers/distribution-spec/blob/master/spec.md#workflow-categories). If you don't specify a tag, Kubernetes assumes you mean the tag `latest`.
+Image tags consist of lowercase and uppercase letters, digits, underscores (`_`), periods (`.`), and dashes (`-`). It can be up to 128 characters long. And must follow the next regex pattern: `[](https://github.com/opencontainers/distribution-spec/blob/master/spec.md#workflow-categories). If you don't specify a tag, Kubernetes assumes you mean the tag `latest`.
 
-Image digests consists of a hash algorithm (such as `sha256`) and a hash value. For example: `sha256:1ff6c18fbef2045af6b9c16bf034cc421a29027b800e4f9b68ae9b1cb3e9ae07` You can find more information about digests format in the [OCI Image Specification](https://github.com/opencontainers/image-spec/blob/master/descriptor.md#digests).
+Image digests consists of a hash algorithm (such as `sha256`) and a hash value. For example: `sha256:1ff6c18fbef2045af6b9c16bf034cc421a29027b800e4f9b68ae9b1cb3e9ae07` You can find more information about digests format in the [](https://github.com/opencontainers/image-spec/blob/master/descriptor.md#digests).
 
 Some image name examples that Kubernetes can use are:
 
@@ -47,11 +47,11 @@ the image is pulled only if it is not already present locally.
 
 `Always`
 
-every time the kubelet launches a container, the kubelet queries the container image registry to resolve the name to an image [digest](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier). If the kubelet has a container image with that exact digest cached locally, the kubelet uses its cached image; otherwise, the kubelet pulls the image with the resolved digest, and uses that image to launch the container.
+every time the kubelet launches a container, the kubelet queries the container image registry to resolve the name to an image [](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier). If the kubelet has a container image with that exact digest cached locally, the kubelet uses its cached image; otherwise, the kubelet pulls the image with the resolved digest, and uses that image to launch the container.
 
 `Never`
 
-the kubelet does not try fetching the image. If the image is somehow already present locally, the kubelet attempts to start the container; otherwise, startup fails. See [pre-pulled images](https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images) for more details.
+the kubelet does not try fetching the image. If the image is somehow already present locally, the kubelet attempts to start the container; otherwise, startup fails. See [](https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images) for more details.
 
 The caching semantics of the underlying image provider make even `imagePullPolicy: Always` efficient, as long as the registry is reliably accessible. Your container runtime can notice that the image layers already exist on the node so that they don't need to be downloaded again.
 
@@ -89,11 +89,11 @@ If you would like to always force a pull, you can do one of the following:
 - Set the `imagePullPolicy` of the container to `Always`.
 - Omit the `imagePullPolicy` and use `:latest` as the tag for the image to use; Kubernetes will set the policy to `Always` when you submit the Pod.
 - Omit the `imagePullPolicy` and the tag for the image to use; Kubernetes will set the policy to `Always` when you submit the Pod.
-- Enable the [AlwaysPullImages](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller.
+- Enable the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) admission controller.
 
 ### ImagePullBackOff[](https://kubernetes.io/docs/concepts/containers/images/#imagepullbackoff)
 
-When a kubelet starts creating containers for a Pod using a container runtime, it might be possible the container is in [Waiting](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-state-waiting) state because of `ImagePullBackOff`.
+When a kubelet starts creating containers for a Pod using a container runtime, it might be possible the container is in [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-state-waiting) state because of `ImagePullBackOff`.
 
 The status `ImagePullBackOff` means that a container could not start because Kubernetes could not pull a container image (for reasons such as invalid image name, or pulling from a private registry without `imagePullSecret`). The `BackOff` part indicates that Kubernetes will keep trying to pull the image, with an increasing back-off delay.
 
@@ -255,7 +255,7 @@ kubectl create secret docker-registry <name> \
 ```
 
 If you already have a Docker credentials file then, rather than using the above command, you can import the credentials file as a Kubernetes [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/).  
-[Create a Secret based on existing Docker credentials](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) explains how to set this up.
+[](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) explains how to set this up.
 
 This is particularly useful if you are using multiple private container registries, as `kubectl create secret docker-registry` creates a Secret that only works with a single private registry.
 
@@ -294,7 +294,7 @@ This needs to be done for each pod that is using a private registry.
 
 However, setting of this field can be automated by setting the imagePullSecrets in a [ServiceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) resource.
 
-Check [Add ImagePullSecrets to a Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account) for detailed instructions.
+Check [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account) for detailed instructions.
 
 You can use this in conjunction with a per-node `.docker/config.json`. The credentials will be merged.
 
@@ -315,10 +315,10 @@ There are a number of solutions for configuring private registries. Here are som
         - It will work better with cluster autoscaling than manual node configuration.
     - Or, on a cluster where changing the node configuration is inconvenient, use `imagePullSecrets`.
 3. Cluster with proprietary images, a few of which require stricter access control.
-    - Ensure [AlwaysPullImages admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) is active. Otherwise, all Pods potentially have access to all images.
+    - Ensure [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) is active. Otherwise, all Pods potentially have access to all images.
     - Move sensitive data into a "Secret" resource, instead of packaging it in an image.
 4. A multi-tenant cluster where each tenant needs own private registry.
-    - Ensure [AlwaysPullImages admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) is active. Otherwise, all Pods of all tenants potentially have access to all images.
+    - Ensure [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages) is active. Otherwise, all Pods of all tenants potentially have access to all images.
     - Run a private registry with authorization required.
     - Generate registry credential for each tenant, put into secret, and populate secret to each tenant namespace.
     - The tenant adds that secret to imagePullSecrets of each namespace.
@@ -339,5 +339,5 @@ For more information on the legacy mechanism, read the documentation for the ver
 ## What's next[](https://kubernetes.io/docs/concepts/containers/images/#what-s-next)
 
 - Read the [OCI Image Manifest Specification](https://github.com/opencontainers/image-spec/blob/master/manifest.md).
-- Learn about [container image garbage collection](https://kubernetes.io/docs/concepts/architecture/garbage-collection/#container-image-garbage-collection).
+- Learn about [](https://kubernetes.io/docs/concepts/architecture/garbage-collection/#container-image-garbage-collection).
 - Learn more about [pulling an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).

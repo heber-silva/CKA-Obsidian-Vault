@@ -5,9 +5,9 @@ This guide is to help users debug applications that are deployed into Kubernetes
 
 The first step in troubleshooting is triage. What is the problem? Is it your Pods, your Replication Controller or your Service?
 
-- [Debugging Pods](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-pods)
-- [Debugging Replication Controllers](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-replication-controllers)
-- [Debugging Services](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-services)
+- [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-pods)
+- [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-replication-controllers)
+- [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-services)
 
 ### Debugging Pods[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-pods)
 
@@ -77,7 +77,7 @@ The next thing to check is whether the pod on the apiserver matches the pod you 
 
 ### Debugging Replication Controllers[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-replication-controllers)
 
-Replication controllers are fairly straightforward. They can either create Pods or they can't. If they can't create pods, then please refer to the [instructions above](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-pods) to debug your pods.
+Replication controllers are fairly straightforward. They can either create Pods or they can't. If they can't create pods, then please refer to the [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/#debugging-pods) to debug your pods.
 
 You can also use `kubectl describe rc ${CONTROLLER_NAME}` to introspect events related to the replication controller.
 

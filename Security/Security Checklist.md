@@ -20,7 +20,7 @@ Checklists are **not** sufficient for attaining a good security posture on the
 - [ ]  The root certificate is protected (either an offline CA, or a managed online CA with effective access controls).
 - [ ]  Intermediate and leaf certificates have an expiry date no more than 3 years in the future.
 - [ ]  A process exists for periodic access review, and reviews occur no more than 24 months apart.
-- [ ]  The [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md) are followed for guidance related to authentication and authorization.
+- [ ](Role%20Based%20Access%20Control%20Good%20Practices.md) are followed for guidance related to authentication and authorization.
 
 After bootstrapping, neither users nor components should authenticate to the Kubernetes API as `system:masters`. Similarly, running all of kube-controller-manager as `system:masters` should be avoided. In fact, `system:masters` should only be used as a break-glass mechanism, as opposed to an admin user.
 
@@ -34,7 +34,7 @@ After bootstrapping, neither users nor components should authenticate to the Kub
 - [ ]  Access from the workloads to the cloud metadata API is filtered.
 - [ ]  Use of LoadBalancer and ExternalIPs is restricted.
 
-A number of [Container Network Interface (CNI) plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) plugins provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [NetworkPolicy](NetworkPolicy.md) which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
+A number of [Container Network Interface (CNI) plugins](CNI)%20plugins) plugins provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [NetworkPolicy](../Networking/NetworkPolicy.md) which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
 
 Not all CNI plugins provide encryption in transit. If the chosen plugin lacks this feature, an alternative solution could be to use a service mesh to provide that functionality.
 
@@ -46,7 +46,7 @@ The [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference
 
 If a cloud provider is used for hosting Kubernetes, the access from pods to the cloud metadata API `169.254.169.254` should also be restricted or blocked if not needed because it may leak information.
 
-For restricted LoadBalancer and ExternalIPs use, see [CVE-2020-8554: Man in the middle using LoadBalancer or ExternalIPs](https://github.com/kubernetes/kubernetes/issues/97076) and the [DenyServiceExternalIPs admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips) for further information.
+For restricted LoadBalancer and ExternalIPs use, see [CVE-2020-8554: Man in the middle using LoadBalancer or ExternalIPs](https://github.com/kubernetes/kubernetes/issues/97076) and the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips) for further information.
 
 ## Pod security[](https://kubernetes.io/docs/concepts/security/security-checklist/#pod-security)
 
@@ -57,11 +57,11 @@ For restricted LoadBalancer and ExternalIPs use, see [CVE-2020-8554: Man in the
 - [ ]  For nodes that support it, Seccomp is enabled with appropriate syscalls profile for programs.
 - [ ]  For nodes that support it, AppArmor or SELinux is enabled with appropriate profile for programs.
 
-RBAC authorization is crucial but [cannot be granular enough to have authorization on the Pods' resources](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#workload-creation) (or on any resource that manages Pods). The only granularity is the API verbs on the resource itself, for example, `create` on Pods. Without additional admission, the authorization to create these resources allows direct unrestricted access to the schedulable nodes of a cluster.
+RBAC authorization is crucial but [](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#workload-creation) (or on any resource that manages Pods). The only granularity is the API verbs on the resource itself, for example, `create` on Pods. Without additional admission, the authorization to create these resources allows direct unrestricted access to the schedulable nodes of a cluster.
 
 The [Pod Security Standards](Pod%20Security%20Standards.md) define three different policies, privileged, baseline and restricted that limit how fields can be set in the `PodSpec` regarding security. These standards can be enforced at the namespace level with the new [Pod Security Admission](Pod%20Security%20Admission.md) admission, enabled by default, or by third-party admission webhook. Please note that, contrary to the removed PodSecurityPolicy admission it replaces, [Pod Security](https://kubernetes.io/docs/concepts/security/pod-security-admission/) admission can be easily combined with admission webhooks and external services.
 
-Pod Security admission `restricted` policy, the most restrictive policy of the [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/) set, [can operate in several modes](https://kubernetes.io/docs/concepts/security/pod-security-admission/#pod-security-admission-labels-for-namespaces), `warn`, `audit` or `enforce` to gradually apply the most appropriate [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) according to security best practices. Nevertheless, pods' [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) should be separately investigated to limit the privileges and access pods may have on top of the predefined security standards, for specific use cases.
+Pod Security admission `restricted` policy, the most restrictive policy of the [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/) set, [](https://kubernetes.io/docs/concepts/security/pod-security-admission/#pod-security-admission-labels-for-namespaces), `warn`, `audit` or `enforce` to gradually apply the most appropriate [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) according to security best practices. Nevertheless, pods' [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) should be separately investigated to limit the privileges and access pods may have on top of the predefined security standards, for specific use cases.
 
 For a hands-on tutorial on [Pod Security](https://kubernetes.io/docs/concepts/security/pod-security-admission/), see the blog post [Kubernetes 1.23: Pod Security Graduates to Beta](https://kubernetes.io/blog/2021/12/09/pod-security-admission-beta/).
 
@@ -91,15 +91,15 @@ Seccomp is only available on Linux nodes.
 
 #### Note:
 
-AppArmor is only available on Linux nodes, and enabled in [some Linux distributions](https://gitlab.com/apparmor/apparmor/-/wikis/home#distributions-and-ports).
+AppArmor is only available on Linux nodes, and enabled in [](https://gitlab.com/apparmor/apparmor/-/wikis/home#distributions-and-ports).
 
 #### SELinux[](https://kubernetes.io/docs/concepts/security/security-checklist/#selinux)
 
-[SELinux](https://github.com/SELinuxProject/selinux-notebook/blob/main/src/selinux_overview.md) is also a Linux kernel security module that can provide a mechanism for supporting access control security policies, including Mandatory Access Controls (MAC). SELinux labels can be assigned to containers or pods [via their `securityContext` section](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
+[SELinux](https://github.com/SELinuxProject/selinux-notebook/blob/main/src/selinux_overview.md) is also a Linux kernel security module that can provide a mechanism for supporting access control security policies, including Mandatory Access Controls (MAC). SELinux labels can be assigned to containers or pods [](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
 
 #### Note:
 
-SELinux is only available on Linux nodes, and enabled in [some Linux distributions](https://en.wikipedia.org/wiki/Security-Enhanced_Linux#Implementations).
+SELinux is only available on Linux nodes, and enabled in [](https://en.wikipedia.org/wiki/Security-Enhanced_Linux#Implementations).
 
 ## Logs and auditing[](https://kubernetes.io/docs/concepts/security/security-checklist/#logs-and-auditing)
 
@@ -112,15 +112,15 @@ SELinux is only available on Linux nodes, and enabled in [some Linux distributi
 
 Pods that are on different tiers of sensitivity, for example, an application pod and the Kubernetes API server, should be deployed onto separate nodes. The purpose of node isolation is to prevent an application container breakout to directly providing access to applications with higher level of sensitivity to easily pivot within the cluster. This separation should be enforced to prevent pods accidentally being deployed onto the same node. This could be enforced with the following features:
 
-[Assigning Pods to Nodes](Assigning%20Pods%20to%20Nodes.md)
+[Assigning Pods to Nodes](../Scheduling,%20Preemption%20and%20Eviction/Assigning%20Pods%20to%20Nodes.md)
 
-Key-value pairs, as part of the pod specification, that specify which nodes to deploy onto. These can be enforced at the namespace and cluster level with the [PodNodeSelector](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podnodeselector) admission controller.
+Key-value pairs, as part of the pod specification, that specify which nodes to deploy onto. These can be enforced at the namespace and cluster level with the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podnodeselector) admission controller.
 
-[PodTolerationRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podtolerationrestriction)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podtolerationrestriction)
 
 An admission controller that allows administrators to restrict permitted [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) within a namespace. Pods within a namespace may only utilize the tolerations specified on the namespace object annotation keys that provide a set of default and allowed tolerations.
 
-[RuntimeClass](RuntimeClass.md)
+[RuntimeClass](../Container/RuntimeClass.md)
 RuntimeClass is a feature for selecting the container runtime configuration. The container runtime configuration is used to run a Pod's containers and can provide more or less isolation from the host at the cost of performance overhead.
 
 ## Secrets[](https://kubernetes.io/docs/concepts/security/security-checklist/#secrets)
@@ -129,28 +129,28 @@ RuntimeClass is a feature for selecting the container runtime configuration. The
 - [ ]  Encryption at rest is configured for the Secret API.
 - [ ]  If appropriate, a mechanism to inject secrets stored in third-party storage is deployed and available.
 - [ ]  Service account tokens are not mounted in pods that don't require them.
-- [ ]  [Bound service account token volume](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) is in-use instead of non-expiring tokens.
+- [](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) is in-use instead of non-expiring tokens.
 
 Secrets required for pods should be stored within Kubernetes Secrets as opposed to alternatives such as ConfigMap. Secret resources stored within etcd should be [encrypted at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
 
-Pods needing secrets should have these automatically mounted through volumes, preferably stored in memory like with the [`emptyDir.medium` option](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir). Mechanism can be used to also inject secrets from third-party storages as volume, like the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). This should be done preferentially as compared to providing the pods service account RBAC access to secrets. This would allow adding secrets into the pod as environment variables or files. Please note that the environment variable method might be more prone to leakage due to crash dumps in logs and the non-confidential nature of environment variable in Linux, as opposed to the permission mechanism on files.
+Pods needing secrets should have these automatically mounted through volumes, preferably stored in memory like with the [](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir). Mechanism can be used to also inject secrets from third-party storages as volume, like the [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). This should be done preferentially as compared to providing the pods service account RBAC access to secrets. This would allow adding secrets into the pod as environment variables or files. Please note that the environment variable method might be more prone to leakage due to crash dumps in logs and the non-confidential nature of environment variable in Linux, as opposed to the permission mechanism on files.
 
-Service account tokens should not be mounted into pods that do not require them. This can be configured by setting [`automountServiceAccountToken`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) to `false` either within the service account to apply throughout the namespace or specifically for a pod. For Kubernetes v1.22 and above, use [Bound Service Accounts](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) for time-bound service account credentials.
+Service account tokens should not be mounted into pods that do not require them. This can be configured by setting [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) to `false` either within the service account to apply throughout the namespace or specifically for a pod. For Kubernetes v1.22 and above, use [](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) for time-bound service account credentials.
 
 ## Images[](https://kubernetes.io/docs/concepts/security/security-checklist/#images)
 
 - [ ]  Minimize unnecessary content in container images.
 - [ ]  Container images are configured to be run as unprivileged user.
-- [ ]  References to container images are made by sha256 digests (rather than tags) or the provenance of the image is validated by verifying the image's digital signature at deploy time [via admission control](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/#verifying-image-signatures-with-admission-controller).
+- [](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/#verifying-image-signatures-with-admission-controller).
 - [ ]  Container images are regularly scanned during creation and in deployment, and known vulnerable software is patched.
 
-Container image should contain the bare minimum to run the program they package. Preferably, only the program and its dependencies, building the image from the minimal possible base. In particular, image used in production should not contain shells or debugging utilities, as an [ephemeral debug container](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container) can be used for troubleshooting.
+Container image should contain the bare minimum to run the program they package. Preferably, only the program and its dependencies, building the image from the minimal possible base. In particular, image used in production should not contain shells or debugging utilities, as an [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container) can be used for troubleshooting.
 
-Build images to directly start with an unprivileged user by using the [`USER` instruction in Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user). The [Security Context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) allows a container image to be started with a specific user and group with `runAsUser` and `runAsGroup`, even if not specified in the image manifest. However, the file permissions in the image layers might make it impossible to just start the process with a new unprivileged user without image modification.
+Build images to directly start with an unprivileged user by using the [](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user). The [](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) allows a container image to be started with a specific user and group with `runAsUser` and `runAsGroup`, even if not specified in the image manifest. However, the file permissions in the image layers might make it impossible to just start the process with a new unprivileged user without image modification.
 
-Avoid using image tags to reference an image, especially the `latest` tag, the image behind a tag can be easily modified in a registry. Prefer using the complete `sha256` digest which is unique to the image manifest. This policy can be enforced via an [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook). Image signatures can also be automatically [verified with an admission controller](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/#verifying-image-signatures-with-admission-controller) at deploy time to validate their authenticity and integrity.
+Avoid using image tags to reference an image, especially the `latest` tag, the image behind a tag can be easily modified in a registry. Prefer using the complete `sha256` digest which is unique to the image manifest. This policy can be enforced via an [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook). Image signatures can also be automatically [](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/#verifying-image-signatures-with-admission-controller) at deploy time to validate their authenticity and integrity.
 
-Scanning a container image can prevent critical vulnerabilities from being deployed to the cluster alongside the container image. Image scanning should be completed before deploying a container image to a cluster and is usually done as part of the deployment process in a CI/CD pipeline. The purpose of an image scan is to obtain information about possible vulnerabilities and their prevention in the container image, such as a [Common Vulnerability Scoring System (CVSS)](https://www.first.org/cvss/) score. If the result of the image scans is combined with the pipeline compliance rules, only properly patched container images will end up in Production.
+Scanning a container image can prevent critical vulnerabilities from being deployed to the cluster alongside the container image. Image scanning should be completed before deploying a container image to a cluster and is usually done as part of the deployment process in a CI/CD pipeline. The purpose of an image scan is to obtain information about possible vulnerabilities and their prevention in the container image, such as a [Common Vulnerability Scoring System (CVSS)](CVSS)) score. If the result of the image scans is combined with the pipeline compliance rules, only properly patched container images will end up in Production.
 
 ## Admission controllers[](https://kubernetes.io/docs/concepts/security/security-checklist/#admission-controllers)
 
@@ -162,64 +162,64 @@ Admission controllers can help to improve the security of the cluster. However, 
 
 The following lists present a number of admission controllers that could be considered to enhance the security posture of your cluster and application. It includes controllers that may be referenced in other parts of this document.
 
-This first group of admission controllers includes plugins [enabled by default](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#which-plugins-are-enabled-by-default), consider to leave them enabled unless you know what you are doing:
+This first group of admission controllers includes plugins [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#which-plugins-are-enabled-by-default), consider to leave them enabled unless you know what you are doing:
 
-[`CertificateApproval`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificateapproval)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificateapproval)
 
 Performs additional authorization checks to ensure the approving user has permission to approve certificate request.
 
-[`CertificateSigning`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificatesigning)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificatesigning)
 
 Performs additional authorization checks to ensure the signing user has permission to sign certificate requests.
 
-[`CertificateSubjectRestriction`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificatesubjectrestriction)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#certificatesubjectrestriction)
 
 Rejects any certificate request that specifies a 'group' (or 'organization attribute') of `system:masters`.
 
-[`LimitRanger`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#limitranger)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#limitranger)
 
 Enforce the LimitRange API constraints.
 
-[`MutatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook)
 
 Allows the use of custom controllers through webhooks, these controllers may mutate requests that it reviews.
 
-[`PodSecurity`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecurity)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecurity)
 
 Replacement for Pod Security Policy, restricts security contexts of deployed Pods.
 
-[`ResourceQuota`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#resourcequota)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#resourcequota)
 
 Enforces resource quotas to prevent over-usage of resources.
 
-[`ValidatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook)
 
 Allows the use of custom controllers through webhooks, these controllers do not mutate requests that it reviews.
 
 The second group includes plugin that are not enabled by default but in general availability state and recommended to improve your security posture:
 
-[`DenyServiceExternalIPs`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips)
 
 Rejects all net-new usage of the `Service.spec.externalIPs` field. This is a mitigation for [CVE-2020-8554: Man in the middle using LoadBalancer or ExternalIPs](https://github.com/kubernetes/kubernetes/issues/97076).
 
-[`NodeRestriction`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
 
 Restricts kubelet's permissions to only modify the pods API resources they own or the node API resource that represent themselves. It also prevents kubelet from using the `node-restriction.kubernetes.io/` annotation, which can be used by an attacker with access to the kubelet's credentials to influence pod placement to the controlled node.
 
 The third group includes plugins that are not enabled by default but could be considered for certain use cases:
 
-[`AlwaysPullImages`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages)
 
 Enforces the usage of the latest version of a tagged image and ensures that the deployer has permissions to use the image.
 
-[`ImagePolicyWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+[](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
 
 Allows enforcing additional controls for images through webhooks.
 
 ## What's next[](https://kubernetes.io/docs/concepts/security/security-checklist/#what-s-next)
 
-- [Privilege escalation via Pod creation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#privilege-escalation-via-pod-creation) warns you about a specific access control risk; check how you're managing that threat.
+- [](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#privilege-escalation-via-pod-creation) warns you about a specific access control risk; check how you're managing that threat.
     - If you use Kubernetes RBAC, read [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md) for further information on authorization.
 - [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/) for information on protecting a cluster from accidental or malicious access.
 - [Multi-tenancy](Multi-tenancy.md) for configuration options recommendations and best practices on multi-tenancy.
-- [Blog post "A Closer Look at NSA/CISA Kubernetes Hardening Guidance"](https://kubernetes.io/blog/2021/10/05/nsa-cisa-kubernetes-hardening-guidance/#building-secure-container-images) for complementary resource on hardening Kubernetes clusters.
+- [](https://kubernetes.io/blog/2021/10/05/nsa-cisa-kubernetes-hardening-guidance/#building-secure-container-images) for complementary resource on hardening Kubernetes clusters.

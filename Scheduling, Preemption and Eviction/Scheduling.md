@@ -1,5 +1,5 @@
 #prova 
-In Kubernetes, [scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/) refers to making sure that [Pod](Pod.md)s are matched to [Node](Node.md)s so that the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) can run them. Preemption is the process of terminating Pods with lower [Priority](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) so that Pods with higher Priority can schedule on Nodes. Eviction is the process of terminating one or more Pods on Nodes.
+In Kubernetes, [scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/) refers to making sure that [Pod](../Workloads/Pod.md)s are matched to [Node](../Kubernetes%20Achitecture/Node.md)s so that the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) can run them. Preemption is the process of terminating Pods with lower [](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) so that Pods with higher Priority can schedule on Nodes. Eviction is the process of terminating one or more Pods on Nodes.
 
 ## Scheduling[](https://kubernetes.io/docs/concepts/scheduling-eviction/#scheduling)
 
@@ -13,7 +13,7 @@ In Kubernetes, [scheduling](https://kubernetes.io/docs/concepts/scheduling-evict
 - [Scheduler Performance Tuning](Scheduler%20Performance%20Tuning.md)
 - [Resource Bin Packing](Resource%20Bin%20Packing.md)
 - [Pod Scheduling Readiness](Pod%20Scheduling%20Readiness.md)
-- [Descheduler](https://github.com/kubernetes-sigs/descheduler#descheduler-for-kubernetes)
+- [](https://github.com/kubernetes-sigs/descheduler#descheduler-for-kubernetes)
 
 ## Pod Disruption[](https://kubernetes.io/docs/concepts/scheduling-eviction/#pod-disruption)
 

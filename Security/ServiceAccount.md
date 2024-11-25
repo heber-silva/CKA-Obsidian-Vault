@@ -10,7 +10,7 @@ A service account is a type of non-human account that, in Kubernetes, provides a
 
 Service accounts exist as ServiceAccount objects in the API server. Service accounts have the following properties:
 
-- **Namespaced:** Each service account is bound to a Kubernetes [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces). Every namespace gets a [`default` ServiceAccount](https://kubernetes.io/docs/concepts/security/service-accounts/#default-service-accounts) upon creation.
+- **Namespaced:** Each service account is bound to a Kubernetes [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces). Every namespace gets a [](https://kubernetes.io/docs/concepts/security/service-accounts/#default-service-accounts) upon creation.
     
 - **Lightweight:** Service accounts exist in the cluster and are defined in the Kubernetes API. You can quickly create service accounts to enable specific tasks.
     
@@ -22,14 +22,14 @@ Service accounts are different from user accounts, which are authenticated human
 |Description|ServiceAccount|User or group|
 |---|---|---|
 |Location|Kubernetes API (ServiceAccount object)|External|
-|Access control|Kubernetes RBAC or other [authorization mechanisms](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#authorization-modules)|Kubernetes RBAC or other identity and access management mechanisms|
+|Access control|Kubernetes RBAC or other [](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#authorization-modules)|Kubernetes RBAC or other identity and access management mechanisms|
 |Intended use|Workloads, automation|People|
 
 ### Default service accounts[](https://kubernetes.io/docs/concepts/security/service-accounts/#default-service-accounts)
 
-When you create a cluster, Kubernetes automatically creates a ServiceAccount object named `default` for every namespace in your cluster. The `default` service accounts in each namespace get no permissions by default other than the [default API discovery permissions](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings) that Kubernetes grants to all authenticated principals if role-based access control (RBAC) is enabled. If you delete the `default` ServiceAccount object in a namespace, the [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) replaces it with a new one.
+When you create a cluster, Kubernetes automatically creates a ServiceAccount object named `default` for every namespace in your cluster. The `default` service accounts in each namespace get no permissions by default other than the [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings) that Kubernetes grants to all authenticated principals if role-based access control (RBAC) is enabled. If you delete the `default` ServiceAccount object in a namespace, the [](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) replaces it with a new one.
 
-If you deploy a Pod in a namespace, and you don't [manually assign a ServiceAccount to the Pod](https://kubernetes.io/docs/concepts/security/service-accounts/#assign-to-pod), Kubernetes assigns the `default` ServiceAccount for that namespace to the Pod.
+If you deploy a Pod in a namespace, and you don't [](https://kubernetes.io/docs/concepts/security/service-accounts/#assign-to-pod), Kubernetes assigns the `default` ServiceAccount for that namespace to the Pod.
 
 ## Use cases for Kubernetes service accounts[](https://kubernetes.io/docs/concepts/security/service-accounts/#use-cases)
 
@@ -37,9 +37,9 @@ As a general guideline, you can use service accounts to provide identities in th
 
 - Your Pods need to communicate with the Kubernetes API server, for example in situations such as the following:
     - Providing read-only access to sensitive information stored in Secrets.
-    - Granting [cross-namespace access](https://kubernetes.io/docs/concepts/security/service-accounts/#cross-namespace), such as allowing a Pod in namespace `example` to read, list, and watch for Lease objects in the `kube-node-lease` namespace.
+    - Granting [](https://kubernetes.io/docs/concepts/security/service-accounts/#cross-namespace), such as allowing a Pod in namespace `example` to read, list, and watch for Lease objects in the `kube-node-lease` namespace.
 - Your Pods need to communicate with an external service. For example, a workload Pod requires an identity for a commercially available cloud API, and the commercial provider allows configuring a suitable trust relationship.
-- [Authenticating to a private image registry using an `imagePullSecret`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
+- [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
 - An external service needs to communicate with the Kubernetes API server. For example, authenticating to the cluster as part of a CI/CD pipeline.
 - You use third-party security software in your cluster that relies on the ServiceAccount identity of different Pods to group those Pods into different contexts.
 
@@ -53,16 +53,16 @@ To use a Kubernetes service account, you do the following:
     
 3. Assign the ServiceAccount object to Pods during Pod creation.
     
-    If you're using the identity from an external service, [retrieve the ServiceAccount token](https://kubernetes.io/docs/concepts/security/service-accounts/#get-a-token) and use it from that service instead.
+    If you're using the identity from an external service, [](https://kubernetes.io/docs/concepts/security/service-accounts/#get-a-token) and use it from that service instead.
     
 
 For instructions, refer to [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
 
 ### Grant permissions to a ServiceAccount[](https://kubernetes.io/docs/concepts/security/service-accounts/#grant-permissions)
 
-You can use the built-in Kubernetes [role-based access control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) mechanism to grant the minimum permissions required by each service account. You create a _role_, which grants access, and then _bind_ the role to your ServiceAccount. RBAC lets you define a minimum set of permissions so that the service account permissions follow the principle of least privilege. Pods that use that service account don't get more permissions than are required to function correctly.
+You can use the built-in Kubernetes [role-based access control (RBAC)](RBAC)) mechanism to grant the minimum permissions required by each service account. You create a _role_, which grants access, and then _bind_ the role to your ServiceAccount. RBAC lets you define a minimum set of permissions so that the service account permissions follow the principle of least privilege. Pods that use that service account don't get more permissions than are required to function correctly.
 
-For instructions, refer to [ServiceAccount permissions](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#service-account-permissions).
+For instructions, refer to [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#service-account-permissions).
 
 #### Cross-namespace access using a ServiceAccount[](https://kubernetes.io/docs/concepts/security/service-accounts/#cross-namespace)
 
@@ -70,7 +70,7 @@ You can use RBAC to allow service accounts in one namespace to perform actions o
 
 ### Assign a ServiceAccount to a Pod[](https://kubernetes.io/docs/concepts/security/service-accounts/#assign-to-pod)
 
-To assign a ServiceAccount to a Pod, you set the `spec.serviceAccountName` field in the Pod specification. Kubernetes then automatically provides the credentials for that ServiceAccount to the Pod. In v1.22 and later, Kubernetes gets a short-lived, **automatically rotating** token using the `TokenRequest` API and mounts the token as a [projected volume](https://kubernetes.io/docs/concepts/storage/projected-volumes/#serviceaccounttoken).
+To assign a ServiceAccount to a Pod, you set the `spec.serviceAccountName` field in the Pod specification. Kubernetes then automatically provides the credentials for that ServiceAccount to the Pod. In v1.22 and later, Kubernetes gets a short-lived, **automatically rotating** token using the `TokenRequest` API and mounts the token as a [](https://kubernetes.io/docs/concepts/storage/projected-volumes/#serviceaccounttoken).
 
 By default, Kubernetes provides the Pod with the credentials for an assigned ServiceAccount, whether that is the `default` ServiceAccount or a custom ServiceAccount that you specify.
 
@@ -83,12 +83,12 @@ In versions earlier than 1.22, Kubernetes provides a long-lived, static token to
 If you need the credentials for a ServiceAccount to mount in a non-standard location, or for an audience that isn't the API server, use one of the following methods:
 
 - [TokenRequest API](https://kubernetes.io/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) (recommended): Request a short-lived service account token from within your own _application code_. The token expires automatically and can rotate upon expiration. If you have a legacy application that is not aware of Kubernetes, you could use a sidecar container within the same pod to fetch these tokens and make them available to the application workload.
-- [Token Volume Projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) (also recommended): In Kubernetes v1.20 and later, use the Pod specification to tell the kubelet to add the service account token to the Pod as a _projected volume_. Projected tokens expire automatically, and the kubelet rotates the token before it expires.
-- [Service Account Token Secrets](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount) (not recommended): You can mount service account tokens as Kubernetes Secrets in Pods. These tokens don't expire and don't rotate. In versions prior to v1.24, a permanent token was automatically created for each service account. This method is not recommended anymore, especially at scale, because of the risks associated with static, long-lived credentials. The [LegacyServiceAccountTokenNoAutoGeneration feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates-removed/) (which was enabled by default from Kubernetes v1.24 to v1.26), prevented Kubernetes from automatically creating these tokens for ServiceAccounts. The feature gate is removed in v1.27, because it was elevated to GA status; you can still create indefinite service account tokens manually, but should take into account the security implications.
+- [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) (also recommended): In Kubernetes v1.20 and later, use the Pod specification to tell the kubelet to add the service account token to the Pod as a _projected volume_. Projected tokens expire automatically, and the kubelet rotates the token before it expires.
+- [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount) (not recommended): You can mount service account tokens as Kubernetes Secrets in Pods. These tokens don't expire and don't rotate. In versions prior to v1.24, a permanent token was automatically created for each service account. This method is not recommended anymore, especially at scale, because of the risks associated with static, long-lived credentials. The [LegacyServiceAccountTokenNoAutoGeneration feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates-removed/) (which was enabled by default from Kubernetes v1.24 to v1.26), prevented Kubernetes from automatically creating these tokens for ServiceAccounts. The feature gate is removed in v1.27, because it was elevated to GA status; you can still create indefinite service account tokens manually, but should take into account the security implications.
 
 #### Note:
 
-For applications running outside your Kubernetes cluster, you might be considering creating a long-lived ServiceAccount token that is stored in a Secret. This allows authentication, but the Kubernetes project recommends you avoid this approach. Long-lived bearer tokens represent a security risk as, once disclosed, the token can be misused. Instead, consider using an alternative. For example, your external application can authenticate using a well-protected private key `and` a certificate, or using a custom mechanism such as an [authentication webhook](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) that you implement yourself.
+For applications running outside your Kubernetes cluster, you might be considering creating a long-lived ServiceAccount token that is stored in a Secret. This allows authentication, but the Kubernetes project recommends you avoid this approach. Long-lived bearer tokens represent a security risk as, once disclosed, the token can be misused. Instead, consider using an alternative. For example, your external application can authenticate using a well-protected private key `and` a certificate, or using a custom mechanism such as an [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) that you implement yourself.
 
 You can also use TokenRequest to obtain short-lived tokens for your external application.
 
@@ -126,11 +126,11 @@ ServiceAccounts use signed [JSON Web Tokens](https://www.rfc-editor.org/rfc/rfc
 4. Checks whether the token is currently valid.
 5. Checks the audience claims.
 
-The TokenRequest API produces _bound tokens_ for a ServiceAccount. This binding is linked to the lifetime of the client, such as a Pod, that is acting as that ServiceAccount. See [Token Volume Projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) for an example of a bound pod service account token's JWT schema and payload.
+The TokenRequest API produces _bound tokens_ for a ServiceAccount. This binding is linked to the lifetime of the client, such as a Pod, that is acting as that ServiceAccount. See [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) for an example of a bound pod service account token's JWT schema and payload.
 
 For tokens issued using the `TokenRequest` API, the API server also checks that the specific object reference that is using the ServiceAccount still exists, matching by the [unique ID](https://kubernetes.io/docs/concepts/overview/working-with-objects/names) of that object. For legacy tokens that are mounted as Secrets in Pods, the API server checks the token against the Secret.
 
-For more information about the authentication process, refer to [Authentication](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens).
+For more information about the authentication process, refer to [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens).
 
 ### Authenticating service account credentials in your own code[](https://kubernetes.io/docs/concepts/security/service-accounts/#authenticating-in-code)
 
@@ -145,16 +145,16 @@ Your application should always define the audience that it accepts, and should c
 
 ## Alternatives[](https://kubernetes.io/docs/concepts/security/service-accounts/#alternatives)
 
-- Issue your own tokens using another mechanism, and then use [Webhook Token Authentication](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) to validate bearer tokens using your own validation service.
+- Issue your own tokens using another mechanism, and then use [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) to validate bearer tokens using your own validation service.
 - Provide your own identities to Pods.
     - [Use the SPIFFE CSI driver plugin to provide SPIFFE SVIDs as X.509 certificate pairs to Pods](https://cert-manager.io/docs/projects/csi-driver-spiffe/).
         
-        🛇 This item links to a third party project or product that is not part of Kubernetes itself. [More information](https://kubernetes.io/docs/concepts/security/service-accounts/#third-party-content-disclaimer)
+        🛇 This item links to a third party project or product that is not part of Kubernetes itself. [](https://kubernetes.io/docs/concepts/security/service-accounts/#third-party-content-disclaimer)
         
     - [Use a service mesh such as Istio to provide certificates to Pods](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/).
         
 - Authenticate from outside the cluster to the API server without using service account tokens:
-    - [Configure the API server to accept OpenID Connect (OIDC) tokens from your identity provider](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens).
+    - [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens).
     - Use service accounts or user accounts created using an external Identity and Access Management (IAM) service, such as from a cloud provider, to authenticate to your cluster.
     - [Use the CertificateSigningRequest API with client certificates](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/).
 - [Configure the kubelet to retrieve credentials from an image registry](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-credential-provider/).

@@ -75,7 +75,7 @@ Example:
 I1025 00:15:15.525108       1 controller_utils.go:116] "Pod status updated" pod="kube-system/kubedns" status="ready"
 ```
 
-Strings are quoted. Other values are formatted with [`%+v`](https://pkg.go.dev/fmt#hdr-Printing), which may cause log messages to continue on the next line [depending on the data](https://github.com/kubernetes/kubernetes/issues/106428).
+Strings are quoted. Other values are formatted with [](https://pkg.go.dev/fmt#hdr-Printing), which may cause log messages to continue on the next line [depending on the data](https://github.com/kubernetes/kubernetes/issues/106428).
 
 ```
 I1025 00:15:15.525108       1 example.go:116] "Example" data="This is text with a line break\nand \"quotation marks\"." someInt=1 someFloat=0.1 someStruct={StringField: First line,
@@ -154,7 +154,7 @@ Keys with special meaning:
 List of components currently supporting JSON format:
 
 - [kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)
-- [kube-apiserver](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver)
+- [](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver)
 - [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)
 - [kubelet](https://kubernetes.io/docs/reference/generated/kubelet)
 

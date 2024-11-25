@@ -1,6 +1,6 @@
 FEATURE STATE: `Kubernetes v1.29 [beta]`
 
-Sidecar containers are the secondary [Container](Container.md) that run along with the main application container within the same [Pod](Pod.md). These containers are used to enhance or to extend the functionality of the primary _app container_ by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
+Sidecar containers are the secondary [Container](../../Container/Container.md) that run along with the main application container within the same [Pod](../Pod.md). These containers are used to enhance or to extend the functionality of the primary _app container_ by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
 
 Typically, you only have one app container in a Pod. For example, if you have a web application that requires a local webserver, the local webserver is a sidecar and the web application itself is the app container.
 
@@ -55,7 +55,7 @@ spec:
           emptyDir: {}
 ```
 
-## Sidecar containers and [Pod Lifecycle](Pod%20Lifecycle.md)[](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/#sidecar-containers-and-pod-lifecycle)
+## Sidecar containers and [Pod Lifecycle](../Pod%20Lifecycle/Pod%20Lifecycle.md)[](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/#sidecar-containers-and-pod-lifecycle)
 
 If an init container is created with its `restartPolicy` set to `Always`, it will start and remain running during the entire life of the Pod. This can be helpful for running supporting services separated from the main application containers.
 
@@ -65,7 +65,7 @@ Since these containers are defined as init containers, they benefit from the sam
 
 Compared to regular init containers, sidecars defined within `initContainers` continue to run after they have started. This is important when there is more than one entry inside `.spec.initContainers` for a Pod. After a sidecar-style init container is running (the kubelet has set the `started` status for that init container to true), the kubelet then starts the next init container from the ordered `.spec.initContainers` list. That status either becomes true because there is a process running in the container and no startup probe defined, or as a result of its `startupProbe` succeeding.
 
-Upon Pod [termination](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#termination-with-sidecars), the kubelet postpones terminating sidecar containers until the main application container has fully stopped. The sidecar containers are then shut down in the opposite order of their appearance in the Pod specification. This approach ensures that the sidecars remain operational, supporting other containers within the Pod, until their service is no longer required.
+Upon Pod [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#termination-with-sidecars), the kubelet postpones terminating sidecar containers until the main application container has fully stopped. The sidecar containers are then shut down in the opposite order of their appearance in the Pod specification. This approach ensures that the sidecars remain operational, supporting other containers within the Pod, until their service is no longer required.
 
 ### Jobs with sidecar containers[](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/#jobs-with-sidecar-containers)
 
@@ -118,7 +118,7 @@ From Kubernetes perspective, sidecars graceful termination is less important. Wh
 
 Sidecar containers work alongside the main container, extending its functionality and providing additional services.
 
-Sidecar containers run concurrently with the main application container. They are active throughout the lifecycle of the pod and can be started and stopped independently of the main container. Unlike [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/), sidecar containers support [probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe) to control their lifecycle.
+Sidecar containers run concurrently with the main application container. They are active throughout the lifecycle of the pod and can be started and stopped independently of the main container. Unlike [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/), sidecar containers support [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe) to control their lifecycle.
 
 Sidecar containers can interact directly with the main application containers, because like init containers they always share the same network, and can optionally also share volumes (filesystems).
 

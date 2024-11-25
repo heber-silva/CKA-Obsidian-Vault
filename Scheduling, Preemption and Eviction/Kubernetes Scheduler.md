@@ -10,7 +10,7 @@ If you want to understand why Pods are placed onto a particular Node, or if you'
 
 ## kube-scheduler[](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler)
 
-[kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) is the default scheduler for Kubernetes and runs as part of the [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane). kube-scheduler is designed so that, if you want and need to, you can write your own scheduling component and use that instead.
+[kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) is the default scheduler for Kubernetes and runs as part of the [](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane). kube-scheduler is designed so that, if you want and need to, you can write your own scheduling component and use that instead.
 
 Kube-scheduler selects an optimal node to run newly created or not yet scheduled (unscheduled) pods. Since containers in pods - and pods themselves - can have different requirements, the scheduler filters out any nodes that don't meet a Pod's specific scheduling needs. Alternatively, the API lets you specify a node for a Pod when you create it, but this is unusual and is only done in special cases.
 
@@ -36,18 +36,18 @@ Finally, kube-scheduler assigns the Pod to the Node with the highest ranking. If
 There are two supported ways to configure the filtering and scoring behavior of the scheduler:
 
 1. [Scheduling Policies](https://kubernetes.io/docs/reference/scheduling/policies/) allow you to configure _Predicates_ for filtering and _Priorities_ for scoring.
-2. [Scheduling Profiles](https://kubernetes.io/docs/reference/scheduling/config/#profiles) allow you to configure Plugins that implement different scheduling stages, including: `QueueSort`, `Filter`, `Score`, `Bind`, `Reserve`, `Permit`, and others. You can also configure the kube-scheduler to run different profiles.
+2. [](https://kubernetes.io/docs/reference/scheduling/config/#profiles) allow you to configure Plugins that implement different scheduling stages, including: `QueueSort`, `Filter`, `Score`, `Bind`, `Reserve`, `Permit`, and others. You can also configure the kube-scheduler to run different profiles.
 
 ## What's next[](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#what-s-next)
 
 - Read about [scheduler performance tuning](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/)
 - Read about [Pod topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 - Read the [reference documentation](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) for kube-scheduler
-- Read the [kube-scheduler config (v1)](https://kubernetes.io/docs/reference/config-api/kube-scheduler-config.v1/) reference
+- Read the [kube-scheduler config (v1)](v1)) reference
 - Learn about [configuring multiple schedulers](https://kubernetes.io/docs/tasks/extend-kubernetes/configure-multiple-schedulers/)
 - Learn about [topology management policies](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/)
 - Learn about [Pod Overhead](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-overhead/)
 - Learn about scheduling of Pods that use volumes in:
-    - [Volume Topology Support](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode)
+    - [](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode)
     - [Storage Capacity Tracking](https://kubernetes.io/docs/concepts/storage/storage-capacity/)
     - [Node-specific Volume Limits](https://kubernetes.io/docs/concepts/storage/storage-limits/)

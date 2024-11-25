@@ -23,13 +23,13 @@ Each request can be recorded with an associated _stage_. The defined stages are
 
 #### Note:
 
-The configuration of an [Audit Event configuration](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event) is different from the [Event](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#event-v1-core) API object.
+The configuration of an [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event) is different from the [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#event-v1-core) API object.
 
 The audit logging feature increases the memory consumption of the API server because some context required for auditing is stored for each request. Memory consumption depends on the audit logging configuration.
 
 ## Audit policy[](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/#audit-policy)
 
-Audit policy defines rules about what events should be recorded and what data they should include. The audit policy object structure is defined in the [`audit.k8s.io` API group](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy). When an event is processed, it's compared against the list of rules in order. The first matching rule sets the _audit level_ of the event. The defined audit levels are:
+Audit policy defines rules about what events should be recorded and what data they should include. The audit policy object structure is defined in the [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy). When an event is processed, it's compared against the list of rules in order. The first matching rule sets the _audit level_ of the event. The defined audit levels are:
 
 - `None` - don't log events that match this rule.
 - `Metadata` - log events with metadata (requesting user, timestamp, resource, verb, etc.) but not request or response body.
@@ -123,7 +123,7 @@ rules:
 
 If you're crafting your own audit profile, you can use the audit profile for Google Container-Optimized OS as a starting point. You can check the [configure-helper.sh](https://github.com/kubernetes/kubernetes/blob/master/cluster/gce/gci/configure-helper.sh) script, which generates an audit policy file. You can see most of the audit policy file by looking directly at the script.
 
-You can also refer to the [`Policy` configuration reference](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy) for details about the fields defined.
+You can also refer to the [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy) for details about the fields defined.
 
 ## Audit backends[](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/#audit-backends)
 
@@ -132,7 +132,7 @@ Audit backends persist audit events to an external storage. Out of the box, the 
 - Log backend, which writes events into the filesystem
 - Webhook backend, which sends events to an external HTTP API
 
-In all cases, audit events follow a structure defined by the Kubernetes API in the [`audit.k8s.io` API group](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event).
+In all cases, audit events follow a structure defined by the Kubernetes API in the [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event).
 
 #### Note:
 
@@ -246,5 +246,5 @@ By default truncate is disabled in both `webhook` and `log`, a cluster admini
 
 ## What's next[](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/#what-s-next)
 
-- Learn about [Mutating webhook auditing annotations](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#mutating-webhook-auditing-annotations).
-- Learn more about [`Event`](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event) and the [`Policy`](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy) resource types by reading the Audit configuration reference.
+- Learn about [](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#mutating-webhook-auditing-annotations).
+- Learn more about [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Event) and the [](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/#audit-k8s-io-v1-Policy) resource types by reading the Audit configuration reference.

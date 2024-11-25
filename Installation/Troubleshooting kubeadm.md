@@ -115,13 +115,13 @@ Calico, Canal, and Flannel CNI providers are verified to support HostPort.
 
 For more information, see the [CNI portmap documentation](https://github.com/containernetworking/plugins/blob/master/plugins/meta/portmap/README.md).
 
-If your network provider does not support the portmap CNI plugin, you may need to use the [NodePort feature of services](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport) or use `HostNetwork=true`.
+If your network provider does not support the portmap CNI plugin, you may need to use the [](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport) or use `HostNetwork=true`.
 
 ## Pods are not accessible via their Service IP[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#pods-are-not-accessible-via-their-service-ip)
 
-- Many network add-ons do not yet enable [hairpin mode](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/#a-pod-fails-to-reach-itself-via-the-service-ip) which allows pods to access themselves via their Service IP. This is an issue related to [CNI](https://github.com/containernetworking/cni/issues/476). Please contact the network add-on provider to get the latest status of their support for hairpin mode.
+- Many network add-ons do not yet enable [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/#a-pod-fails-to-reach-itself-via-the-service-ip) which allows pods to access themselves via their Service IP. This is an issue related to [CNI](https://github.com/containernetworking/cni/issues/476). Please contact the network add-on provider to get the latest status of their support for hairpin mode.
     
-- If you are using VirtualBox (directly or via Vagrant), you will need to ensure that `hostname -i` returns a routable IP address. By default, the first interface is connected to a non-routable host-only network. A work around is to modify `/etc/hosts`, see this [Vagrantfile](https://github.com/errordeveloper/k8s-playground/blob/22dd39dfc06111235620e6c4404a96ae146f26fd/Vagrantfile#L11) for an example.
+- If you are using VirtualBox (directly or via Vagrant), you will need to ensure that `hostname -i` returns a routable IP address. By default, the first interface is connected to a non-routable host-only network. A work around is to modify `/etc/hosts`, see this [](https://github.com/errordeveloper/k8s-playground/blob/22dd39dfc06111235620e6c4404a96ae146f26fd/Vagrantfile#L11) for an example.
     
 
 ## TLS certificate errors[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#tls-certificate-errors)
@@ -163,7 +163,7 @@ By default, kubeadm configures a kubelet with automatic rotation of client certi
 
 1. Backup and delete `/etc/kubernetes/kubelet.conf` and `/var/lib/kubelet/pki/kubelet-client*` from the failed node.
     
-2. From a working control plane node in the cluster that has `/etc/kubernetes/pki/ca.key` execute `kubeadm kubeconfig user --org system:nodes --client-name system:node:$NODE > kubelet.conf`. `$NODE` must be set to the name of the existing failed node in the cluster. Modify the resulted `kubelet.conf` manually to adjust the cluster name and server endpoint, or pass `kubeconfig user --config` (see [Generating kubeconfig files for additional users](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubeconfig-additional-users)). If your cluster does not have the `ca.key` you must sign the embedded certificates in the `kubelet.conf` externally.
+2. From a working control plane node in the cluster that has `/etc/kubernetes/pki/ca.key` execute `kubeadm kubeconfig user --org system:nodes --client-name system:node:$NODE > kubelet.conf`. `$NODE` must be set to the name of the existing failed node in the cluster. Modify the resulted `kubelet.conf` manually to adjust the cluster name and server endpoint, or pass `kubeconfig user --config` (see [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubeconfig-additional-users)). If your cluster does not have the `ca.key` you must sign the embedded certificates in the `kubelet.conf` externally.
     
 3. Copy this resulted `kubelet.conf` to `/etc/kubernetes/kubelet.conf` on the failed node.
     
@@ -214,7 +214,7 @@ Error from server: Get https://10.19.0.41:10250/containerLogs/default/mysql-ddc6
     curl http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/address
     ```
     
-    The workaround is to tell `kubelet` which IP to use using `--node-ip`. When using DigitalOcean, it can be the public one (assigned to `eth0`) or the private one (assigned to `eth1`) should you want to use the optional private network. The `kubeletExtraArgs` section of the kubeadm [`NodeRegistrationOptions` structure](https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/#kubeadm-k8s-io-v1beta4-NodeRegistrationOptions) can be used for this.
+    The workaround is to tell `kubelet` which IP to use using `--node-ip`. When using DigitalOcean, it can be the public one (assigned to `eth0`) or the private one (assigned to `eth1`) should you want to use the optional private network. The `kubeletExtraArgs` section of the kubeadm [](https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/#kubeadm-k8s-io-v1beta4-NodeRegistrationOptions) can be used for this.
     
     Then restart `kubelet`:
     
@@ -228,7 +228,7 @@ Error from server: Get https://10.19.0.41:10250/containerLogs/default/mysql-ddc6
 
 If you have nodes that are running SELinux with an older version of Docker, you might experience a scenario where the `coredns` pods are not starting. To solve that, you can try one of the following options:
 
-- Upgrade to a [newer version of Docker](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker).
+- Upgrade to a [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker).
     
 - [Disable SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/sect-security-enhanced_linux-enabling_and_disabling_selinux-disabling_selinux).
     
@@ -241,7 +241,7 @@ kubectl -n kube-system get deployment coredns -o yaml | \
   kubectl apply -f -
 ```
 
-Another cause for CoreDNS to have `CrashLoopBackOff` is when a CoreDNS Pod deployed in Kubernetes detects a loop. [A number of workarounds](https://github.com/coredns/coredns/tree/master/plugin/loop#troubleshooting-loops-in-kubernetes-clusters) are available to avoid Kubernetes trying to restart the CoreDNS Pod every time CoreDNS detects the loop and exits.
+Another cause for CoreDNS to have `CrashLoopBackOff` is when a CoreDNS Pod deployed in Kubernetes detects a loop. [](https://github.com/coredns/coredns/tree/master/plugin/loop#troubleshooting-loops-in-kubernetes-clusters) are available to avoid Kubernetes trying to restart the CoreDNS Pod every time CoreDNS detects the loop and exits.
 
 #### Warning:
 
@@ -385,9 +385,9 @@ x509: certificate signed by unknown authority
 x509: certificate is valid for IP-foo not IP-bar
 ```
 
-See [Enabling signed kubelet serving certificates](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubelet-serving-certs) to understand how to configure the kubelets in a kubeadm cluster to have properly signed serving certificates.
+See [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubelet-serving-certs) to understand how to configure the kubelets in a kubeadm cluster to have properly signed serving certificates.
 
-Also see [How to run the metrics-server securely](https://github.com/kubernetes-sigs/metrics-server/blob/master/FAQ.md#how-to-run-metrics-server-securely).
+Also see [](https://github.com/kubernetes-sigs/metrics-server/blob/master/FAQ.md#how-to-run-metrics-server-securely).
 
 ## Upgrade fails due to etcd hash not changing[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#upgrade-fails-due-to-etcd-hash-not-changing)
 

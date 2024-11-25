@@ -60,7 +60,7 @@ When creating a debugging session on a Node, keep in mind that:
 - `kubectl debug` automatically generates the name of the new pod, based on the name of the node.
 - The root filesystem of the Node will be mounted at `/host`.
 - Although the container runs in the host IPC, Network, and PID namespaces, the pod isn't privileged. This means that reading some process information might fail because access to that information is restricted to superusers. For example, `chroot /host` will fail. If you need a privileged pod, create it manually or use the `--profile=sysadmin` flag.
-- By applying [Debugging Profiles](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#debugging-profiles), you can set specific properties such as [securityContext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) to a debugging Pod.
+- By applying [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#debugging-profiles), you can set specific properties such as [securityContext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) to a debugging Pod.
 
 ## Cleaning up[](https://kubernetes.io/docs/tasks/debug/debug-cluster/kubectl-node-debug/#cleaning-up)
 
@@ -86,4 +86,4 @@ pod "node-debugger-mynode-pdx84" deleted
 
 #### Note:
 
-The `kubectl debug node` command won't work if the Node is down (disconnected from the network, or kubelet dies and won't restart, etc.). Check [debugging a down/unreachable node](https://kubernetes.io/docs/tasks/debug/debug-cluster/#example-debugging-a-down-unreachable-node) in that case.
+The `kubectl debug node` command won't work if the Node is down (disconnected from the network, or kubelet dies and won't restart, etc.). Check [](https://kubernetes.io/docs/tasks/debug/debug-cluster/#example-debugging-a-down-unreachable-node) in that case.

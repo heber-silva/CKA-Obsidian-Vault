@@ -36,7 +36,7 @@ The following checklist provides base security hardening recommendations that wo
 - [ ]  Set `runAsNonRoot: true`.
 - [ ]  Configure the container to execute as a less privileged user (for example, using `runAsUser` and `runAsGroup`), and configure appropriate permissions on files or directories inside the container image.
 - [ ]  Optionally add a supplementary group with `fsGroup` to access persistent volumes.
-- [ ]  The application deploys into a namespace that enforces an appropriate [Pod Security Standards](Pod%20Security%20Standards.md). If you cannot control this enforcement for the cluster(s) where the application is deployed, take this into account either through documentation or additional defense in depth.
+- [ ](Pod%20Security%20Standards.md). If you cannot control this enforcement for the cluster(s) where the application is deployed, take this into account either through documentation or additional defense in depth.
 
 ### Container-level `securityContext` recommendations[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#security-context-container)
 
@@ -48,10 +48,10 @@ The following checklist provides base security hardening recommendations that wo
 ### Role Based Access Control (RBAC)[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#rbac)
 
 - [ ]  Permissions such as **create**, **patch**, **update** and **delete** should be only granted if necessary.
-- [ ]  Avoid creating RBAC permissions to create or update roles which can lead to [privilege escalation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#privilege-escalation-prevention-and-bootstrapping).
+- [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#privilege-escalation-prevention-and-bootstrapping).
 - [ ]  Review bindings for the `system:unauthenticated` group and remove them where possible, as this gives access to anyone who can contact the API server at a network level.
 
-The **create**, **update** and **delete** verbs should be permitted judiciously. The **patch** verb if allowed on a Namespace can [allow users to update labels on the namespace or deployments](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#namespace-modification) which can increase the attack surface.
+The **create**, **update** and **delete** verbs should be permitted judiciously. The **patch** verb if allowed on a Namespace can [](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#namespace-modification) which can increase the attack surface.
 
 For sensitive workloads, consider providing a recommended ValidatingAdmissionPolicy that further restricts the permitted write actions.
 
@@ -62,7 +62,7 @@ For sensitive workloads, consider providing a recommended ValidatingAdmissionPol
 
 ### Network policies[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#network-policies)
 
-- [ ]  Configure [NetworkPolicy](NetworkPolicy.md) to only allow expected ingress and egress traffic from the pods.
+- [ ](../Networking/NetworkPolicy.md) to only allow expected ingress and egress traffic from the pods.
 
 Make sure that your cluster provides and enforces NetworkPolicy. If you are writing an application that users will deploy to different clusters, consider whether you can assume that NetworkPolicy is available and enforced.
 
@@ -74,15 +74,15 @@ This section of this guide covers some advanced security hardening points which 
 
 Configure [Security Context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod-container.
 
-- [ ]  [Set the Seccomp Profile for a Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-seccomp-profile-for-a-container).
+- [](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-seccomp-profile-for-a-container).
 - [ ]  [Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/).
-- [ ]  [Assign SELinux Labels to a Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
+- [](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
 
 ### Runtime classes[](https://kubernetes.io/docs/concepts/security/application-security-checklist/#runtime-classes)
 
 - [ ]  Configure appropriate runtime classes for containers.
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/security/application-security-checklist/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/security/application-security-checklist/#third-party-content-disclaimer)
 
 Some containers may require a different isolation level from what is provided by the default runtime of the cluster. `runtimeClassName` can be used in a podspec to define a different runtime class.
 
@@ -92,4 +92,4 @@ In high trust environments, consider using [confidential virtual machines](http
 
 Items on this page refer to third party products or projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for those third-party products or projects. See the [CNCF website guidelines](https://github.com/cncf/foundation/blob/master/website-guidelines.md) for more details.
 
-You should read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.
+You should read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.

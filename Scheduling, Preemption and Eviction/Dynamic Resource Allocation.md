@@ -14,11 +14,11 @@ When a driver provides a _control plane controller_, the driver itself handles 
 
 ## Before you begin[](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#before-you-begin)
 
-Kubernetes v1.31 includes cluster-level API support for dynamic resource allocation, but it [needs to be enabled](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#enabling-dynamic-resource-allocation) explicitly. You also must install a resource driver for specific resources that are meant to be managed using this API. If you are not running Kubernetes v1.31, check the documentation for that version of Kubernetes.
+Kubernetes v1.31 includes cluster-level API support for dynamic resource allocation, but it [](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#enabling-dynamic-resource-allocation) explicitly. You also must install a resource driver for specific resources that are meant to be managed using this API. If you are not running Kubernetes v1.31, check the documentation for that version of Kubernetes.
 
 ## API[](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#api)
 
-The `resource.k8s.io/v1alpha3` [API group](https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) provides these types:
+The `resource.k8s.io/v1alpha3` [](https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) provides these types:
 
 ResourceClaim
 
@@ -128,7 +128,7 @@ By using structured parameters, the scheduler is able to reach a decision withou
 
 ## Monitoring resources[](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#monitoring-resources)
 
-The kubelet provides a gRPC service to enable discovery of dynamic resources of running Pods. For more information on the gRPC endpoints, see the [resource allocation reporting](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
+The kubelet provides a gRPC service to enable discovery of dynamic resources of running Pods. For more information on the gRPC endpoints, see the [](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
 
 ## Pre-scheduled Pods[](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#pre-scheduled-pods)
 
@@ -157,7 +157,7 @@ You may also be able to mutate the incoming Pod, at admission time, to unset the
 
 ## Enabling dynamic resource allocation[](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/#enabling-dynamic-resource-allocation)
 
-Dynamic resource allocation is an _alpha feature_ and only enabled when the `DynamicResourceAllocation` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) and the `resource.k8s.io/v1alpha3` [API group](https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) are enabled. For details on that, see the `--feature-gates` and `--runtime-config` [kube-apiserver parameters](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/). kube-scheduler, kube-controller-manager and kubelet also need the feature gate.
+Dynamic resource allocation is an _alpha feature_ and only enabled when the `DynamicResourceAllocation` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) and the `resource.k8s.io/v1alpha3` [](https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) are enabled. For details on that, see the `--feature-gates` and `--runtime-config` [kube-apiserver parameters](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/). kube-scheduler, kube-controller-manager and kubelet also need the feature gate.
 
 When a resource driver uses a control plane controller, then the `DRAControlPlaneController` feature gate has to be enabled in addition to `DynamicResourceAllocation`.
 

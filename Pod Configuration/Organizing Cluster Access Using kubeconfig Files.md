@@ -59,7 +59,7 @@ Here are the rules that `kubectl` uses when it merges kubeconfig files:
     - The first file to set a particular value or map key wins.
     - Never change the value or map key. Example: Preserve the context of the first file to set `current-context`. Example: If two files specify a `red-user`, use only values from the first file's `red-user`. Even if the second file has non-conflicting entries under `red-user`, discard them.
     
-    For an example of setting the `KUBECONFIG` environment variable, see [Setting the KUBECONFIG environment variable](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable).
+    For an example of setting the `KUBECONFIG` environment variable, see [](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable).
     
     Otherwise, use the default kubeconfig file, `$HOME/.kube/config`, with no merging.
     
@@ -119,4 +119,4 @@ contexts:
 ## What's next[](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#what-s-next)
 
 - [Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
-- [`kubectl config`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#config)
+- [](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#config)

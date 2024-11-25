@@ -11,4 +11,4 @@ Each StorageClass contains the fields `provisioner`, `parameters`, and `recla
 
 The name of a StorageClass object is significant, and is how users can request a particular class. Administrators set the name and other parameters of a class when first creating StorageClass objects.
 
-As an administrator, you can specify a default StorageClass that applies to any PVCs that don't request a specific class. For more details, see the [PersistentVolumeClaim concept](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).
+As an administrator, you can specify a default StorageClass that applies to any PVCs that don't request a specific class. For more details, see the [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).

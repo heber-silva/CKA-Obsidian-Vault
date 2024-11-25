@@ -4,9 +4,9 @@ Principles and practices for good Secret management for cluster administrators a
 
 In Kubernetes, a Secret is an object that stores sensitive information, such as passwords, OAuth tokens, and SSH keys.
 
-Secrets give you more control over how sensitive information is used and reduces the risk of accidental exposure. Secret values are encoded as base64 strings and are stored unencrypted by default, but can be configured to be [encrypted at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted).
+Secrets give you more control over how sensitive information is used and reduces the risk of accidental exposure. Secret values are encoded as base64 strings and are stored unencrypted by default, but can be configured to be [](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted).
 
-A [Pod](Pod.md) can reference the Secret in a variety of ways, such as in a volume mount or as an environment variable. Secrets are designed for confidential data and [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) are designed for non-confidential data.
+A [Pod](../Workloads/Pod.md) can reference the Secret in a variety of ways, such as in a volume mount or as an environment variable. Secrets are designed for confidential data and [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) are designed for non-confidential data.
 
 The following good practices are intended for both cluster administrators and application developers. Use these guidelines to improve the security of your sensitive information in Secret objects, as well as to more effectively manage your Secrets.
 
@@ -20,7 +20,7 @@ By default, Secret objects are stored unencrypted in [etcd](https://kubernetes.
 
 ### Configure least-privilege access to Secrets[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#least-privilege-secrets)
 
-When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md).
+When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](RBAC)), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md).
 
 - **Components**: Restrict `watch` or `list` access to only the most privileged, system-level components. Only grant `get` access for Secrets if the component's normal behavior requires it.
 - **Humans**: Restrict `get`, `watch`, or `list` access to Secrets. Only allow cluster administrators to access `etcd`. This includes read-only access. For more complex access control, such as restricting access to Secrets with specific annotations, consider using third-party authorization mechanisms.
@@ -36,7 +36,7 @@ A user who can create a Pod that uses a Secret can also see the value of that Se
 
 #### Additional ServiceAccount annotations for Secret management[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#additional-serviceaccount-annotations-for-secret-management)
 
-You can also use the `kubernetes.io/enforce-mountable-secrets` annotation on a ServiceAccount to enforce specific rules on how Secrets are used in a Pod. For more details, see the [documentation on this annotation](https://kubernetes.io/docs/reference/labels-annotations-taints/#enforce-mountable-secrets).
+You can also use the `kubernetes.io/enforce-mountable-secrets` annotation on a ServiceAccount to enforce specific rules on how Secrets are used in a Pod. For more details, see the [](https://kubernetes.io/docs/reference/labels-annotations-taints/#enforce-mountable-secrets).
 
 ### Improve etcd management policies[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#improve-etcd-management-policies)
 
@@ -46,11 +46,11 @@ If there are multiple `etcd` instances, configure encrypted SSL/TLS communicat
 
 ### Configure access to external Secrets[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#configure-access-to-external-secrets)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#third-party-content-disclaimer)
 
 You can use third-party Secrets store providers to keep your confidential data outside your cluster and then configure Pods to access that information. The [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) is a DaemonSet that lets the kubelet retrieve Secrets from external stores, and mount the Secrets as a volume into specific Pods that you authorize to access the data.
 
-For a list of supported providers, refer to [Providers for the Secret Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/concepts.html#provider-for-the-secrets-store-csi-driver).
+For a list of supported providers, refer to [](https://secrets-store-csi-driver.sigs.k8s.io/concepts.html#provider-for-the-secrets-store-csi-driver).
 
 ## Developers[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#developers)
 
@@ -66,7 +66,7 @@ Applications still need to protect the value of confidential information after r
 
 ### Avoid sharing Secret manifests[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#avoid-sharing-secret-manifests)
 
-If you configure a Secret through a [manifest](https://kubernetes.io/docs/reference/glossary/?all=true#term-manifest), with the secret data encoded as base64, sharing this file or checking it in to a source repository means the secret is available to everyone who can read the manifest.
+If you configure a Secret through a [](https://kubernetes.io/docs/reference/glossary/?all=true#term-manifest), with the secret data encoded as base64, sharing this file or checking it in to a source repository means the secret is available to everyone who can read the manifest.
 
 #### Caution:
 
@@ -74,4 +74,4 @@ Base64 encoding is _not_ an encryption method, it provides no additional confi
 
 Items on this page refer to third party products or projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for those third-party products or projects. See the [CNCF website guidelines](https://github.com/cncf/foundation/blob/master/website-guidelines.md) for more details.
 
-You should read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.
+You should read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before proposing a change that adds an extra third-party link.

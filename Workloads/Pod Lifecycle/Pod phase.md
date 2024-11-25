@@ -1,4 +1,4 @@
-A [Pod](Pod.md)'s `status` field is a [PodStatus](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podstatus-v1-core) object, which has a `phase` field.
+A [Pod](../Pod.md)'s `status` field is a [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#podstatus-v1-core) object, which has a `phase` field.
 
 The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The phase is not intended to be a comprehensive rollup of observations of container or Pod state, nor is it intended to be a comprehensive state machine.
 
@@ -27,8 +27,8 @@ Make sure not to confuse _Status_, a kubectl display field for user intuition, 
 
 ---
 
-A Pod is granted a term to terminate gracefully, which defaults to 30 seconds. You can use the flag `--force` to [terminate a Pod by force](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-forced).
+A Pod is granted a term to terminate gracefully, which defaults to 30 seconds. You can use the flag `--force` to [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-forced).
 
-Since Kubernetes 1.27, the kubelet transitions deleted Pods, except for [static Pods](https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/) and [force-deleted Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-forced) without a finalizer, to a terminal phase (`Failed` or `Succeeded` depending on the exit statuses of the pod containers) before their deletion from the API server.
+Since Kubernetes 1.27, the kubelet transitions deleted Pods, except for [static Pods](https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/) and [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-forced) without a finalizer, to a terminal phase (`Failed` or `Succeeded` depending on the exit statuses of the pod containers) before their deletion from the API server.
 
 If a node dies or is disconnected from the rest of the cluster, Kubernetes applies a policy for setting the `phase` of all Pods on the lost node to Failed.

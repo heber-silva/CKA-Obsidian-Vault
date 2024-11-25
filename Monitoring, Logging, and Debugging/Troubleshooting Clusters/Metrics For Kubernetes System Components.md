@@ -11,7 +11,7 @@ Examples of those components:
 
 - [kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)
 - [kube-proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)
-- [kube-apiserver](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver)
+- [](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver)
 - [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)
 - [kubelet](https://kubernetes.io/docs/reference/generated/kubelet)
 
@@ -65,7 +65,7 @@ For example:
     ```
     
 
-Hidden metrics are no longer published for scraping, but are still available for use. To use a hidden metric, please refer to the [Show hidden metrics](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/#show-hidden-metrics) section.
+Hidden metrics are no longer published for scraping, but are still available for use. To use a hidden metric, please refer to the [](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/#show-hidden-metrics) section.
 
 Deleted metrics are no longer published and cannot be used.
 
@@ -157,6 +157,6 @@ Additionally, the `cardinality_enforcement_unexpected_categorizations_total` m
 
 ## What's next[](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/#what-s-next)
 
-- Read about the [Prometheus text format](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md#text-based-format) for metrics
+- Read about the [](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md#text-based-format) for metrics
 - See the list of [stable Kubernetes metrics](https://github.com/kubernetes/kubernetes/blob/master/test/instrumentation/testdata/stable-metrics-list.yaml)
-- Read about the [Kubernetes deprecation policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)
+- Read about the [](https://kubernetes.io/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)

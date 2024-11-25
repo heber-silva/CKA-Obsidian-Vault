@@ -17,21 +17,21 @@ As a result, the following storage functionality is not supported on Windows nod
 - Block device mapping
 - Memory as the storage medium (for example, `emptyDir.medium` set to `Memory`)
 - File system features like uid/gid; per-user Linux filesystem permissions
-- Setting [secret permissions with DefaultMode](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) (due to UID/GID dependency)
+- Setting [](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) (due to UID/GID dependency)
 - NFS based storage/volume support
 - Expanding the mounted volume (resizefs)
 
 Kubernetes [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) enable complex applications, with data persistence and Pod volume sharing requirements, to be deployed on Kubernetes. Management of persistent volumes associated with a specific storage back-end or protocol includes actions such as provisioning/de-provisioning/resizing of volumes, attaching/detaching a volume to/from a Kubernetes node and mounting/dismounting a volume to/from individual containers in a pod that needs to persist data.
 
-Volume management components are shipped as Kubernetes volume [plugin](https://kubernetes.io/docs/concepts/storage/volumes/#volume-types). The following broad classes of Kubernetes volume plugins are supported on Windows:
+Volume management components are shipped as Kubernetes volume [](https://kubernetes.io/docs/concepts/storage/volumes/#volume-types). The following broad classes of Kubernetes volume plugins are supported on Windows:
 
-- [`FlexVolume plugins`](https://kubernetes.io/docs/concepts/storage/volumes/#flexvolume)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#flexvolume)
     - Please note that FlexVolumes have been deprecated as of 1.23
-- [`CSI Plugins`](https://kubernetes.io/docs/concepts/storage/volumes/#csi)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#csi)
 
 ##### In-tree volume plugins[](https://kubernetes.io/docs/concepts/storage/windows-storage/#in-tree-volume-plugins)
 
 The following in-tree plugins support persistent storage on Windows nodes:
 
-- [`azureFile`](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile)
-- [`vsphereVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume)

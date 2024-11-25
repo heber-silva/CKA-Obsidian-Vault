@@ -12,7 +12,7 @@ For production clusters with multiple users directly accessing the Kubernetes AP
 
 ## X.509 client certificate authentication[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#x509-client-certificate-authentication)
 
-Kubernetes leverages [X.509 client certificate](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certificates) authentication for system components, such as when the Kubelet authenticates to the API Server. While this mechanism can also be used for user authentication, it might not be suitable for production use due to several restrictions:
+Kubernetes leverages [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certificates) authentication for system components, such as when the Kubelet authenticates to the API Server. While this mechanism can also be used for user authentication, it might not be suitable for production use due to several restrictions:
 
 - Client certificates cannot be individually revoked. Once compromised, a certificate can be used by an attacker until it expires. To mitigate this risk, it is recommended to configure short lifetimes for user authentication credentials created using client certificates.
 - If a certificate needs to be invalidated, the certificate authority must be re-keyed, which can introduce availability risks to the cluster.
@@ -23,7 +23,7 @@ Kubernetes leverages [X.509 client certificate](https://kubernetes.io/docs/refe
 
 ## Static token file[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#static-token-file)
 
-Although Kubernetes allows you to load credentials from a [static token file](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#static-token-file) located on the control plane node disks, this approach is not recommended for production servers due to several reasons:
+Although Kubernetes allows you to load credentials from a [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#static-token-file) located on the control plane node disks, this approach is not recommended for production servers due to several reasons:
 
 - Credentials are stored in clear text on control plane node disks, which can be a security risk.
 - Changing any credential requires a restart of the API server process to take effect, which can impact availability.
@@ -40,7 +40,7 @@ Although Kubernetes allows you to load credentials from a [static token file](h
 
 ## ServiceAccount secret tokens[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#serviceaccount-secret-tokens)
 
-[Service account secrets](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts) are available as an option to allow workloads running in the cluster to authenticate to the API server. In Kubernetes < 1.23, these were the default option, however, they are being replaced with TokenRequest API tokens. While these secrets could be used for user authentication, they are generally unsuitable for a number of reasons:
+[](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts) are available as an option to allow workloads running in the cluster to authenticate to the API server. In Kubernetes < 1.23, these were the default option, however, they are being replaced with TokenRequest API tokens. While these secrets could be used for user authentication, they are generally unsuitable for a number of reasons:
 
 - They cannot be set with an expiry and will remain valid until the associated service account is deleted.
 - The authentication tokens are visible to any cluster user who can read secrets in the namespace that they are defined in.
@@ -54,7 +54,7 @@ When using TokenRequest tokens for service authentication, it is recommended to 
 
 ## OpenID Connect token authentication[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#openid-connect-token-authentication)
 
-Kubernetes supports integrating external authentication services with the Kubernetes API using [OpenID Connect (OIDC)](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens). There is a wide variety of software that can be used to integrate Kubernetes with an identity provider. However, when using OIDC authentication for Kubernetes, it is important to consider the following hardening measures:
+Kubernetes supports integrating external authentication services with the Kubernetes API using [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens). There is a wide variety of software that can be used to integrate Kubernetes with an identity provider. However, when using OIDC authentication for Kubernetes, it is important to consider the following hardening measures:
 
 - The software installed in the cluster to support OIDC authentication should be isolated from general workloads as it will run with high privileges.
 - Some Kubernetes managed services are limited in the OIDC providers that can be used.
@@ -62,13 +62,13 @@ Kubernetes supports integrating external authentication services with the Kubern
 
 ## Webhook token authentication[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#webhook-token-authentication)
 
-[Webhook token authentication](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) is another option for integrating external authentication providers into Kubernetes. This mechanism allows for an authentication service, either running inside the cluster or externally, to be contacted for an authentication decision over a webhook. It is important to note that the suitability of this mechanism will likely depend on the software used for the authentication service, and there are some Kubernetes-specific considerations to take into account.
+[](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#webhook-token-authentication) is another option for integrating external authentication providers into Kubernetes. This mechanism allows for an authentication service, either running inside the cluster or externally, to be contacted for an authentication decision over a webhook. It is important to note that the suitability of this mechanism will likely depend on the software used for the authentication service, and there are some Kubernetes-specific considerations to take into account.
 
 To configure Webhook authentication, access to control plane server filesystems is required. This means that it will not be possible with Managed Kubernetes unless the provider specifically makes it available. Additionally, any software installed in the cluster to support this access should be isolated from general workloads, as it will run with high privileges.
 
 ## Authenticating proxy[](https://kubernetes.io/docs/concepts/security/hardening-guide/authentication-mechanisms/#authenticating-proxy)
 
-Another option for integrating external authentication systems into Kubernetes is to use an [authenticating proxy](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#authenticating-proxy). With this mechanism, Kubernetes expects to receive requests from the proxy with specific header values set, indicating the username and group memberships to assign for authorization purposes. It is important to note that there are specific considerations to take into account when using this mechanism.
+Another option for integrating external authentication systems into Kubernetes is to use an [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#authenticating-proxy). With this mechanism, Kubernetes expects to receive requests from the proxy with specific header values set, indicating the username and group memberships to assign for authorization purposes. It is important to note that there are specific considerations to take into account when using this mechanism.
 
 Firstly, securely configured TLS must be used between the proxy and Kubernetes API server to mitigate the risk of traffic interception or sniffing attacks. This ensures that the communication between the proxy and Kubernetes API server is secure.
 

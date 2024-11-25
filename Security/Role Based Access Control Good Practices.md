@@ -5,7 +5,7 @@ Principles and practices for good RBAC design for cluster operators.
 
 Kubernetes [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) is a key security control to ensure that cluster users and workloads have only the access to resources required to execute their roles. It is important to ensure that, when designing permissions for cluster users, the cluster administrator understands the areas where privilege escalation could occur, to reduce the risk of excessive access leading to security incidents.
 
-The good practices laid out here should be read in conjunction with the general [RBAC documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#restrictions-on-role-creation-or-update).
+The good practices laid out here should be read in conjunction with the general [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#restrictions-on-role-creation-or-update).
 
 ## General good practice[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#general-good-practice)
 
@@ -15,22 +15,22 @@ Ideally, minimal RBAC rights should be assigned to users and service accounts. O
 
 - Assign permissions at the namespace level where possible. Use RoleBindings as opposed to ClusterRoleBindings to give users rights only within a specific namespace.
 - Avoid providing wildcard permissions when possible, especially to all resources. As Kubernetes is an extensible system, providing wildcard access gives rights not just to all object types that currently exist in the cluster, but also to all object types which are created in the future.
-- Administrators should not use `cluster-admin` accounts except where specifically needed. Providing a low privileged account with [impersonation rights](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) can avoid accidental modification of cluster resources.
+- Administrators should not use `cluster-admin` accounts except where specifically needed. Providing a low privileged account with [](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) can avoid accidental modification of cluster resources.
 - Avoid adding users to the `system:masters` group. Any user who is a member of this group bypasses all RBAC rights checks and will always have unrestricted superuser access, which cannot be revoked by removing RoleBindings or ClusterRoleBindings. As an aside, if a cluster is using an authorization webhook, membership of this group also bypasses that webhook (requests from users who are members of that group are never sent to the webhook)
 
 ### Minimize distribution of privileged tokens[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#minimize-distribution-of-privileged-tokens)
 
-Ideally, pods shouldn't be assigned service accounts that have been granted powerful permissions (for example, any of the rights listed under [privilege escalation risks](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#privilege-escalation-risks)). In cases where a workload requires powerful permissions, consider the following practices:
+Ideally, pods shouldn't be assigned service accounts that have been granted powerful permissions (for example, any of the rights listed under [](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#privilege-escalation-risks)). In cases where a workload requires powerful permissions, consider the following practices:
 
 - Limit the number of nodes running powerful pods. Ensure that any DaemonSets you run are necessary and are run with least privilege to limit the blast radius of container escapes.
-- Avoid running powerful pods alongside untrusted or publicly-exposed ones. Consider using [Taints and Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/), [NodeAffinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), or [PodAntiAffinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) to ensure pods don't run alongside untrusted or less-trusted Pods. Pay special attention to situations where less-trustworthy Pods are not meeting the **Restricted** Pod Security Standard.
+- Avoid running powerful pods alongside untrusted or publicly-exposed ones. Consider using [Taints and Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/), [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity), or [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) to ensure pods don't run alongside untrusted or less-trusted Pods. Pay special attention to situations where less-trustworthy Pods are not meeting the **Restricted** Pod Security Standard.
 
 ### Hardening[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#hardening)
 
 Kubernetes defaults to providing access which may not be required in every cluster. Reviewing the RBAC rights provided by default can provide opportunities for security hardening. In general, changes should not be made to rights provided to `system:` accounts some options to harden cluster rights exist:
 
 - Review bindings for the `system:unauthenticated` group and remove them where possible, as this gives access to anyone who can contact the API server at a network level.
-- Avoid the default auto-mounting of service account tokens by setting `automountServiceAccountToken: false`. For more details, see [using default service account token](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server). Setting this value for a Pod will overwrite the service account setting, workloads which require service account tokens can still mount them.
+- Avoid the default auto-mounting of service account tokens by setting `automountServiceAccountToken: false`. For more details, see [](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server). Setting this value for a Pod will overwrite the service account setting, workloads which require service account tokens can still mount them.
 
 ### Periodic review[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#periodic-review)
 
@@ -48,11 +48,11 @@ It is generally clear that allowing `get` access on Secrets will allow a user 
 
 ### Workload creation[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#workload-creation)
 
-Permission to create workloads (either Pods, or [workload resources](https://kubernetes.io/docs/concepts/workloads/controllers/) that manage Pods) in a namespace implicitly grants access to many other resources in that namespace, such as [Secret](Secret.md)s, [ConfigMap](ConfigMap.md)s, and [PersistentVolume](PersistentVolume.md)s that can be mounted in [Pod](Pod.md)s. Additionally, since Pods can run as any [ServiceAccount](ServiceAccount.md), granting permission to create workloads also implicitly grants the API access levels of any service account in that namespace.
+Permission to create workloads (either Pods, or [workload resources](https://kubernetes.io/docs/concepts/workloads/controllers/) that manage Pods) in a namespace implicitly grants access to many other resources in that namespace, such as [Secret](../Pod%20Configuration/Secret.md)s, [ConfigMap](../Pod%20Configuration/ConfigMap.md)s, and [PersistentVolume](../Storage/PersistentVolume.md)s that can be mounted in [Pod](../Workloads/Pod.md)s. Additionally, since Pods can run as any [ServiceAccount](ServiceAccount.md), granting permission to create workloads also implicitly grants the API access levels of any service account in that namespace.
 
-Users who can run privileged Pods can use that access to gain node access and potentially to further elevate their privileges. Where you do not fully trust a user or other principal with the ability to create suitably secure and isolated Pods, you should enforce either the **Baseline** or **Restricted** Pod Security Standard. You can use [Pod Security Admission](Pod%20Security%20admission.md) or other (third party) mechanisms to implement that enforcement.
+Users who can run privileged Pods can use that access to gain node access and potentially to further elevate their privileges. Where you do not fully trust a user or other principal with the ability to create suitably secure and isolated Pods, you should enforce either the **Baseline** or **Restricted** Pod Security Standard. You can use [Pod Security Admission](Pod%20Security%20Admission.md) or other (third party) mechanisms to implement that enforcement.
 
-For these reasons, namespaces should be used to separate resources requiring different levels of trust or tenancy. It is still considered best practice to follow [least privilege](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#least-privilege) principles and assign the minimum set of permissions, but boundaries within a namespace should be considered weak.
+For these reasons, namespaces should be used to separate resources requiring different levels of trust or tenancy. It is still considered best practice to follow [](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#least-privilege) principles and assign the minimum set of permissions, but boundaries within a namespace should be considered weak.
 
 ### Persistent volume creation[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#persistent-volume-creation)
 
@@ -73,7 +73,7 @@ Users with access to the proxy sub-resource of node objects have rights to the K
 
 ### Escalate verb[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#escalate-verb)
 
-Generally, the RBAC system prevents users from creating clusterroles with more rights than the user possesses. The exception to this is the `escalate` verb. As noted in the [RBAC documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#restrictions-on-role-creation-or-update), users with this right can effectively escalate their privileges.
+Generally, the RBAC system prevents users from creating clusterroles with more rights than the user possesses. The exception to this is the `escalate` verb. As noted in the [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#restrictions-on-role-creation-or-update), users with this right can effectively escalate their privileges.
 
 ### Bind verb[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#bind-verb)
 
@@ -105,7 +105,7 @@ Users who can perform **patch** operations on Namespace objects (through a nam
 
 Users who have rights to create objects in a cluster may be able to create sufficient large objects to create a denial of service condition either based on the size or number of objects, as discussed in [etcd used by Kubernetes is vulnerable to OOM attack](https://github.com/kubernetes/kubernetes/issues/107325). This may be specifically relevant in multi-tenant clusters if semi-trusted or untrusted users are allowed limited access to a system.
 
-One option for mitigation of this issue would be to use [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/#object-count-quota) to limit the quantity of objects which can be created.
+One option for mitigation of this issue would be to use [](https://kubernetes.io/docs/concepts/policy/resource-quotas/#object-count-quota) to limit the quantity of objects which can be created.
 
 ## What's next[](https://kubernetes.io/docs/concepts/security/rbac-good-practices/#what-s-next)
 

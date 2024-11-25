@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/determine-reason-pod-failure/) 
 
-This page shows how to write and read a [Container](Container.md) termination message.
+This page shows how to write and read a [Container](../../Container/Container.md) termination message.
 
 Termination messages provide a way for containers to write information about fatal events to a location where it can be easily retrieved and surfaced by tools like dashboards and monitoring software. In most cases, information that you put in a termination message should also be written to the general [Kubernetes logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/).
 
@@ -107,9 +107,9 @@ Moreover, users can set the `terminationMessagePolicy` field of a Container fo
 
 ## What's next[](https://kubernetes.io/docs/tasks/debug/debug-application/determine-reason-pod-failure/#what-s-next)
 
-- See the `terminationMessagePath` field in [Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#container-v1-core).
-- See [ImagePullBackOff](https://kubernetes.io/docs/concepts/containers/images/#imagepullbackoff) in [Images](https://kubernetes.io/docs/concepts/containers/images/).
+- See the `terminationMessagePath` field in [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#container-v1-core).
+- See [](https://kubernetes.io/docs/concepts/containers/images/#imagepullbackoff) in [Images](https://kubernetes.io/docs/concepts/containers/images/).
 - Learn about [retrieving logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/).
 - Learn about [Go templates](https://pkg.go.dev/text/template).
-- Learn about [Pod status](https://kubernetes.io/docs/tasks/debug/debug-application/debug-init-containers/#understanding-pod-status) and [Pod phase](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase).
-- Learn about [container states](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- Learn about [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-init-containers/#understanding-pod-status) and [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase).
+- Learn about [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).

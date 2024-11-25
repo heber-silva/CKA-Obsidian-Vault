@@ -1,20 +1,20 @@
 FEATURE STATE: `Kubernetes v1.14 [stable]`
 
-[Pod](Pod.md)s can have _priority_. Priority indicates the importance of a Pod relative to other Pods. If a Pod cannot be scheduled, the scheduler tries to preempt (evict) lower priority Pods to make [Scheduling](scheduling.md) of the pending Pod possible.
+[Pod](../Workloads/Pod.md)s can have _priority_. Priority indicates the importance of a Pod relative to other Pods. If a Pod cannot be scheduled, the scheduler tries to preempt (evict) lower priority Pods to make [Scheduling](Scheduling.md) of the pending Pod possible.
 
 #### Warning:
 
 In a cluster where not all users are trusted, a malicious user could create Pods at the highest possible priorities, causing other Pods to be evicted/not get scheduled. An administrator can use ResourceQuota to prevent users from creating pods at high priorities.
 
-See [limit Priority Class consumption by default](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default) for details.
+See [](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default) for details.
 
 ## How to use priority and preemption[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#how-to-use-priority-and-preemption)
 
 To use priority and preemption:
 
-1. Add one or more [PriorityClasses](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass).
+1. Add one or more [](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass).
     
-2. Create Pods with[`priorityClassName`](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) set to one of the added PriorityClasses. Of course you do not need to create the Pods directly; normally you would add `priorityClassName` to the Pod template of a collection object like a Deployment.
+2. Create Pods with[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) set to one of the added PriorityClasses. Of course you do not need to create the Pods directly; normally you would add `priorityClassName` to the Pod template of a collection object like a Deployment.
     
 
 Keep reading for more information about these steps.
@@ -25,7 +25,7 @@ Kubernetes already ships with two PriorityClasses: `system-cluster-critical` a
 
 ## PriorityClass[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
 
-A PriorityClass is a non-namespaced object that defines a mapping from a priority class name to the integer value of the priority. The name is specified in the `name` field of the PriorityClass object's metadata. The value is specified in the required `value` field. The higher the value, the higher the priority. The name of a PriorityClass object must be a valid [DNS subdomain name](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names), and it cannot be prefixed with `system-`.
+A PriorityClass is a non-namespaced object that defines a mapping from a priority class name to the integer value of the priority. The name is specified in the `name` field of the PriorityClass object's metadata. The value is specified in the required `value` field. The higher the value, the higher the priority. The name of a PriorityClass object must be a valid [](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names), and it cannot be prefixed with `system-`.
 
 A PriorityClass object can have any 32-bit integer value smaller than or equal to 1 billion. This means that the range of values for a PriorityClass object is from -2147483648 to 1000000000 inclusive. Larger numbers are reserved for built-in PriorityClasses that represent critical system Pods. A cluster admin should create one PriorityClass object for each such mapping that they want.
 
@@ -118,7 +118,7 @@ Please note that Pod P is not necessarily scheduled to the "nominated Node". The
 
 #### Graceful termination of preemption victims[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#graceful-termination-of-preemption-victims)
 
-When Pods are preempted, the victims get their [graceful termination period](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination). They have that much time to finish their work and exit. If they don't, they are killed. This graceful termination period creates a time gap between the point that the scheduler preempts Pods and the time when the pending Pod (P) can be scheduled on the Node (N). In the meantime, the scheduler keeps scheduling other pending Pods. As victims exit or get terminated, the scheduler tries to schedule Pods in the pending queue. Therefore, there is usually a time gap between the point that scheduler preempts victims and the time that Pod P is scheduled. In order to minimize this gap, one can set graceful termination period of lower priority Pods to zero or a small number.
+When Pods are preempted, the victims get their [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination). They have that much time to finish their work and exit. If they don't, they are killed. This graceful termination period creates a time gap between the point that the scheduler preempts Pods and the time when the pending Pod (P) can be scheduled on the Node (N). In the meantime, the scheduler keeps scheduling other pending Pods. As victims exit or get terminated, the scheduler tries to schedule Pods in the pending queue. Therefore, there is usually a time gap between the point that scheduler preempts victims and the time that Pod P is scheduled. In order to minimize this gap, one can set graceful termination period of lower priority Pods to zero or a small number.
 
 #### PodDisruptionBudget is supported, but not guaranteed[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#poddisruptionbudget-is-supported-but-not-guaranteed)
 
@@ -132,7 +132,7 @@ A Node is considered for preemption only when the answer to this question is yes
 
 Preemption does not necessarily remove all lower-priority Pods. If the pending Pod can be scheduled by removing fewer than all lower-priority Pods, then only a portion of the lower-priority Pods are removed. Even so, the answer to the preceding question must be yes. If the answer is no, the Node is not considered for preemption.
 
-If a pending Pod has inter-pod [affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to one or more of the lower-priority Pods on the Node, the inter-Pod affinity rule cannot be satisfied in the absence of those lower-priority Pods. In this case, the scheduler does not preempt any Pods on the Node. Instead, it looks for another Node. The scheduler might find a suitable Node or it might not. There is no guarantee that the pending Pod can be scheduled.
+If a pending Pod has inter-pod [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to one or more of the lower-priority Pods on the Node, the inter-Pod affinity rule cannot be satisfied in the absence of those lower-priority Pods. In this case, the scheduler does not preempt any Pods on the Node. Instead, it looks for another Node. The scheduler might find a suitable Node or it might not. There is no guarantee that the pending Pod can be scheduled.
 
 Our recommended solution for this problem is to create inter-Pod affinity only towards equal or higher priority Pods.
 
@@ -188,13 +188,13 @@ The kubelet uses Priority to determine pod order for [node-pressure eviction](h
 2. Pod Priority
 3. Amount of resource usage relative to requests
 
-See [Pod selection for kubelet eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#pod-selection-for-kubelet-eviction) for more details.
+See [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#pod-selection-for-kubelet-eviction) for more details.
 
 kubelet node-pressure eviction does not evict Pods when their usage does not exceed their requests. If a Pod with lower priority is not exceeding its requests, it won't be evicted. Another Pod with higher priority that exceeds its requests may be evicted.
 
 ## What's next[](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#what-s-next)
 
-- Read about using ResourceQuotas in connection with PriorityClasses: [limit Priority Class consumption by default](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
+- Read about using ResourceQuotas in connection with PriorityClasses: [](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default)
 - Learn about [Pod Disruption](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 - Learn about [API-initiated Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/api-eviction/)
 - Learn about [Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/)

@@ -2,11 +2,11 @@ The [EndpointSlice](https://kubernetes.io/docs/concepts/services-networking/endp
 
 FEATURE STATE: `Kubernetes v1.21 [stable]`
 
-Kubernetes' _EndpointSlice_ API provides a way to track network endpoints within a Kubernetes cluster. EndpointSlices offer a more scalable and extensible alternative to [Endpoints](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints).
+Kubernetes' _EndpointSlice_ API provides a way to track network endpoints within a Kubernetes cluster. EndpointSlices offer a more scalable and extensible alternative to [](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints).
 
 ## EndpointSlice API[](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/#endpointslice-resource)
 
-In Kubernetes, an EndpointSlice contains references to a set of network endpoints. The control plane automatically creates EndpointSlices for any Kubernetes Service that has a [selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) specified. These EndpointSlices include references to all the Pods that match the Service selector. EndpointSlices group network endpoints together by unique combinations of protocol, port number, and Service name. The name of a EndpointSlice object must be a valid [DNS subdomain name](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
+In Kubernetes, an EndpointSlice contains references to a set of network endpoints. The control plane automatically creates EndpointSlices for any Kubernetes Service that has a [selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) specified. These EndpointSlices include references to all the Pods that match the Service selector. EndpointSlices group network endpoints together by unique combinations of protocol, port number, and Service name. The name of a EndpointSlice object must be a valid [](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
 
 As an example, here's a sample EndpointSlice object, that's owned by the `example` Kubernetes Service.
 

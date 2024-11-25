@@ -297,12 +297,12 @@ This is an incomplete list of things that could go wrong, and how to adjust your
 
 ## What's next[](https://kubernetes.io/docs/tasks/debug/debug-cluster/#what-s-next)
 
-- Learn about the metrics available in the [Resource metrics pipeline](Resource%20Metrics%20Pipeline.md)
+- Learn about the metrics available in the [Resource metrics pipeline](Resource%20metrics%20pipeline.md)
 - Discover additional [Tools for Monitoring Resource](Tools%20for%20Monitoring%20Resource.md) usage
-- Use Node Problem Detector to [Monitor Node Health](monitor%20node%20health.md)
+- Use Node Problem Detector to [Monitor Node Health](Monitor%20Node%20Health.md)
 - [Debugging Kubernetes Nodes With Kubectl](Debugging%20Kubernetes%20Nodes%20With%20Kubectl.md)
 - [Debugging Kubernetes nodes with crictl](Debugging%20Kubernetes%20nodes%20with%20crictl.md)
-- Get more information about Kubernetes [Auditing](auditing.md)
+- Get more information about Kubernetes [Auditing](Auditing.md)
 - Use `telepresence` to [develop and debug services locally](https://kubernetes.io/docs/tasks/debug/debug-cluster/local-debugging/)
 - [System Logs](System%20Logs.md)
 - [Metrics For Kubernetes System Components](Metrics%20For%20Kubernetes%20System%20Components.md)

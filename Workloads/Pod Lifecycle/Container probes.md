@@ -1,4 +1,4 @@
-A _probe_ is a diagnostic performed periodically by the [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) on a [Container](Container.md). To perform a diagnostic, the kubelet either executes code within the container, or makes a network request.
+A _probe_ is a diagnostic performed periodically by the [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) on a [Container](../../Container/Container.md). To perform a diagnostic, the kubelet either executes code within the container, or makes a network request.
 
 ### Check mechanisms[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#probe-check-methods)
 
@@ -41,12 +41,12 @@ The container failed the diagnostic.
 The diagnostic failed (no action should be taken, and the kubelet will make further checks).
 
 ### Types of probe[](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe)
-[Liveness, Readiness, and Startup Probes](Liveness,%20Readiness,%20and%20Startup%20Probes.md)
+[Liveness, Readiness, and Startup Probes](../../Pod%20Configuration/Liveness,%20Readiness,%20and%20Startup%20Probes.md)
 The kubelet can optionally perform and react to three kinds of probes on running containers:
 
 `livenessProbe`
 
-Indicates whether the container is running. If the liveness probe fails, the kubelet kills the container, and the container is subjected to its [restart policy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy). If a container does not provide a liveness probe, the default state is `Success`.
+Indicates whether the container is running. If the liveness probe fails, the kubelet kills the container, and the container is subjected to its [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy). If a container does not provide a liveness probe, the default state is `Success`.
 
 `readinessProbe`
 
@@ -54,7 +54,7 @@ Indicates whether the container is ready to respond to requests. If the readines
 
 `startupProbe`
 
-Indicates whether the application within the container is started. All other probes are disabled if a startup probe is provided, until it succeeds. If the startup probe fails, the kubelet kills the container, and the container is subjected to its [restart policy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy). If a container does not provide a startup probe, the default state is `Success`.
+Indicates whether the application within the container is started. All other probes are disabled if a startup probe is provided, until it succeeds. If the startup probe fails, the kubelet kills the container, and the container is subjected to its [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy). If a container does not provide a startup probe, the default state is `Success`.
 
 For more information about how to set up a liveness, readiness, or startup probe, see [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
 
@@ -72,7 +72,7 @@ If you want your container to be able to take itself down for maintenance, you c
 
 If your app has a strict dependency on back-end services, you can implement both a liveness and a readiness probe. The liveness probe passes when the app itself is healthy, but the readiness probe additionally checks that each required back-end service is available. This helps you avoid directing traffic to Pods that can only respond with error messages.
 
-If your container needs to work on loading large data, configuration files, or migrations during startup, you can use a [startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe). However, if you want to detect the difference between an app that has failed and an app that is still processing its startup data, you might prefer a readiness probe.
+If your container needs to work on loading large data, configuration files, or migrations during startup, you can use a [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe). However, if you want to detect the difference between an app that has failed and an app that is still processing its startup data, you might prefer a readiness probe.
 
 #### Note:
 

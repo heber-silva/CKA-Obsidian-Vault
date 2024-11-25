@@ -1,8 +1,8 @@
 FEATURE STATE: `Kubernetes v1.24 [stable]`
 
-When you run a [Pod](Pod.md) on a [Node](Node.md), the Pod itself takes an amount of system resources. These resources are additional to the resources needed to run the [Container](Container.md)(s) inside the Pod. In Kubernetes, _Pod Overhead_ is a way to account for the resources consumed by the Pod infrastructure on top of the container requests & limits.
+When you run a [Pod](../Workloads/Pod.md) on a [Node](../Kubernetes%20Achitecture/Node.md), the Pod itself takes an amount of system resources. These resources are additional to the resources needed to run the [Container](../Container/Container.md)(s) inside the Pod. In Kubernetes, _Pod Overhead_ is a way to account for the resources consumed by the Pod infrastructure on top of the container requests & limits.
 
-In Kubernetes, the Pod's overhead is set at [admission](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) time according to the overhead associated with the Pod's [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/).
+In Kubernetes, the Pod's overhead is set at [](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks) time according to the overhead associated with the Pod's [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/).
 
 A pod's overhead is considered in addition to the sum of container resource requests when scheduling a Pod. Similarly, the kubelet will include the Pod overhead when sizing the Pod cgroup, and when carrying out Pod eviction ranking.
 
@@ -78,7 +78,7 @@ If a [ResourceQuota](https://kubernetes.io/docs/concepts/policy/resource-quotas
 
 When the kube-scheduler is deciding which node should run a new Pod, the scheduler considers that Pod's `overhead` as well as the sum of container requests for that Pod. For this example, the scheduler adds the requests and the overhead, then looks for a node that has 2.25 CPU and 320 MiB of memory available.
 
-Once a Pod is scheduled to a node, the kubelet on that node creates a new [cgroup](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) for the Pod. It is within this pod that the underlying container runtime will create containers.
+Once a Pod is scheduled to a node, the kubelet on that node creates a new [](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) for the Pod. It is within this pod that the underlying container runtime will create containers.
 
 If the resource has a limit defined for each container (Guaranteed QoS or Burstable QoS with limits defined), the kubelet will set an upper limit for the pod cgroup associated with that resource (cpu.cfs_quota_us for CPU and memory.limit_in_bytes memory). This upper limit is based on the sum of the container limits plus the `overhead` defined in the PodSpec.
 

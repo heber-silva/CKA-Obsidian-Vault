@@ -8,21 +8,21 @@ The _split image filesystem_ feature, which enables support for the `containe
 
 The [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) monitors resources like memory, disk space, and filesystem inodes on your cluster's nodes. When one or more of these resources reach specific consumption levels, the kubelet can proactively fail one or more pods on the node to reclaim resources and prevent starvation.
 
-During a node-pressure eviction, the kubelet sets the [phase](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) for the selected pods to `Failed`, and terminates the Pod.
+During a node-pressure eviction, the kubelet sets the [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) for the selected pods to `Failed`, and terminates the Pod.
 
 Node-pressure eviction is not the same as [API-initiated eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/api-eviction/).
 
-The kubelet does not respect your configured [PodDisruptionBudget](https://kubernetes.io/docs/reference/glossary/?all=true#term-pod-disruption-budget) or the pod's `terminationGracePeriodSeconds`. If you use [soft eviction thresholds](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds), the kubelet respects your configured `eviction-max-pod-grace-period`. If you use [hard eviction thresholds](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds), the kubelet uses a `0s` grace period (immediate shutdown) for termination.
+The kubelet does not respect your configured [](https://kubernetes.io/docs/reference/glossary/?all=true#term-pod-disruption-budget) or the pod's `terminationGracePeriodSeconds`. If you use [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds), the kubelet respects your configured `eviction-max-pod-grace-period`. If you use [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds), the kubelet uses a `0s` grace period (immediate shutdown) for termination.
 
 ## Self healing behavior[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#self-healing-behavior)
 
-The kubelet attempts to [reclaim node-level resources](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#reclaim-node-resources) before it terminates end-user pods. For example, it removes unused container images when disk resources are starved.
+The kubelet attempts to [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#reclaim-node-resources) before it terminates end-user pods. For example, it removes unused container images when disk resources are starved.
 
 If the pods are managed by a [workload](https://kubernetes.io/docs/concepts/workloads/) management object (such as [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) or [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)) that replaces failed pods, the control plane (`kube-controller-manager`) creates new pods in place of the evicted pods.
 
 ### Self healing for static pods[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#self-healing-for-static-pods)
 
-If you are running a [static pod](https://kubernetes.io/docs/concepts/workloads/pods/#static-pods) on a node that is under resource pressure, the kubelet may evict that static Pod. The kubelet then tries to create a replacement, because static Pods always represent an intent to run a Pod on that node.
+If you are running a [](https://kubernetes.io/docs/concepts/workloads/pods/#static-pods) on a node that is under resource pressure, the kubelet may evict that static Pod. The kubelet then tries to create a replacement, because static Pods always represent an intent to run a Pod on that node.
 
 The kubelet takes the _priority_ of the static pod into account when creating a replacement. If the static pod manifest specifies a low priority, and there are higher-priority Pods defined within the cluster's control plane, and the node is under resource pressure, the kubelet may not be able to make room for that static pod. The kubelet continues to attempt to run all static pods even when there is resource pressure on a node.
 
@@ -55,9 +55,9 @@ In this table, the **Description** column shows how kubelet gets the value of 
 
 #### Memory signals[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#memory-signals)
 
-On Linux nodes, the value for `memory.available` is derived from the cgroupfs instead of tools like `free -m`. This is important because `free -m` does not work in a container, and if users use the [node allocatable](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) feature, out of resource decisions are made local to the end user Pod part of the cgroup hierarchy as well as the root node. This [script](https://kubernetes.io/examples/admin/resource/memory-available.sh) or [cgroupv2 script](https://kubernetes.io/examples/admin/resource/memory-available-cgroupv2.sh) reproduces the same set of steps that the kubelet performs to calculate `memory.available`. The kubelet excludes inactive_file (the number of bytes of file-backed memory on the inactive LRU list) from its calculation, as it assumes that memory is reclaimable under pressure.
+On Linux nodes, the value for `memory.available` is derived from the cgroupfs instead of tools like `free -m`. This is important because `free -m` does not work in a container, and if users use the [](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) feature, out of resource decisions are made local to the end user Pod part of the cgroup hierarchy as well as the root node. This [script](https://kubernetes.io/examples/admin/resource/memory-available.sh) or [cgroupv2 script](https://kubernetes.io/examples/admin/resource/memory-available-cgroupv2.sh) reproduces the same set of steps that the kubelet performs to calculate `memory.available`. The kubelet excludes inactive_file (the number of bytes of file-backed memory on the inactive LRU list) from its calculation, as it assumes that memory is reclaimable under pressure.
 
-On Windows nodes, the value for `memory.available` is derived from the node's global memory commit levels (queried through the [`GetPerformanceInfo()`](https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getperformanceinfo) system call) by subtracting the node's global [`CommitTotal`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information) from the node's [`CommitLimit`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information). Please note that `CommitLimit` can change if the node's page-file size changes!
+On Windows nodes, the value for `memory.available` is derived from the node's global memory commit levels (queried through the [`GetPerformanceInfo()`]()`) system call) by subtracting the node's global [`CommitTotal`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information) from the node's [`CommitLimit`](https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-performance_information). Please note that `CommitLimit` can change if the node's page-file size changes!
 
 #### Filesystem signals[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#filesystem-signals)
 
@@ -95,12 +95,12 @@ Some kubelet garbage collection features are deprecated in favor of eviction:
 
 ### Eviction thresholds[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-thresholds)
 
-You can specify custom eviction thresholds for the kubelet to use when it makes eviction decisions. You can configure [soft](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds) and [hard](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds) eviction thresholds.
+You can specify custom eviction thresholds for the kubelet to use when it makes eviction decisions. You can configure [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds) and [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds) eviction thresholds.
 
 Eviction thresholds have the form `[eviction-signal][operator][quantity]`, where:
 
-- `eviction-signal` is the [eviction signal](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals) to use.
-- `operator` is the [relational operator](https://en.wikipedia.org/wiki/Relational_operator#Standard_relational_operators) you want, such as `<` (less than).
+- `eviction-signal` is the [](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals) to use.
+- `operator` is the [](https://en.wikipedia.org/wiki/Relational_operator#Standard_relational_operators) you want, such as `<` (less than).
 - `quantity` is the eviction threshold amount, such as `1Gi`. The value of `quantity` must match the quantity representation used by Kubernetes. You can use either literal values or percentages (`%`).
 
 For example, if a node has 10GiB of total memory and you want trigger eviction if the available memory falls below 1GiB, you can define the eviction threshold as either `memory.available<10%` or `memory.available<1Gi` (you cannot use both).
@@ -149,7 +149,7 @@ The kubelet evaluates eviction thresholds based on its configured `housekeeping
 
 ## Node conditions[](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#node-conditions)
 
-The kubelet reports [node conditions](https://kubernetes.io/docs/concepts/architecture/nodes/#condition) to reflect that the node is under pressure because hard or soft eviction threshold is met, independent of configured grace periods.
+The kubelet reports [](https://kubernetes.io/docs/concepts/architecture/nodes/#condition) to reflect that the node is under pressure because hard or soft eviction threshold is met, independent of configured grace periods.
 
 The kubelet maps eviction signals to node conditions as follows:
 
@@ -159,7 +159,7 @@ The kubelet maps eviction signals to node conditions as follows:
 |`DiskPressure`|`nodefs.available`, `nodefs.inodesFree`, `imagefs.available`, `imagefs.inodesFree`, `containerfs.available`, or `containerfs.inodesFree`|Available disk space and inodes on either the node's root filesystem, image filesystem, or container filesystem has satisfied an eviction threshold|
 |`PIDPressure`|`pid.available`|Available processes identifiers on the (Linux) node has fallen below an eviction threshold|
 
-The control plane also [maps](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition) these node conditions to taints.
+The control plane also [](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition) these node conditions to taints.
 
 The kubelet updates the node conditions based on the configured `--node-status-update-frequency`, which defaults to `10s`.
 
@@ -223,7 +223,7 @@ The kubelet does not use the pod's [QoS class](https://kubernetes.io/docs/conce
 
 `Guaranteed` pods are guaranteed only when requests and limits are specified for all the containers and they are equal. These pods will never be evicted because of another pod's resource consumption. If a system daemon (such as `kubelet` and `journald`) is consuming more resources than were reserved via `system-reserved` or `kube-reserved` allocations, and the node only has `Guaranteed` or `Burstable` pods using less resources than requests left on it, then the kubelet must choose to evict one of these pods to preserve node stability and to limit the impact of resource starvation on other pods. In this case, it will choose to evict pods of lowest Priority first.
 
-If you are running a [static pod](https://kubernetes.io/docs/concepts/workloads/pods/#static-pods) and want to avoid having it evicted under resource pressure, set the `priority` field for that Pod directly. Static pods do not support the `priorityClassName` field.
+If you are running a [](https://kubernetes.io/docs/concepts/workloads/pods/#static-pods) and want to avoid having it evicted under resource pressure, set the `priority` field for that Pod directly. Static pods do not support the `priorityClassName` field.
 
 When the kubelet evicts pods in response to inode or process ID starvation, it uses the Pods' relative priority to determine the eviction order, because inodes and PIDs have no requests.
 
@@ -292,7 +292,7 @@ The kubelet sets an `oom_score_adj` value for each container based on the QoS 
 
 #### Note:
 
-The kubelet also sets an `oom_score_adj` value of `-997` for any containers in Pods that have `system-node-critical` [Priority](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority).
+The kubelet also sets an `oom_score_adj` value of `-997` for any containers in Pods that have `system-node-critical` [](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority).
 
 If the kubelet can't reclaim memory before a node experiences OOM, the `oom_killer` calculates an `oom_score` based on the percentage of memory it's using on the node, and then adds the `oom_score_adj` to get an effective `oom_score` for each container. It then kills the container with the highest score.
 
@@ -355,4 +355,4 @@ You can work around that behavior by setting the memory limit and memory request
 - Learn about [Pod Priority and Preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
 - Learn about [PodDisruptionBudgets](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
 - Learn about [Quality of Service](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/) (QoS)
-- Check out the [Eviction API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#create-eviction-pod-v1-core)
+- Check out the [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#create-eviction-pod-v1-core)

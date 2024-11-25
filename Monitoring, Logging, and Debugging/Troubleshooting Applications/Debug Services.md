@@ -292,7 +292,7 @@ Name:      kubernetes.default
 Address 1: 10.0.0.1 kubernetes.default.svc.cluster.local
 ```
 
-If this fails, please see the [kube-proxy](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/#is-the-kube-proxy-working) section of this document, or even go back to the top of this document and start over, but instead of debugging your own Service, debug the DNS Service.
+If this fails, please see the [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/#is-the-kube-proxy-working) section of this document, or even go back to the top of this document and start over, but instead of debugging your own Service, debug the DNS Service.
 
 ## Does the Service work by IP?[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/#does-the-service-work-by-ip)
 

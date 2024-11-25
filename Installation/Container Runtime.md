@@ -2,20 +2,20 @@
 
 You need to install a [container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes) into each node in the cluster so that Pods can run there. This page outlines what is involved and describes related tasks for setting up nodes.
 
-Kubernetes 1.31 requires that you use a runtime that conforms with the [Container Runtime Interface](https://kubernetes.io/docs/concepts/architecture/#container-runtime) (CRI).
+Kubernetes 1.31 requires that you use a runtime that conforms with the [](https://kubernetes.io/docs/concepts/architecture/#container-runtime) (CRI).
 
-See [CRI version support](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-versions) for more information.
+See [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-versions) for more information.
 
 This page provides an outline of how to use several common container runtimes with Kubernetes.
 
-- [containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd)
-- [CRI-O](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o)
-- [Docker Engine](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker)
-- [Mirantis Container Runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#mcr)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#mcr)
 
 #### Note:
 
-Kubernetes releases before v1.24 included a direct integration with Docker Engine, using a component named _dockershim_. That special direct integration is no longer part of Kubernetes (this removal was [announced](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#dockershim-deprecation) as part of the v1.20 release). You can read [Check whether Dockershim removal affects you](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-removal-affects-you/) to understand how this removal might affect you. To learn about migrating from using dockershim, see [Migrating from dockershim](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/).
+Kubernetes releases before v1.24 included a direct integration with Docker Engine, using a component named _dockershim_. That special direct integration is no longer part of Kubernetes (this removal was [](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#dockershim-deprecation) as part of the v1.20 release). You can read [Check whether Dockershim removal affects you](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-removal-affects-you/) to understand how this removal might affect you. To learn about migrating from using dockershim, see [Migrating from dockershim](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/).
 
 If you are running a version of Kubernetes other than v1.31, check the documentation for that version.
 
@@ -47,14 +47,14 @@ sysctl net.ipv4.ip_forward
 
 ## cgroup drivers[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-drivers)
 
-On Linux, [control groups](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) are used to constrain resources that are allocated to processes.
+On Linux, [](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) are used to constrain resources that are allocated to processes.
 
 Both the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) and the underlying container runtime need to interface with control groups to enforce [resource management for pods and containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) and set resources such as cpu/memory requests and limits. To interface with control groups, the kubelet and the container runtime need to use a _cgroup driver_. It's critical that the kubelet and the container runtime use the same cgroup driver and are configured the same.
 
 There are two cgroup drivers available:
 
-- [`cgroupfs`](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroupfs-cgroup-driver)
-- [`systemd`](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroupfs-cgroup-driver)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver)
 
 ### cgroupfs driver[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroupfs-cgroup-driver)
 
@@ -87,8 +87,8 @@ Starting with v1.22 and later, when creating a cluster with kubeadm, if the user
 
 If you configure `systemd` as the cgroup driver for the kubelet, you must also configure `systemd` as the cgroup driver for the container runtime. Refer to the documentation for your container runtime for instructions. For example:
 
-- [containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
-- [CRI-O](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o)
 
 In Kubernetes 1.31, with the `KubeletCgroupDriverFromCRI` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) enabled and a container runtime that supports the `RuntimeConfig` CRI RPC, the kubelet automatically detects the appropriate cgroup driver from the runtime, and ignores the `cgroupDriver` setting within the kubelet configuration.
 
@@ -106,11 +106,11 @@ If you wish to migrate to the `systemd` cgroup driver in existing kubeadm mana
 
 Your container runtime must support at least v1alpha2 of the container runtime interface.
 
-Kubernetes [starting v1.26](https://kubernetes.io/blog/2022/11/18/upcoming-changes-in-kubernetes-1-26/#cri-api-removal) _only works_ with v1 of the CRI API. Earlier versions default to v1 version, however if a container runtime does not support the v1 API, the kubelet falls back to using the (deprecated) v1alpha2 API instead.
+Kubernetes [](https://kubernetes.io/blog/2022/11/18/upcoming-changes-in-kubernetes-1-26/#cri-api-removal) _only works_ with v1 of the CRI API. Earlier versions default to v1 version, however if a container runtime does not support the v1 API, the kubelet falls back to using the (deprecated) v1alpha2 API instead.
 
 ## Container runtimes[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#container-runtimes)
 
-**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [More information.](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#third-party-content-disclaimer)
+**Note:** This section links to third party projects that provide functionality required by Kubernetes. The Kubernetes project authors aren't responsible for these projects, which are listed alphabetically. To add a project to this list, read the [](https://kubernetes.io/docs/contribute/style/content-guide/#third-party-content) before submitting a change. [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#third-party-content-disclaimer)
 
 ### containerd[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd)
 
@@ -118,8 +118,8 @@ This section outlines the necessary steps to use containerd as CRI runtime.
 
 To install containerd on your system, follow the instructions on [getting started with containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md). Return to this step once you've created a valid `config.toml` configuration file.
 
-- [Linux](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#finding-your-config-toml-file-0)
-- [Windows](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#finding-your-config-toml-file-1)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#finding-your-config-toml-file-0)
+- [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#finding-your-config-toml-file-1)
 
 You can find this file under the path `/etc/containerd/config.toml`.
 
@@ -144,7 +144,7 @@ If you installed containerd from a package (for example, RPM or `.deb`), you ma
 
 You need CRI support enabled to use containerd with Kubernetes. Make sure that `cri` is not included in the`disabled_plugins` list within `/etc/containerd/config.toml`; if you made changes to that file, also restart `containerd`.
 
-If you experience container crash loops after the initial cluster installation or after installing a CNI, the containerd configuration provided with the package might contain incompatible configuration parameters. Consider resetting the containerd configuration with `containerd config default > /etc/containerd/config.toml` as specified in [getting-started.md](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#advanced-topics) and then set the configuration parameters specified above accordingly.
+If you experience container crash loops after the initial cluster installation or after installing a CNI, the containerd configuration provided with the package might contain incompatible configuration parameters. Consider resetting the containerd configuration with `containerd config default > /etc/containerd/config.toml` as specified in [](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#advanced-topics) and then set the configuration parameters specified above accordingly.
 
 If you apply this change, make sure to restart containerd:
 
@@ -152,9 +152,9 @@ If you apply this change, make sure to restart containerd:
 sudo systemctl restart containerd
 ```
 
-When using kubeadm, manually configure the [cgroup driver for kubelet](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/#configuring-the-kubelet-cgroup-driver).
+When using kubeadm, manually configure the [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/#configuring-the-kubelet-cgroup-driver).
 
-In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [systemd cgroup driver](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
+In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
 
 #### Overriding the sandbox (pause) image[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#override-pause-image-containerd)
 
@@ -171,7 +171,7 @@ You might need to restart `containerd` as well once you've updated the config 
 
 This section contains the necessary steps to install CRI-O as a container runtime.
 
-To install CRI-O, follow [CRI-O Install Instructions](https://github.com/cri-o/packaging/blob/main/README.md#usage).
+To install CRI-O, follow [](https://github.com/cri-o/packaging/blob/main/README.md#usage).
 
 #### cgroup driver[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-driver)
 
@@ -185,7 +185,7 @@ cgroup_manager = "cgroupfs"
 
 You should also note the changed `conmon_cgroup`, which has to be set to the value `pod` when using CRI-O with `cgroupfs`. It is generally necessary to keep the cgroup driver configuration of the kubelet (usually done via kubeadm) and CRI-O in sync.
 
-In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [systemd cgroup driver](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
+In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
 
 For CRI-O, the CRI socket is `/var/run/crio/crio.sock` by default.
 
@@ -206,7 +206,7 @@ This config option supports live configuration reload to apply this change: `sy
 
 These instructions assume that you are using the [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/) adapter to integrate Docker Engine with Kubernetes.
 
-1. On each of your nodes, install Docker for your Linux distribution as per [Install Docker Engine](https://docs.docker.com/engine/install/#server).
+1. On each of your nodes, install Docker for your Linux distribution as per [](https://docs.docker.com/engine/install/#server).
     
 2. Install [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/usage/install), following the directions in the install section of the documentation.
     
@@ -229,4 +229,4 @@ The `cri-dockerd` adapter accepts a command line argument for specifying which
 
 ## What's next[](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#what-s-next)
 
-As well as a container runtime, your cluster will need a working [network plugin](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model).
+As well as a container runtime, your cluster will need a working [](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model).

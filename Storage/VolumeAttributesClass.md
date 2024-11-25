@@ -14,4 +14,4 @@ You will also have to enable the `storage.k8s.io/v1beta1` API group through th
 --runtime-config=storage.k8s.io/v1beta1=true
 ```
 
-You can also only use VolumeAttributesClasses with storage backed by [Container Storage Interface](https://kubernetes.io/docs/concepts/storage/volumes/#csi), and only where the relevant CSI driver implements the `ModifyVolume` API.****
+You can also only use VolumeAttributesClasses with storage backed by [](https://kubernetes.io/docs/concepts/storage/volumes/#csi), and only where the relevant CSI driver implements the `ModifyVolume` API.****

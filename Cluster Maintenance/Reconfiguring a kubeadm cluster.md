@@ -209,7 +209,7 @@ kubectl patch no <node-name> --patch-file <patch-file>
 
 #### Persisting control plane component reconfiguration[](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-reconfigure/#persisting-control-plane-component-reconfiguration)
 
-The main source of control plane configuration is the `ClusterConfiguration` object stored in the cluster. To extend the static Pod manifests configuration, [patches](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches) can be used.
+The main source of control plane configuration is the `ClusterConfiguration` object stored in the cluster. To extend the static Pod manifests configuration, [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches) can be used.
 
 These patch files must remain as files on the control plane nodes to ensure that they can be used by the `kubeadm upgrade ... --patches <directory>`.
 

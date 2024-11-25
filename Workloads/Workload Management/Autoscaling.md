@@ -1,4 +1,4 @@
-With autoscaling, you can automatically update your workloads ([Pod](Pod.md)s) in one way or another. This allows your cluster to react to changes in resource demand more elastically and efficiently.
+With autoscaling, you can automatically update your workloads ([Pod](../Pod.md)s) in one way or another. This allows your cluster to react to changes in resource demand more elastically and efficiently.
 
 In Kubernetes, you can _scale_ a workload depending on the current demand of resources. This allows your cluster to react to changes in resource demand more elastically and efficiently.
 
@@ -27,7 +27,7 @@ The concept of _Autoscaling_ in Kubernetes refers to the ability to automatica
 
 In Kubernetes, you can automatically scale a workload horizontally using a _HorizontalPodAutoscaler_ (HPA).
 
-It is implemented as a Kubernetes API resource and a [controller](https://kubernetes.io/docs/concepts/architecture/controller/) and periodically adjusts the number of [replicas](https://kubernetes.io/docs/reference/glossary/?all=true#term-replica) in a workload to match observed resource utilization such as CPU or memory usage.
+It is implemented as a Kubernetes API resource and a [controller](https://kubernetes.io/docs/concepts/architecture/controller/) and periodically adjusts the number of [](https://kubernetes.io/docs/reference/glossary/?all=true#term-replica) in a workload to match observed resource utilization such as CPU or memory usage.
 
 There is a [walkthrough tutorial](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) of configuring a HorizontalPodAutoscaler for a Deployment.
 
@@ -72,7 +72,7 @@ While the Cluster Proportional Autoscaler scales the number of replicas of a wor
 
 ### Event driven Autoscaling[](https://kubernetes.io/docs/concepts/workloads/autoscaling/#event-driven-autoscaling)
 
-It is also possible to scale workloads based on events, for example using the [_Kubernetes Event Driven Autoscaler_ (**KEDA**)](https://keda.sh/).
+It is also possible to scale workloads based on events, for example using the [_Kubernetes Event Driven Autoscaler_ (**KEDA**)](**KEDA**)).
 
 KEDA is a CNCF graduated enabling you to scale your workloads based on the number of events to be processed, for example the amount of messages in a queue. There exists a wide range of adapters for different event sources to choose from.
 

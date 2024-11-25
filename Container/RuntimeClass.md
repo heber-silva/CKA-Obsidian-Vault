@@ -19,13 +19,13 @@ You can also use RuntimeClass to run different Pods with the same container runt
 
 ### 1. Configure the CRI implementation on nodes[](https://kubernetes.io/docs/concepts/containers/runtime-class/#1-configure-the-cri-implementation-on-nodes)
 
-The configurations available through RuntimeClass are Container Runtime Interface (CRI) implementation dependent. See the corresponding documentation ([below](https://kubernetes.io/docs/concepts/containers/runtime-class/#cri-configuration)) for your CRI implementation for how to configure.
+The configurations available through RuntimeClass are Container Runtime Interface (CRI) implementation dependent. See the corresponding documentation ([](https://kubernetes.io/docs/concepts/containers/runtime-class/#cri-configuration)) for your CRI implementation for how to configure.
 
 #### Note:
 
-RuntimeClass assumes a homogeneous node configuration across the cluster by default (which means that all nodes are configured the same way with respect to container runtimes). To support heterogeneous node configurations, see [Scheduling](https://kubernetes.io/docs/concepts/containers/runtime-class/#scheduling) below.
+RuntimeClass assumes a homogeneous node configuration across the cluster by default (which means that all nodes are configured the same way with respect to container runtimes). To support heterogeneous node configurations, see [](https://kubernetes.io/docs/concepts/containers/runtime-class/#scheduling) below.
 
-The configurations have a corresponding `handler` name, referenced by the RuntimeClass. The handler must be a valid [DNS label name](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names).
+The configurations have a corresponding `handler` name, referenced by the RuntimeClass. The handler must be a valid [](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names).
 
 ### 2. Create the corresponding RuntimeClass resources[](https://kubernetes.io/docs/concepts/containers/runtime-class/#2-create-the-corresponding-runtimeclass-resources)
 
@@ -45,7 +45,7 @@ metadata:
 handler: myconfiguration 
 ```
 
-The name of a RuntimeClass object must be a valid [DNS subdomain name](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
+The name of a RuntimeClass object must be a valid [](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
 
 #### Note:
 
@@ -65,7 +65,7 @@ spec:
   # ...
 ```
 
-This will instruct the kubelet to use the named RuntimeClass to run this pod. If the named RuntimeClass does not exist, or the CRI cannot run the corresponding handler, the pod will enter the `Failed` terminal [phase](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase). Look for a corresponding [event](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/) for an error message.
+This will instruct the kubelet to use the named RuntimeClass to run this pod. If the named RuntimeClass does not exist, or the CRI cannot run the corresponding handler, the pod will enter the `Failed` terminal [](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase). Look for a corresponding [event](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/) for an error message.
 
 If no `runtimeClassName` is specified, the default RuntimeHandler will be used, which is equivalent to the behavior when the RuntimeClass feature is disabled.
 
@@ -83,9 +83,9 @@ Runtime handlers are configured through containerd's configuration at `/etc/con
 
 See containerd's [config documentation](https://github.com/containerd/containerd/blob/main/docs/cri/config.md) for more details:
 
-#### [CRI-O](https://cri-o.io/#what-is-cri-o)[](https://kubernetes.io/docs/concepts/containers/runtime-class/#hahahugoshortcode1515s4hbhb)
+#### [](https://cri-o.io/#what-is-cri-o)[](https://kubernetes.io/docs/concepts/containers/runtime-class/#hahahugoshortcode1515s4hbhb)
 
-Runtime handlers are configured through CRI-O's configuration at `/etc/crio/crio.conf`. Valid handlers are configured under the [crio.runtime table](https://github.com/cri-o/cri-o/blob/master/docs/crio.conf.5.md#crioruntime-table):
+Runtime handlers are configured through CRI-O's configuration at `/etc/crio/crio.conf`. Valid handlers are configured under the [](https://github.com/cri-o/cri-o/blob/master/docs/crio.conf.5.md#crioruntime-table):
 
 ```
 [crio.runtime.runtimes.${HANDLER_NAME}]
@@ -117,6 +117,6 @@ Pod overhead is defined in RuntimeClass through the `overhead` field. Through 
 ## What's next[](https://kubernetes.io/docs/concepts/containers/runtime-class/#what-s-next)
 
 - [RuntimeClass Design](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/585-runtime-class/README.md)
-- [RuntimeClass Scheduling Design](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/585-runtime-class/README.md#runtimeclass-scheduling)
-- Read about the [Pod Overhead](Pod%20Overhead.md) concept
+- [](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/585-runtime-class/README.md#runtimeclass-scheduling)
+- Read about the [Pod Overhead](../Scheduling,%20Preemption%20and%20Eviction/Pod%20Overhead.md) concept
 - [PodOverhead Feature Design](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/688-pod-overhead)

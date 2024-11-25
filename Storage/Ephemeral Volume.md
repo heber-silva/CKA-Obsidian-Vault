@@ -10,13 +10,13 @@ Ephemeral volumes are specified _inline_ in the Pod spec, which simplifies app
 
 Kubernetes supports several different kinds of ephemeral volumes for different purposes:
 
-- [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir): empty at Pod startup, with storage coming locally from the kubelet base directory (usually the root disk) or RAM
-- [configMap](https://kubernetes.io/docs/concepts/storage/volumes/#configmap), [downwardAPI](https://kubernetes.io/docs/concepts/storage/volumes/#downwardapi), [secret](https://kubernetes.io/docs/concepts/storage/volumes/#secret): inject different kinds of Kubernetes data into a Pod
-- [image](https://kubernetes.io/docs/concepts/storage/volumes/#image): allows mounting container image files or artifacts, directly to a Pod.
-- [CSI ephemeral volumes](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes): similar to the previous volume kinds, but provided by special [CSI](https://kubernetes.io/docs/concepts/storage/volumes/#csi) drivers which specifically [support this feature](https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html)
-- [generic ephemeral volumes](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes), which can be provided by all storage drivers that also support persistent volumes
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir): empty at Pod startup, with storage coming locally from the kubelet base directory (usually the root disk) or RAM
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#configmap), [](https://kubernetes.io/docs/concepts/storage/volumes/#downwardapi), [](https://kubernetes.io/docs/concepts/storage/volumes/#secret): inject different kinds of Kubernetes data into a Pod
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#image): allows mounting container image files or artifacts, directly to a Pod.
+- [](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes): similar to the previous volume kinds, but provided by special [](https://kubernetes.io/docs/concepts/storage/volumes/#csi) drivers which specifically [support this feature](https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html)
+- [](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes), which can be provided by all storage drivers that also support persistent volumes
 
-`emptyDir`, `configMap`, `downwardAPI`, `secret` are provided as [local ephemeral storage](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-ephemeral-storage). They are managed by kubelet on each node.
+`emptyDir`, `configMap`, `downwardAPI`, `secret` are provided as [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-ephemeral-storage). They are managed by kubelet on each node.
 
 CSI ephemeral volumes _must_ be provided by third-party CSI storage drivers.
 

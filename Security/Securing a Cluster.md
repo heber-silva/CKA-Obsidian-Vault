@@ -30,7 +30,7 @@ Consult the [authentication reference document](https://kubernetes.io/docs/refe
 
 ### API Authorization[](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#api-authorization)
 
-Once authenticated, every API call is also expected to pass an authorization check. Kubernetes ships an integrated [Role-Based Access Control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) component that matches an incoming user or group to a set of permissions bundled into roles. These permissions combine verbs (get, create, delete) with resources (pods, services, nodes) and can be namespace-scoped or cluster-scoped. A set of out-of-the-box roles are provided that offer reasonable default separation of responsibility depending on what actions a client might want to perform. It is recommended that you use the [Node](https://kubernetes.io/docs/reference/access-authn-authz/node/) and [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) authorizers together, in combination with the [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) admission plugin.
+Once authenticated, every API call is also expected to pass an authorization check. Kubernetes ships an integrated [Role-Based Access Control (RBAC)](RBAC)) component that matches an incoming user or group to a set of permissions bundled into roles. These permissions combine verbs (get, create, delete) with resources (pods, services, nodes) and can be namespace-scoped or cluster-scoped. A set of out-of-the-box roles are provided that offer reasonable default separation of responsibility depending on what actions a client might want to perform. It is recommended that you use the [Node](https://kubernetes.io/docs/reference/access-authn-authz/node/) and [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) authorizers together, in combination with the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) admission plugin.
 
 As with authentication, simple and broad roles may be appropriate for smaller clusters, but as more users interact with the cluster, it may become necessary to separate teams into separate [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces) with more limited roles.
 
@@ -144,7 +144,7 @@ Kubernetes supports optional [encryption at rest](https://kubernetes.io/docs/ta
 
 ### Receiving alerts for security updates and reporting vulnerabilities[](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#receiving-alerts-for-security-updates-and-reporting-vulnerabilities)
 
-Join the [kubernetes-announce](https://groups.google.com/forum/#!forum/kubernetes-announce) group for emails about security announcements. See the [security reporting](https://kubernetes.io/docs/reference/issues-security/security/) page for more on how to report vulnerabilities.
+Join the [](https://groups.google.com/forum/#!forum/kubernetes-announce) group for emails about security announcements. See the [security reporting](https://kubernetes.io/docs/reference/issues-security/security/) page for more on how to report vulnerabilities.
 
 ## What's next[](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#what-s-next)
 

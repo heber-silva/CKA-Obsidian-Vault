@@ -1,7 +1,7 @@
 [Doc](https://kubernetes.io/docs/concepts/security/pod-security-policy/)
 #### Removed feature
 
-PodSecurityPolicy was [deprecated](https://kubernetes.io/blog/2021/04/08/kubernetes-1-21-release-announcement/#podsecuritypolicy-deprecation) in Kubernetes v1.21, and removed from Kubernetes in v1.25.
+PodSecurityPolicy was [](https://kubernetes.io/blog/2021/04/08/kubernetes-1-21-release-announcement/#podsecuritypolicy-deprecation) in Kubernetes v1.21, and removed from Kubernetes in v1.25.
 
 Instead of using PodSecurityPolicy, you can enforce similar restrictions on Pods using either or both:
 

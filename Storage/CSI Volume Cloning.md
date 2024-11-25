@@ -1,4 +1,4 @@
-The [CSI](https://kubernetes.io/docs/concepts/storage/volumes/#csi) [Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/) feature adds support for specifying existing [PVC](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)s in the `dataSource` field to indicate a user would like to clone a [Volume](https://kubernetes.io/docs/concepts/storage/volumes/).
+The [](https://kubernetes.io/docs/concepts/storage/volumes/#csi) [Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/) feature adds support for specifying existing [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)s in the `dataSource` field to indicate a user would like to clone a [Volume](https://kubernetes.io/docs/concepts/storage/volumes/).
 
 A Clone is defined as a duplicate of an existing Kubernetes Volume that can be consumed as any standard Volume would be. The only difference is that upon provisioning, rather than creating a "new" empty Volume, the back end device creates an exact duplicate of the specified Volume.
 

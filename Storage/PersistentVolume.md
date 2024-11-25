@@ -1,7 +1,7 @@
 #prova 
-[Doc](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
+[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
 
-Each PV contains a spec and status, which is the specification and status of the volume. The name of a PersistentVolume object must be a valid [DNS subdomain name](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
+Each PV contains a spec and status, which is the specification and status of the volume. The name of a PersistentVolume object must be a valid [](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
 
 ```yaml
 apiVersion: v1
@@ -30,7 +30,7 @@ Helper programs relating to the volume type may be required for consumption of a
 
 ### Capacity[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
 
-Generally, a PV will have a specific storage capacity. This is set using the PV's `capacity` attribute which is a [Quantity](https://kubernetes.io/docs/reference/glossary/?all=true#term-quantity) value.
+Generally, a PV will have a specific storage capacity. This is set using the PV's `capacity` attribute which is a [](https://kubernetes.io/docs/reference/glossary/?all=true#term-quantity) value.
 
 Currently, storage size is the only resource that can be set or requested. Future attributes may include IOPS, throughput, etc.
 
@@ -44,7 +44,7 @@ Kubernetes supports two `volumeModes` of PersistentVolumes: `Filesystem` and
 
 A volume with `volumeMode: Filesystem` is _mounted_ into Pods into a directory. If the volume is backed by a block device and the device is empty, Kubernetes creates a filesystem on the device before mounting it for the first time.
 
-You can set the value of `volumeMode` to `Block` to use a volume as a raw block device. Such volume is presented into a Pod as a block device, without any filesystem on it. This mode is useful to provide a Pod the fastest possible way to access a volume, without any filesystem layer between the Pod and the volume. On the other hand, the application running in the Pod must know how to handle a raw block device. See [Raw Block Volume Support](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support) for an example on how to use a volume with `volumeMode: Block` in a Pod.
+You can set the value of `volumeMode` to `Block` to use a volume as a raw block device. Such volume is presented into a Pod as a block device, without any filesystem on it. This mode is useful to provide a Pod the fastest possible way to access a volume, without any filesystem layer between the Pod and the volume. On the other hand, the application running in the Pod must know how to handle a raw block device. See [](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support) for an example on how to use a volume with `volumeMode: Block` in a Pod.
 
 ### Access Modes[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
 
@@ -72,7 +72,7 @@ the volume can be mounted as read-write by a single Pod. Use ReadWriteOncePod ac
 
 #### Note:
 
-The `ReadWriteOncePod` access mode is only supported for [CSI](https://kubernetes.io/docs/concepts/storage/volumes/#csi) volumes and Kubernetes version 1.22+. To use this feature you will need to update the following [CSI sidecars](https://kubernetes-csi.github.io/docs/sidecar-containers.html) to these versions or greater:
+The `ReadWriteOncePod` access mode is only supported for [](https://kubernetes.io/docs/concepts/storage/volumes/#csi) volumes and Kubernetes version 1.22+. To use this feature you will need to update the following [CSI sidecars](https://kubernetes-csi.github.io/docs/sidecar-containers.html) to these versions or greater:
 
 - [csi-provisioner:v3.0.0+](https://github.com/kubernetes-csi/external-provisioner/releases/tag/v3.0.0)
 - [csi-attacher:v3.3.0+](https://github.com/kubernetes-csi/external-attacher/releases/tag/v3.3.0)
@@ -147,9 +147,9 @@ In the past, the annotation `volume.beta.kubernetes.io/mount-options` was used
 
 #### Note:
 
-For most volume types, you do not need to set this field. You need to explicitly set this for [local](https://kubernetes.io/docs/concepts/storage/volumes/#local) volumes.
+For most volume types, you do not need to set this field. You need to explicitly set this for [](https://kubernetes.io/docs/concepts/storage/volumes/#local) volumes.
 
-A PV can specify node affinity to define constraints that limit what nodes this volume can be accessed from. Pods that use a PV will only be scheduled to nodes that are selected by the node affinity. To specify node affinity, set `nodeAffinity` in the `.spec` of a PV. The [PersistentVolume](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec) API reference has more details on this field.
+A PV can specify node affinity to define constraints that limit what nodes this volume can be accessed from. Pods that use a PV will only be scheduled to nodes that are selected by the node affinity. To specify node affinity, set `nodeAffinity` in the `.spec` of a PV. The [](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec) API reference has more details on this field.
 
 ### Phase[](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#phase)
 
@@ -183,30 +183,30 @@ The `.status` field for a PersistentVolume can include an alpha `lastPhaseTra
 
 PersistentVolume types are implemented as plugins. Kubernetes currently supports the following plugins:
 
-- [`csi`](https://kubernetes.io/docs/concepts/storage/volumes/#csi) - Container Storage Interface (CSI)
-- [`fc`](https://kubernetes.io/docs/concepts/storage/volumes/#fc) - Fibre Channel (FC) storage
-- [`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - HostPath volume (for single node testing only; WILL NOT WORK in a multi-node cluster; consider using `local` volume instead)
-- [`iscsi`](https://kubernetes.io/docs/concepts/storage/volumes/#iscsi) - iSCSI (SCSI over IP) storage
-- [`local`](https://kubernetes.io/docs/concepts/storage/volumes/#local) - local storage devices mounted on nodes.
-- [`nfs`](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) - Network File System (NFS) storage
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#csi) - Container Storage Interface (CSI)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#fc) - Fibre Channel (FC) storage
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - HostPath volume (for single node testing only; WILL NOT WORK in a multi-node cluster; consider using `local` volume instead)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#iscsi) - iSCSI (SCSI over IP) storage
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#local) - local storage devices mounted on nodes.
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) - Network File System (NFS) storage
 
 The following types of PersistentVolume are deprecated but still available. If you are using these volume types except for `flexVolume`, `cephfs` and `rbd`, please install corresponding CSI drivers.
 
-- [`awsElasticBlockStore`](https://kubernetes.io/docs/concepts/storage/volumes/#awselasticblockstore) - AWS Elastic Block Store (EBS) (**migration on by default** starting v1.23)
-- [`azureDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk) - Azure Disk (**migration on by default** starting v1.23)
-- [`azureFile`](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile) - Azure File (**migration on by default** starting v1.24)
-- [`cinder`](https://kubernetes.io/docs/concepts/storage/volumes/#cinder) - Cinder (OpenStack block storage) (**migration on by default** starting v1.21)
-- [`flexVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#flexvolume) - FlexVolume (**deprecated** starting v1.23, no migration plan and no plan to remove support)
-- [`gcePersistentDisk`](https://kubernetes.io/docs/concepts/storage/volumes/#gcePersistentDisk) - GCE Persistent Disk (**migration on by default** starting v1.23)
-- [`portworxVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#portworxvolume) - Portworx volume (**migration on by default** starting v1.31)
-- [`vsphereVolume`](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**migration on by default** starting v1.25)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#awselasticblockstore) - AWS Elastic Block Store (EBS) (**migration on by default** starting v1.23)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#azuredisk) - Azure Disk (**migration on by default** starting v1.23)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#azurefile) - Azure File (**migration on by default** starting v1.24)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#cinder) - Cinder (OpenStack block storage) (**migration on by default** starting v1.21)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#flexvolume) - FlexVolume (**deprecated** starting v1.23, no migration plan and no plan to remove support)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#gcePersistentDisk) - GCE Persistent Disk (**migration on by default** starting v1.23)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#portworxvolume) - Portworx volume (**migration on by default** starting v1.31)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**migration on by default** starting v1.25)
 
 Older versions of Kubernetes also supported the following in-tree PersistentVolume types:
 
-- [`cephfs`](https://kubernetes.io/docs/concepts/storage/volumes/#cephfs) (**not available** starting v1.31)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#cephfs) (**not available** starting v1.31)
 - `flocker` - Flocker storage. (**not available** starting v1.25)
 - `photonPersistentDisk` - Photon controller persistent disk. (**not available** starting v1.15)
 - `quobyte` - Quobyte volume. (**not available** starting v1.25)
-- [`rbd`](https://kubernetes.io/docs/concepts/storage/volumes/#rbd) - Rados Block Device (RBD) volume (**not available** starting v1.31)
+- [](https://kubernetes.io/docs/concepts/storage/volumes/#rbd) - Rados Block Device (RBD) volume (**not available** starting v1.31)
 - `scaleIO` - ScaleIO volume. (**not available** starting v1.21)
 - `storageos` - StorageOS volume. (**not available** starting v1.25)

@@ -17,7 +17,7 @@ Pod Security admission places requirements on a Pod's [Security Context](https:
 
 ## Pod Security Admission labels for namespaces[](https://kubernetes.io/docs/concepts/security/pod-security-admission/#pod-security-admission-labels-for-namespaces)
 
-Once the feature is enabled or the webhook is installed, you can configure namespaces to define the admission control mode you want to use for pod security in each namespace. Kubernetes defines a set of [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels) that you can set to define which of the predefined Pod Security Standard levels you want to use for a namespace. The label you select defines what action the [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) takes if a potential violation is detected:
+Once the feature is enabled or the webhook is installed, you can configure namespaces to define the admission control mode you want to use for pod security in each namespace. Kubernetes defines a set of [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels) that you can set to define which of the predefined Pod Security Standard levels you want to use for a namespace. The label you select defines what action the [](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) takes if a potential violation is detected:
 
 |Mode|Description|
 |---|---|
@@ -52,17 +52,17 @@ Pods are often created indirectly, by creating a [workload object](https://kube
 
 ## Exemptions[](https://kubernetes.io/docs/concepts/security/pod-security-admission/#exemptions)
 
-You can define _exemptions_ from pod security enforcement in order to allow the creation of pods that would have otherwise been prohibited due to the policy associated with a given namespace. Exemptions can be statically configured in the [Admission Controller configuration](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/#configure-the-admission-controller).
+You can define _exemptions_ from pod security enforcement in order to allow the creation of pods that would have otherwise been prohibited due to the policy associated with a given namespace. Exemptions can be statically configured in the [](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/#configure-the-admission-controller).
 
 Exemptions must be explicitly enumerated. Requests meeting exemption criteria are _ignored_ by the Admission Controller (all `enforce`, `audit` and `warn` behaviors are skipped). Exemption dimensions include:
 
 - **Usernames:** requests from users with an exempt authenticated (or impersonated) username are ignored.
-- **RuntimeClassNames:** pods and [workload resources](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates) specifying an exempt runtime class name are ignored.
-- **Namespaces:** pods and [workload resources](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates) in an exempt namespace are ignored.
+- **RuntimeClassNames:** pods and [](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates) specifying an exempt runtime class name are ignored.
+- **Namespaces:** pods and [](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates) in an exempt namespace are ignored.
 
 #### Caution:
 
-Most pods are created by a controller in response to a [workload resource](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates), meaning that exempting an end user will only exempt them from enforcement when creating pods directly, but not when creating a workload resource. Controller service accounts (such as `system:serviceaccount:kube-system:replicaset-controller`) should generally not be exempted, as doing so would implicitly exempt any user that can create the corresponding workload resource.
+Most pods are created by a controller in response to a [](https://kubernetes.io/docs/concepts/security/pod-security-admission/#workload-resources-and-pod-templates), meaning that exempting an end user will only exempt them from enforcement when creating pods directly, but not when creating a workload resource. Controller service accounts (such as `system:serviceaccount:kube-system:replicaset-controller`) should generally not be exempted, as doing so would implicitly exempt any user that can create the corresponding workload resource.
 
 Updates to the following pod fields are exempt from policy checks, meaning that if a pod update request only changes these fields, it will not be denied even if the pod is in violation of the current policy level:
 

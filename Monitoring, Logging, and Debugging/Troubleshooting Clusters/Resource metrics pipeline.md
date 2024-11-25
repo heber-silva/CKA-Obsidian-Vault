@@ -2,30 +2,30 @@
 
 For Kubernetes, the _Metrics API_ offers a basic set of metrics to support automatic scaling and similar use cases. This API makes information available about resource usage for node and pod, including metrics for CPU and memory. If you deploy the Metrics API into your cluster, clients of the Kubernetes API can then query for this information, and you can use Kubernetes' access control mechanisms to manage permissions to do so.
 
-The [HorizontalPodAutoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) and [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA) use data from the metrics API to adjust workload replicas and resources to meet customer demand.
+The [HorizontalPodAutoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) and [](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA) use data from the metrics API to adjust workload replicas and resources to meet customer demand.
 
-You can also view the resource metrics using the [`kubectl top`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top) command.
+You can also view the resource metrics using the [](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top) command.
 
 #### Note:
 
-The Metrics API, and the metrics pipeline that it enables, only offers the minimum CPU and memory metrics to enable automatic scaling using HPA and / or VPA. If you would like to provide a more complete set of metrics, you can complement the simpler Metrics API by deploying a second [metrics pipeline](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline) that uses the _Custom Metrics API_.
+The Metrics API, and the metrics pipeline that it enables, only offers the minimum CPU and memory metrics to enable automatic scaling using HPA and / or VPA. If you would like to provide a more complete set of metrics, you can complement the simpler Metrics API by deploying a second [](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline) that uses the _Custom Metrics API_.
 
 Figure 1 illustrates the architecture of the resource metrics pipeline.
-[Open: Pasted image 20241117190407.png](Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
-![2882b7037952f36372683160953ec9f2_MD5](Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
+[Open: Pasted image 20241117190407.png](../../Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
+![2882b7037952f36372683160953ec9f2_MD5](../../Images/2882b7037952f36372683160953ec9f2_MD5.jpeg)
 Figure 1. Resource Metrics Pipeline
 
 The architecture components, from right to left in the figure, consist of the following:
 
 - [cAdvisor](https://github.com/google/cadvisor): Daemon for collecting, aggregating and exposing container metrics included in Kubelet.
     
-- [kubelet](https://kubernetes.io/docs/concepts/architecture/#kubelet): Node agent for managing container resources. Resource metrics are accessible using the `/metrics/resource` and `/stats` kubelet API endpoints.
+- [](https://kubernetes.io/docs/concepts/architecture/#kubelet): Node agent for managing container resources. Resource metrics are accessible using the `/metrics/resource` and `/stats` kubelet API endpoints.
     
 - [node level resource metrics](https://kubernetes.io/docs/reference/instrumentation/node-metrics/): API provided by the kubelet for discovering and retrieving per-node summarized stats available through the `/metrics/resource` endpoint.
     
-- [metrics-server](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server): Cluster addon component that collects and aggregates resource metrics pulled from each kubelet. The API server serves Metrics API for use by HPA, VPA, and by the `kubectl top` command. Metrics Server is a reference implementation of the Metrics API.
+- [](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server): Cluster addon component that collects and aggregates resource metrics pulled from each kubelet. The API server serves Metrics API for use by HPA, VPA, and by the `kubectl top` command. Metrics Server is a reference implementation of the Metrics API.
     
-- [Metrics API](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api): Kubernetes API supporting access to CPU and memory used for workload autoscaling. To make this work in your cluster, you need an API extension server that provides the Metrics API.
+- [](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api): Kubernetes API supporting access to CPU and memory used for workload autoscaling. To make this work in your cluster, you need an API extension server that provides the Metrics API.
     
     #### Note:
     
@@ -110,7 +110,7 @@ Sample response:
 
 The Metrics API is defined in the [k8s.io/metrics](https://github.com/kubernetes/metrics) repository. You must enable the [API aggregation layer](https://kubernetes.io/docs/tasks/extend-kubernetes/configure-aggregation-layer/) and register an [APIService](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/api-service-v1/) for the `metrics.k8s.io` API.
 
-To learn more about the Metrics API, see [resource metrics API design](https://git.k8s.io/design-proposals-archive/instrumentation/resource-metrics-api.md), the [metrics-server repository](https://github.com/kubernetes-sigs/metrics-server) and the [resource metrics API](https://github.com/kubernetes/metrics#resource-metrics-api).
+To learn more about the Metrics API, see [resource metrics API design](https://git.k8s.io/design-proposals-archive/instrumentation/resource-metrics-api.md), the [metrics-server repository](https://github.com/kubernetes-sigs/metrics-server) and the [](https://github.com/kubernetes/metrics#resource-metrics-api).
 
 #### Note:
 
@@ -124,7 +124,7 @@ CPU is reported as the average core usage measured in cpu units. One cpu, in Kub
 
 This value is derived by taking a rate over a cumulative CPU counter provided by the kernel (in both Linux and Windows kernels). The time window used to calculate CPU is shown under window field in Metrics API.
 
-To learn more about how Kubernetes allocates and measures CPU resources, see [meaning of CPU](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu).
+To learn more about how Kubernetes allocates and measures CPU resources, see [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu).
 
 ### Memory[](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#memory)
 
@@ -134,7 +134,7 @@ In an ideal world, the "working set" is the amount of memory in-use that cannot 
 
 The Kubernetes model for a container's working set expects that the container runtime counts anonymous memory associated with the container in question. The working set metric typically also includes some cached (file-backed) memory, because the host OS cannot always reclaim pages.
 
-To learn more about how Kubernetes allocates and measures memory resources, see [meaning of memory](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory).
+To learn more about how Kubernetes allocates and measures memory resources, see [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory).
 
 ## Metrics Server[](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server)
 

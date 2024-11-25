@@ -1,4 +1,4 @@
-When you specify a [Pod](Pod.md), you can optionally specify how much of each resource a [Container](Container.md) needs. The most common resources to specify are CPU and memory (RAM); there are others.
+When you specify a [Pod](../Workloads/Pod.md), you can optionally specify how much of each resource a [Container](../Container/Container.md) needs. The most common resources to specify are CPU and memory (RAM); there are others.
 
 When you specify the resource _request_ for containers in a Pod, the [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) uses this information to decide which node to place the Pod on. When you specify a resource _limit_ for a container, the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) enforces those limits so that the running container is not allowed to use more of that resource than the limit you set. The kubelet also reserves at least the _request_ amount of that system resource specifically for that container to use.
 
@@ -18,7 +18,7 @@ If you specify a limit for a resource, but do not specify any request, and no ad
 
 ## Resource types[](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-types)
 
-_CPU_ and _memory_ are each a _resource type_. A resource type has a base unit. CPU represents compute processing and is specified in units of [Kubernetes CPUs](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu). Memory is specified in units of bytes. For Linux workloads, you can specify _huge page_ resources. Huge pages are a Linux-specific feature where the node kernel allocates blocks of memory that are much larger than the default page size.
+_CPU_ and _memory_ are each a _resource type_. A resource type has a base unit. CPU represents compute processing and is specified in units of [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu). Memory is specified in units of bytes. For Linux workloads, you can specify _huge page_ resources. Huge pages are a Linux-specific feature where the node kernel allocates blocks of memory that are much larger than the default page size.
 
 For example, on a system where the default page size is 4KiB, you could specify a limit, `hugepages-2Mi: 80Mi`. If the container tries allocating over 40 2MiB huge pages (a total of 80 MiB), that allocation fails.
 
@@ -107,25 +107,25 @@ When you create a Pod, the Kubernetes scheduler selects a node for the Pod to ru
 
 When the kubelet starts a container as part of a Pod, the kubelet passes that container's requests and limits for memory and CPU to the container runtime.
 
-On Linux, the container runtime typically configures kernel [cgroups](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) that apply and enforce the limits you defined.
+On Linux, the container runtime typically configures kernel [](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) that apply and enforce the limits you defined.
 
 - The CPU limit defines a hard ceiling on how much CPU time that the container can use. During each scheduling interval (time slice), the Linux kernel checks to see if this limit is exceeded; if so, the kernel waits before allowing that cgroup to resume execution.
 - The CPU request typically defines a weighting. If several different containers (cgroups) want to run on a contended system, workloads with larger CPU requests are allocated more CPU time than workloads with small requests.
 - The memory request is mainly used during (Kubernetes) Pod scheduling. On a node that uses cgroups v2, the container runtime might use the memory request as a hint to set `memory.min` and `memory.low`.
 - The memory limit defines a memory limit for that cgroup. If the container tries to allocate more memory than this limit, the Linux kernel out-of-memory subsystem activates and, typically, intervenes by stopping one of the processes in the container that tried to allocate memory. If that process is the container's PID 1, and the container is marked as restartable, Kubernetes restarts the container.
-- The memory limit for the Pod or container can also apply to pages in memory backed volumes, such as an `emptyDir`. The kubelet tracks `tmpfs` emptyDir volumes as container memory use, rather than as local ephemeral storage.　When using memory backed `emptyDir`, be sure to check the notes [below](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#memory-backed-emptydir).
+- The memory limit for the Pod or container can also apply to pages in memory backed volumes, such as an `emptyDir`. The kubelet tracks `tmpfs` emptyDir volumes as container memory use, rather than as local ephemeral storage.　When using memory backed `emptyDir`, be sure to check the notes [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#memory-backed-emptydir).
 
 If a container exceeds its memory request and the node that it runs on becomes short of memory overall, it is likely that the Pod the container belongs to will be [evicted](https://kubernetes.io/docs/concepts/scheduling-eviction/).
 
 A container might or might not be allowed to exceed its CPU limit for extended periods of time. However, container runtimes don't terminate Pods or containers for excessive CPU usage.
 
-To determine whether a container cannot be scheduled or is being killed due to resource limits, see the [Troubleshooting](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#troubleshooting) section.
+To determine whether a container cannot be scheduled or is being killed due to resource limits, see the [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#troubleshooting) section.
 
 ### Monitoring compute & memory resource usage[](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#monitoring-compute-memory-resource-usage)
 
-The kubelet reports the resource usage of a Pod as part of the Pod [`status`](https://kubernetes.io/docs/concepts/overview/working-with-objects/#object-spec-and-status).
+The kubelet reports the resource usage of a Pod as part of the Pod [](https://kubernetes.io/docs/concepts/overview/working-with-objects/#object-spec-and-status).
 
-If optional [tools for monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/) are available in your cluster, then Pod resource usage can be retrieved either from the [Metrics API](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api) directly or from your monitoring tools.
+If optional [tools for monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/) are available in your cluster, then Pod resource usage can be retrieved either from the [](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api) directly or from your monitoring tools.
 
 ### Considerations for memory backed `emptyDir` volumes[](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#memory-backed-emptydir)
 
@@ -149,9 +149,9 @@ FEATURE STATE: `Kubernetes v1.25 [stable]`
 
 Nodes have local ephemeral storage, backed by locally-attached writeable devices or, sometimes, by RAM. "Ephemeral" means that there is no long-term guarantee about durability.
 
-Pods use ephemeral local storage for scratch space, caching, and for logs. The kubelet can provide scratch space to Pods using local ephemeral storage to mount [`emptyDir`](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) into containers.
+Pods use ephemeral local storage for scratch space, caching, and for logs. The kubelet can provide scratch space to Pods using local ephemeral storage to mount [](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) into containers.
 
-The kubelet also uses this kind of storage to hold [node-level container logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/#logging-at-the-node-level), container images, and the writable layers of running containers.
+The kubelet also uses this kind of storage to hold [](https://kubernetes.io/docs/concepts/cluster-administration/logging/#logging-at-the-node-level), container images, and the writable layers of running containers.
 
 #### Caution:
 
@@ -172,12 +172,12 @@ Kubernetes lets you track, reserve and limit the amount of ephemeral local stora
 
 Kubernetes supports two ways to configure local ephemeral storage on a node:
 
-- [Single filesystem](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-storage-configurations-0)
-- [Two filesystems](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-storage-configurations-1)
+- [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-storage-configurations-0)
+- [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#local-storage-configurations-1)
 
 In this configuration, you place all different kinds of ephemeral local data (`emptyDir` volumes, writeable layers, container images, logs) into one filesystem. The most effective way to configure the kubelet means dedicating this filesystem to Kubernetes (kubelet) data.
 
-The kubelet also writes [node-level container logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/#logging-at-the-node-level) and treats these similarly to ephemeral local storage.
+The kubelet also writes [](https://kubernetes.io/docs/concepts/cluster-administration/logging/#logging-at-the-node-level) and treats these similarly to ephemeral local storage.
 
 The kubelet writes logs to files inside its configured log directory (`/var/log` by default); and has a base directory for other locally stored data (`/var/lib/kubelet` by default).
 
@@ -250,7 +250,7 @@ spec:
 
 ### How Pods with ephemeral-storage requests are scheduled[](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#how-pods-with-ephemeral-storage-requests-are-scheduled)
 
-When you create a Pod, the Kubernetes scheduler selects a node for the Pod to run on. Each node has a maximum amount of local ephemeral storage it can provide for Pods. For more information, see [Node Allocatable](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable).
+When you create a Pod, the Kubernetes scheduler selects a node for the Pod to run on. Each node has a maximum amount of local ephemeral storage it can provide for Pods. For more information, see [](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable).
 
 The scheduler ensures that the sum of the resource requests of the scheduled containers is less than the capacity of the node.
 
@@ -274,12 +274,12 @@ If the kubelet is not measuring local ephemeral storage, then a Pod that exceeds
 
 However, if the filesystem space for writeable container layers, node-level logs, or `emptyDir` volumes falls low, the node [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) itself as short on local storage and this taint triggers eviction for any Pods that don't specifically tolerate the taint.
 
-See the supported [configurations](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#configurations-for-local-ephemeral-storage) for ephemeral local storage.
+See the supported [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#configurations-for-local-ephemeral-storage) for ephemeral local storage.
 
 The kubelet supports different ways to measure Pod storage use:
 
-- [Periodic scanning](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-emphemeralstorage-measurement-0)
-- [Filesystem project quota](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-emphemeralstorage-measurement-1)
+- [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-emphemeralstorage-measurement-0)
+- [](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-emphemeralstorage-measurement-1)
 
 The kubelet performs regular, scheduled checks that scan each `emptyDir` volume, container log directory, and writeable container layer.
 
@@ -326,7 +326,7 @@ http://k8s-master:8080/api/v1/nodes/k8s-node-1/status
 
 #### Note:
 
-In the preceding request, `~1` is the encoding for the character `/` in the patch path. The operation path value in JSON-Patch is interpreted as a JSON-Pointer. For more details, see [IETF RFC 6901, section 3](https://tools.ietf.org/html/rfc6901#section-3).
+In the preceding request, `~1` is the encoding for the character `/` in the patch path. The operation path value in JSON-Patch is interpreted as a JSON-Pointer. For more details, see [](https://tools.ietf.org/html/rfc6901#section-3).
 
 #### Cluster-level extended resources[](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#cluster-level-extended-resources)
 
@@ -464,7 +464,7 @@ In the preceding output, you can see that if a Pod requests more than 1.120 CPUs
 
 By looking at the “Pods” section, you can see which Pods are taking up space on the node.
 
-The amount of resources available to Pods is less than the node capacity because system daemons use a portion of the available resources. Within the Kubernetes API, each Node has a `.status.allocatable` field (see [NodeStatus](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/node-v1/#NodeStatus) for details).
+The amount of resources available to Pods is less than the node capacity because system daemons use a portion of the available resources. Within the Kubernetes API, each Node has a `.status.allocatable` field (see [](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/node-v1/#NodeStatus) for details).
 
 The `.status.allocatable` field describes the amount of resources that are available to Pods on that node (for example: 15 virtual CPUs and 7538 MiB of memory). For more information on node allocatable resources in Kubernetes, see [Reserve Compute Resources for System Daemons](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/).
 
@@ -528,7 +528,7 @@ Your next step might be to check the application code for a memory leak. If you 
 
 - Get hands-on experience [assigning Memory resources to containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/).
 - Get hands-on experience [assigning CPU resources to containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/).
-- Read how the API reference defines a [container](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) and its [resource requirements](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources)
+- Read how the API reference defines a [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) and its [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources)
 - Read about [project quotas](https://www.linux.org/docs/man8/xfs_quota.html) in XFS
-- Read more about the [kube-scheduler configuration reference (v1)](https://kubernetes.io/docs/reference/config-api/kube-scheduler-config.v1/)
+- Read more about the [kube-scheduler configuration reference (v1)](v1))
 - Read more about [Quality of Service classes for Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/)

@@ -1,17 +1,17 @@
 [Doc](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 
-You can constrain a [Pod](Pod.md) so that it is _restricted_ to run on particular [Node](Node.md), or to _prefer_ to run on particular nodes. There are several ways to do this and the recommended approaches all use [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) to facilitate the selection. Often, you do not need to set any such constraints; the [scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) will automatically do a reasonable placement (for example, spreading your Pods across nodes so as not place Pods on a node with insufficient free resources). However, there are some circumstances where you may want to control which node the Pod deploys to, for example, to ensure that a Pod ends up on a node with an SSD attached to it, or to co-locate Pods from two different services that communicate a lot into the same availability zone.
+You can constrain a [Pod](../Workloads/Pod.md) so that it is _restricted_ to run on particular [Node](../Kubernetes%20Achitecture/Node.md), or to _prefer_ to run on particular nodes. There are several ways to do this and the recommended approaches all use [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) to facilitate the selection. Often, you do not need to set any such constraints; the [scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/) will automatically do a reasonable placement (for example, spreading your Pods across nodes so as not place Pods on a node with insufficient free resources). However, there are some circumstances where you may want to control which node the Pod deploys to, for example, to ensure that a Pod ends up on a node with an SSD attached to it, or to co-locate Pods from two different services that communicate a lot into the same availability zone.
 
 You can use any of the following methods to choose where Kubernetes schedules specific Pods:
 
-- [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) field matching against [node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels)
-- [Affinity and anti-affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
-- [nodeName](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename) field
-- [Pod topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#pod-topology-spread-constraints)
+- [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) field matching against [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels)
+- [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
+- [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename) field
+- [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#pod-topology-spread-constraints)
 
 ## Node labels[](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels)
 
-Like many other Kubernetes objects, nodes have [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). You can [attach labels manually](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/#add-a-label-to-a-node). Kubernetes also populates a [standard set of labels](https://kubernetes.io/docs/reference/node/node-labels/) on all nodes in a cluster.
+Like many other Kubernetes objects, nodes have [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). You can [](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/#add-a-label-to-a-node). Kubernetes also populates a [standard set of labels](https://kubernetes.io/docs/reference/node/node-labels/) on all nodes in a cluster.
 
 #### Note:
 
@@ -23,16 +23,16 @@ Adding labels to nodes allows you to target Pods for scheduling on specific node
 
 If you use labels for node isolation, choose label keys that the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) cannot modify. This prevents a compromised node from setting those labels on itself so that the scheduler schedules workloads onto the compromised node.
 
-The [`NodeRestriction` admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) prevents the kubelet from setting or modifying labels with a `node-restriction.kubernetes.io/` prefix.
+The [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) prevents the kubelet from setting or modifying labels with a `node-restriction.kubernetes.io/` prefix.
 
 To make use of that label prefix for node isolation:
 
 1. Ensure you are using the [Node authorizer](https://kubernetes.io/docs/reference/access-authn-authz/node/) and have _enabled_ the `NodeRestriction` admission plugin.
-2. Add labels with the `node-restriction.kubernetes.io/` prefix to your nodes, and use those labels in your [node selectors](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector). For example, `example.com.node-restriction.kubernetes.io/fips=true` or `example.com.node-restriction.kubernetes.io/pci-dss=true`.
+2. Add labels with the `node-restriction.kubernetes.io/` prefix to your nodes, and use those labels in your [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector). For example, `example.com.node-restriction.kubernetes.io/fips=true` or `example.com.node-restriction.kubernetes.io/pci-dss=true`.
 
 ## nodeSelector[](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)
 
-`nodeSelector` is the simplest recommended form of node selection constraint. You can add the `nodeSelector` field to your Pod specification and specify the [node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels) you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
+`nodeSelector` is the simplest recommended form of node selection constraint. You can add the `nodeSelector` field to your Pod specification and specify the [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels) you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
 
 See [Assign Pods to Nodes](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/) for more information.
 
@@ -101,7 +101,7 @@ In this example, the following rules apply:
 
 You can use the `operator` field to specify a logical operator for Kubernetes to use when interpreting the rules. You can use `In`, `NotIn`, `Exists`, `DoesNotExist`, `Gt` and `Lt`.
 
-Read [Operators](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#operators) to learn more about how these work.
+Read [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#operators) to learn more about how these work.
 
 `NotIn` and `DoesNotExist` allow you to define node anti-affinity behavior. Alternatively, you can use [node taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to repel Pods from specific nodes.
 
@@ -169,7 +169,7 @@ If you want Kubernetes to successfully schedule the Pods in this example, you mu
 
 FEATURE STATE: `Kubernetes v1.20 [beta]`
 
-When configuring multiple [scheduling profiles](https://kubernetes.io/docs/reference/scheduling/config/#multiple-profiles), you can associate a profile with a node affinity, which is useful if a profile only applies to a specific set of nodes. To do so, add an `addedAffinity` to the `args` field of the [`NodeAffinity` plugin](https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins) in the [scheduler configuration](https://kubernetes.io/docs/reference/scheduling/config/). For example:
+When configuring multiple [](https://kubernetes.io/docs/reference/scheduling/config/#multiple-profiles), you can associate a profile with a node affinity, which is useful if a profile only applies to a specific set of nodes. To do so, add an `addedAffinity` to the `args` field of the [](https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins) in the [scheduler configuration](https://kubernetes.io/docs/reference/scheduling/config/). For example:
 
 ```yaml
 apiVersion: kubescheduler.config.k8s.io/v1beta3
@@ -197,7 +197,7 @@ Since the `addedAffinity` is not visible to end users, its behavior might be u
 
 #### Note:
 
-The DaemonSet controller, which [creates Pods for DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#how-daemon-pods-are-scheduled), does not support scheduling profiles. When the DaemonSet controller creates Pods, the default Kubernetes scheduler places those Pods and honors any `nodeAffinity` rules in the DaemonSet controller.
+The DaemonSet controller, which [](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#how-daemon-pods-are-scheduled), does not support scheduling profiles. When the DaemonSet controller creates Pods, the default Kubernetes scheduler places those Pods and honors any `nodeAffinity` rules in the DaemonSet controller.
 
 ### Inter-pod affinity and anti-affinity[](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity)
 
@@ -205,7 +205,7 @@ Inter-pod affinity and anti-affinity allow you to constrain which nodes your Pod
 
 Inter-pod affinity and anti-affinity rules take the form "this Pod should (or, in the case of anti-affinity, should not) run in an X if that X is already running one or more Pods that meet rule Y", where X is a topology domain like node, rack, cloud provider zone or region, or similar and Y is the rule Kubernetes tries to satisfy.
 
-You express these rules (Y) as [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors) with an optional associated list of namespaces. Pods are namespaced objects in Kubernetes, so Pod labels also implicitly have namespaces. Any label selectors for Pod labels should specify the namespaces in which Kubernetes should look for those labels.
+You express these rules (Y) as [](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors) with an optional associated list of namespaces. Pods are namespaced objects in Kubernetes, so Pod labels also implicitly have namespaces. Any label selectors for Pod labels should specify the namespaces in which Kubernetes should look for those labels.
 
 You express the topology domain (X) using a `topologyKey`, which is the key for the node label that the system uses to denote the domain. For examples, see [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/labels-annotations-taints/).
 
@@ -219,7 +219,7 @@ Pod anti-affinity requires nodes to be consistently labeled, in other words, eve
 
 #### Types of inter-pod affinity and anti-affinity[](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#types-of-inter-pod-affinity-and-anti-affinity)
 
-Similar to [node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) are two types of Pod affinity and anti-affinity as follows:
+Similar to [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) are two types of Pod affinity and anti-affinity as follows:
 
 - `requiredDuringSchedulingIgnoredDuringExecution`
 - `preferredDuringSchedulingIgnoredDuringExecution`
@@ -278,7 +278,7 @@ To get yourself more familiar with the examples of Pod affinity and anti-affinit
 
 You can use the `In`, `NotIn`, `Exists` and `DoesNotExist` values in the `operator` field for Pod affinity and anti-affinity.
 
-Read [Operators](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#operators) to learn more about how these work.
+Read [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#operators) to learn more about how these work.
 
 In principle, the `topologyKey` can be any allowed label key with the following exceptions for performance and security reasons:
 
@@ -466,7 +466,7 @@ Creating the two preceding Deployments results in the following cluster layout, 
 
 The overall effect is that each cache instance is likely to be accessed by a single client that is running on the same node. This approach aims to minimize both skew (imbalanced load) and latency.
 
-You might have other reasons to use Pod anti-affinity. See the [ZooKeeper tutorial](https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/#tolerating-node-failure) for an example of a StatefulSet configured with anti-affinity for high availability, using the same technique as this example.
+You might have other reasons to use Pod anti-affinity. See the [](https://kubernetes.io/docs/tutorials/stateful-application/zookeeper/#tolerating-node-failure) for an example of a StatefulSet configured with anti-affinity for high availability, using the same technique as this example.
 
 ## nodeName[](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename)
 
@@ -480,7 +480,7 @@ Some of the limitations of using `nodeName` to select nodes are:
 
 #### Warning:
 
-`nodeName` is intended for use by custom schedulers or advanced use cases where you need to bypass any configured schedulers. Bypassing the schedulers might lead to failed Pods if the assigned Nodes get oversubscribed. You can use [node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) or the [`nodeSelector` field](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to assign a Pod to a specific Node without bypassing the schedulers.
+`nodeName` is intended for use by custom schedulers or advanced use cases where you need to bypass any configured schedulers. Bypassing the schedulers might lead to failed Pods if the assigned Nodes get oversubscribed. You can use [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) or the [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to assign a Pod to a specific Node without bypassing the schedulers.
 
 Here is an example of a Pod spec using the `nodeName` field:
 

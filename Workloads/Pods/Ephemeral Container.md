@@ -1,4 +1,4 @@
-[Pod](Pod.md) are the fundamental building block of Kubernetes applications. Since Pods are intended to be disposable and replaceable, you cannot add a container to a Pod once it has been created. Instead, you usually delete and replace Pods in a controlled fashion using [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
+[Pod](../Pod.md) are the fundamental building block of Kubernetes applications. Since Pods are intended to be disposable and replaceable, you cannot add a container to a Pod once it has been created. Instead, you usually delete and replace Pods in a controlled fashion using [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
 
 Sometimes it's necessary to inspect the state of an existing Pod, however, for example to troubleshoot a hard-to-reproduce bug. In these cases you can run an ephemeral container in an existing Pod to inspect its state and run arbitrary commands.
 
@@ -8,7 +8,7 @@ Ephemeral containers differ from other containers in that they lack guarantees f
 
 - Ephemeral containers may not have ports, so fields such as `ports`, `livenessProbe`, `readinessProbe` are disallowed.
 - Pod resource allocations are immutable, so setting `resources` is disallowed.
-- For a complete list of allowed fields, see the [EphemeralContainer reference documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#ephemeralcontainer-v1-core).
+- For a complete list of allowed fields, see the [](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#ephemeralcontainer-v1-core).
 
 Ephemeral containers are created using a special `ephemeralcontainers` handler in the API rather than by adding them directly to `pod.spec`, so it's not possible to add an ephemeral container using `kubectl edit`.
 
@@ -28,4 +28,4 @@ When using ephemeral containers, it's helpful to enable [process namespace shar
 
 ## What's next[](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/#what-s-next)
 
-- Learn how to [debug pods using ephemeral containers](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container).
+- Learn how to [](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container).

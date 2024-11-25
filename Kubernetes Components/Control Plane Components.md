@@ -1,7 +1,7 @@
 #prova
 ### **kube-apiserver**
 
-The API server is a component of the Kubernetes [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
+The API server is a component of the Kubernetes [](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
 
 The main implementation of a Kubernetes API server is [kube-apiserver](https://kubernetes.io/docs/reference/generated/kube-apiserver/). kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. You can run several instances of kube-apiserver and balance traffic between those instances.
 
@@ -19,7 +19,7 @@ The main implementation of a Kubernetes API server is [kube-apiserver](https://
 
 Consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.
 
-If your Kubernetes cluster uses etcd as its backing store, make sure you have a [back up](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster) plan for the data.
+If your Kubernetes cluster uses etcd as its backing store, make sure you have a [](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster) plan for the data.
 
 You can find in-depth information about etcd in the official [documentation](https://etcd.io/docs/).
 
@@ -52,7 +52,7 @@ The above is not an exhaustive list
 
 ### **cloud-controller-manager**
 
-A Kubernetes [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+A Kubernetes [](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
 
 The cloud-controller-manager only runs controllers that are specific to your cloud provider.
 

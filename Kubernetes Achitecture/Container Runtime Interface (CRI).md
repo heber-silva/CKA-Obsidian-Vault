@@ -4,7 +4,7 @@ You need a working [container runtime](https://kubernetes.io/docs/setup/product
 
 The Container Runtime Interface (CRI) is the main protocol for the communication between the [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) and Container Runtime.
 
-The Kubernetes Container Runtime Interface (CRI) defines the main [gRPC](https://grpc.io/) protocol for the communication between the [node components](https://kubernetes.io/docs/concepts/architecture/#node-components) [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) and [container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes).
+The Kubernetes Container Runtime Interface (CRI) defines the main [gRPC](https://grpc.io/) protocol for the communication between the [](https://kubernetes.io/docs/concepts/architecture/#node-components) [kubelet](https://kubernetes.io/docs/reference/generated/kubelet) and [container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes).
 
 ## The API[](https://kubernetes.io/docs/concepts/architecture/cri/#api)
 

@@ -6,8 +6,8 @@
 - 2 GB or more of RAM per machine (any less will leave little room for your apps).
 - 2 CPUs or more for control plane machines.
 - Full network connectivity between all machines in the cluster (public or private network is fine).
-- Unique hostname, MAC address, and product_uuid for every node. See [here](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-mac-address) for more details.
-- Certain ports are open on your machines. See [here](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports) for more details.
+- Unique hostname, MAC address, and product_uuid for every node. See [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-mac-address) for more details.
+- Certain ports are open on your machines. See [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports) for more details.
 ## Verify the MAC address and product_uuid are unique for every node[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-mac-address)
 
 - You can get the MAC address of the network interfaces using the command `ip link` or `ifconfig -a`
@@ -33,14 +33,14 @@ The pod network plugin you use may also require certain ports to be open. Since 
 
 The default behavior of a kubelet is to fail to start if swap memory is detected on a node. This means that swap should either be disabled or tolerated by kubelet.
 
-- To tolerate swap, add `failSwapOn: false` to kubelet configuration or as a command line argument. Note: even if `failSwapOn: false` is provided, workloads wouldn't have swap access by default. This can be changed by setting a `swapBehavior`, again in the kubelet configuration file. To use swap, set a `swapBehavior` other than the default `NoSwap` setting. See [Swap memory management](https://kubernetes.io/docs/concepts/architecture/nodes/#swap-memory) for more details.
+- To tolerate swap, add `failSwapOn: false` to kubelet configuration or as a command line argument. Note: even if `failSwapOn: false` is provided, workloads wouldn't have swap access by default. This can be changed by setting a `swapBehavior`, again in the kubelet configuration file. To use swap, set a `swapBehavior` other than the default `NoSwap` setting. See [](https://kubernetes.io/docs/concepts/architecture/nodes/#swap-memory) for more details.
 - To disable swap, `sudo swapoff -a` can be used to disable swapping temporarily. To make this change persistent across reboots, make sure swap is disabled in config files like `/etc/fstab`, `systemd.swap`, depending how it was configured on your system.
 
 ## Installing a container runtime[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime)
 
-To run containers in Pods, Kubernetes uses a [Container Runtime](container%20runtime.md).
+To run containers in Pods, Kubernetes uses a [Container Runtime](Container%20Runtime.md).
 
-By default, Kubernetes uses the [Container Runtime Interface](https://kubernetes.io/docs/concepts/architecture/#container-runtime) (CRI) to interface with your chosen container runtime.
+By default, Kubernetes uses the [](https://kubernetes.io/docs/concepts/architecture/#container-runtime) (CRI) to interface with your chosen container runtime.
 
 If you don't specify a runtime, kubeadm automatically tries to detect an installed container runtime by scanning through a list of known endpoints.
 
@@ -89,7 +89,7 @@ These instructions exclude all Kubernetes packages from any system upgrades. Thi
 For more information on version skews, see:
 
 - Kubernetes [version and version-skew policy](https://kubernetes.io/docs/setup/release/version-skew-policy/)
-- Kubeadm-specific [version skew policy](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#version-skew-policy)
+- Kubeadm-specific [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#version-skew-policy)
 
 ---
 **Note:** The legacy package repositories (`apt.kubernetes.io` and `yum.kubernetes.io`) have been [deprecated and frozen starting from September 13, 2023](https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/). **Using the [new package repositories hosted at `pkgs.k8s.io`](https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/) is strongly recommended and required in order to install Kubernetes versions released after September 13, 2023.** The deprecated legacy repositories, and their contents, might be removed at any time in the future and without a further notice period. The new package repositories provide downloads for Kubernetes versions starting with v1.24.0.
@@ -148,7 +148,7 @@ In releases older than Debian 12 and Ubuntu 22.04, directory `/etc/apt/keyrings
 The kubelet is now restarting every few seconds, as it waits in a crashloop for kubeadm to tell it what to do.
 
 ## Configuring a cgroup driver
-Both the container runtime and the kubelet have a property called ["cgroup driver"](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-drivers), which is important for the management of cgroups on Linux machines.
+Both the container runtime and the kubelet have a property called [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-drivers), which is important for the management of cgroups on Linux machines.
 
 #### Warning:
 
@@ -183,7 +183,7 @@ To follow this guide, you need:
 
 You also need to use a version of `kubeadm` that can deploy the version of Kubernetes that you want to use in your new cluster.
 
-[Kubernetes' version and version skew support policy](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions) applies to `kubeadm` as well as to Kubernetes overall. Check that policy to learn about what versions of Kubernetes and `kubeadm` are supported. This page is written for Kubernetes v1.31.
+[](https://kubernetes.io/docs/setup/release/version-skew-policy/#supported-versions) applies to `kubeadm` as well as to Kubernetes overall. Check that policy to learn about what versions of Kubernetes and `kubeadm` are supported. This page is written for Kubernetes v1.31.
 
 The `kubeadm` tool's overall feature state is General Availability (GA). Some sub-features are still under active development. The implementation of creating the cluster may change slightly as the tool evolves, but the overall implementation should be pretty stable.
 
@@ -236,7 +236,7 @@ For kubelets on all nodes, the `--node-ip` option can be passed in `.nodeRegi
 
 For dual-stack see [Dual-stack support with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/dual-stack-support/).
 
-The IP addresses that you assign to control plane components become part of their X.509 certificates' subject alternative name fields. Changing these IP addresses would require signing new certificates and restarting the affected components, so that the change in certificate files is reflected. See [Manual certificate renewal](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#manual-certificate-renewal) for more details on this topic.
+The IP addresses that you assign to control plane components become part of their X.509 certificates' subject alternative name fields. Changing these IP addresses would require signing new certificates and restarting the affected components, so that the change in certificate files is reflected. See [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#manual-certificate-renewal) for more details on this topic.
 
 #### Warning:
 
@@ -246,17 +246,17 @@ The Kubernetes project recommends against this approach (configuring all compone
 
 This step is optional and only applies in case you wish `kubeadm init` and `kubeadm join` to not download the default container images which are hosted at `registry.k8s.io`.
 
-Kubeadm has commands that can help you pre-pull the required images when creating a cluster without an internet connection on its nodes. See [Running kubeadm without an internet connection](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#without-internet-connection) for more details.
+Kubeadm has commands that can help you pre-pull the required images when creating a cluster without an internet connection on its nodes. See [](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#without-internet-connection) for more details.
 
-Kubeadm allows you to use a custom image repository for the required images. See [Using custom images](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#custom-images) for more details.
+Kubeadm allows you to use a custom image repository for the required images. See [](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#custom-images) for more details.
 
 ### Initializing your control-plane node[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#initializing-your-control-plane-node)
 
-The control-plane node is the machine where the control plane components run, including [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/) (the cluster database) and the [API Server](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver) (which the [kubectl](https://kubernetes.io/docs/reference/kubectl/) command line tool communicates with).
+The control-plane node is the machine where the control plane components run, including [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/) (the cluster database) and the [](https://kubernetes.io/docs/concepts/architecture/#kube-apiserver) (which the [kubectl](https://kubernetes.io/docs/reference/kubectl/) command line tool communicates with).
 
 1. (Recommended) If you have plans to upgrade this single control-plane `kubeadm` cluster to [high availability](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/) you should specify the `--control-plane-endpoint` to set the shared endpoint for all control-plane nodes. Such an endpoint can be either a DNS name or an IP address of a load-balancer.
-2. Choose a Pod network add-on, and verify whether it requires any arguments to be passed to `kubeadm init`. Depending on which third-party provider you choose, you might need to set the `--pod-network-cidr` to a provider-specific value. See [Installing a Pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
-3. (Optional) `kubeadm` tries to detect the container runtime by using a list of well known endpoints. To use different container runtime or if there are more than one installed on the provisioned node, specify the `--cri-socket` argument to `kubeadm`. See [Installing a runtime](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime).
+2. Choose a Pod network add-on, and verify whether it requires any arguments to be passed to `kubeadm init`. Depending on which third-party provider you choose, you might need to set the `--pod-network-cidr` to a provider-specific value. See [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
+3. (Optional) `kubeadm` tries to detect the container runtime by using a list of well known endpoints. To use different container runtime or if there are more than one installed on the provisioned node, specify the `--cri-socket` argument to `kubeadm`. See [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime).
 
 To initialize the control-plane node run:
 
@@ -284,13 +284,13 @@ Turning a single control plane cluster created without `--control-plane-endpoin
 
 For more information about `kubeadm init` arguments, see the [kubeadm reference guide](https://kubernetes.io/docs/reference/setup-tools/kubeadm/).
 
-To configure `kubeadm init` with a configuration file see [Using kubeadm init with a configuration file](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#config-file).
+To configure `kubeadm init` with a configuration file see [](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#config-file).
 
 To customize control plane components, including optional IPv6 assignment to liveness probe for control plane components and etcd server, provide extra arguments to each component as documented in [custom arguments](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/).
 
 To reconfigure a cluster that has already been created see [Reconfiguring a kubeadm cluster](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-reconfigure/).
 
-To run `kubeadm init` again, you must first [tear down the cluster](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#tear-down).
+To run `kubeadm init` again, you must first [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#tear-down).
 
 If you join a node with a different architecture to your cluster, make sure that your deployed DaemonSets have container image support for this architecture.
 
@@ -335,9 +335,9 @@ The kubeconfig file `admin.conf` that `kubeadm init` generates contains a ce
 
 `kubeadm init` generates another kubeconfig file `super-admin.conf` that contains a certificate with `Subject: O = system:masters, CN = kubernetes-super-admin`. `system:masters` is a break-glass, super user group that bypasses the authorization layer (for example RBAC). Do not share the `super-admin.conf` file with anyone. It is recommended to move the file to a safe location.
 
-See [Generating kubeconfig files for additional users](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubeconfig-additional-users) on how to use `kubeadm kubeconfig user` to generate kubeconfig files for additional users.
+See [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubeconfig-additional-users) on how to use `kubeadm kubeconfig user` to generate kubeconfig files for additional users.
 
-Make a record of the `kubeadm join` command that `kubeadm init` outputs. You need this command to [join nodes to your cluster](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes).
+Make a record of the `kubeadm join` command that `kubeadm init` outputs. You need this command to [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes).
 
 The token is used for mutual authentication between the control-plane node and the joining nodes. The token included here is secret. Keep it safe, because anyone with this token can add authenticated nodes to your cluster. These tokens can be listed, created, and deleted with the `kubeadm token` command. See the [kubeadm reference guide](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-token/).
 
@@ -362,9 +362,9 @@ Kubeadm should be CNI agnostic and the validation of CNI providers is out of the
 
 Several external projects provide Kubernetes Pod networks using CNI, some of which also support [Network Policy](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-See a list of add-ons that implement the [Kubernetes networking model](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model).
+See a list of add-ons that implement the [](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model).
 
-Please refer to the [Installing Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy) page for a non-exhaustive list of networking addons supported by Kubernetes. You can install a Pod network add-on with the following command on the control-plane node or a node that has the kubeconfig credentials:
+Please refer to the [](https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy) page for a non-exhaustive list of networking addons supported by Kubernetes. You can install a Pod network add-on with the following command on the control-plane node or a node that has the kubeconfig credentials:
 
 ```bash
 kubectl apply -f <add-on.yaml>
@@ -372,7 +372,7 @@ kubectl apply -f <add-on.yaml>
 
 #### Note:
 
-Only a few CNI plugins support Windows. More details and setup instructions can be found in [Adding Windows worker nodes](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/adding-windows-nodes/#network-config).
+Only a few CNI plugins support Windows. More details and setup instructions can be found in [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/adding-windows-nodes/#network-config).
 
 You can install only one Pod network per cluster.
 
@@ -382,7 +382,7 @@ If your network is not working or CoreDNS is not in the `Running` state, check
 
 ### Managed node labels[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#managed-node-labels)
 
-By default, kubeadm enables the [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) admission controller that restricts what labels can be self-applied by kubelets on node registration. The admission controller documentation covers what labels are permitted to be used with the kubelet `--node-labels` option. The `node-role.kubernetes.io/control-plane` label is such a restricted label and kubeadm manually applies it using a privileged client after a node has been created. To do that manually you can do the same by using `kubectl label` and ensure it is using a privileged kubeconfig such as the kubeadm managed `/etc/kubernetes/admin.conf`.
+By default, kubeadm enables the [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) admission controller that restricts what labels can be self-applied by kubelets on node registration. The admission controller documentation covers what labels are permitted to be used with the kubelet `--node-labels` option. The `node-role.kubernetes.io/control-plane` label is such a restricted label and kubeadm manually applies it using a privileged client after a node has been created. To do that manually you can do the same by using `kubectl label` and ensure it is using a privileged kubeconfig such as the kubeadm managed `/etc/kubernetes/admin.conf`.
 
 ### Control plane node isolation[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#control-plane-node-isolation)
 
@@ -401,7 +401,7 @@ node "test-01" untainted
 
 This will remove the `node-role.kubernetes.io/control-plane:NoSchedule` taint from any nodes that have it, including the control plane nodes, meaning that the scheduler will then be able to schedule Pods everywhere.
 
-Additionally, you can execute the following command to remove the [`node.kubernetes.io/exclude-from-external-load-balancers`](https://kubernetes.io/docs/reference/labels-annotations-taints/#node-kubernetes-io-exclude-from-external-load-balancers) label from the control plane node, which excludes it from the list of backend servers:
+Additionally, you can execute the following command to remove the [](https://kubernetes.io/docs/reference/labels-annotations-taints/#node-kubernetes-io-exclude-from-external-load-balancers) label from the control plane node, which excludes it from the list of backend servers:
 
 ```bash
 kubectl label nodes --all node.kubernetes.io/exclude-from-external-load-balancers-
@@ -450,7 +450,7 @@ You can now access the API Server locally at `http://localhost:8001/api/v1`
 
 If you used disposable servers for your cluster, for testing, you can switch those off and do no further clean up. You can use `kubectl config delete-cluster` to delete your local references to the cluster.
 
-However, if you want to deprovision your cluster more cleanly, you should first [drain the node](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain) and make sure that the node is empty, then deconfigure the node.
+However, if you want to deprovision your cluster more cleanly, you should first [](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain) and make sure that the node is empty, then deconfigure the node.
 
 ### Remove the node[](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#remove-the-node)
 

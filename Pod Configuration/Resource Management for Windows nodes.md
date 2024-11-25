@@ -1,8 +1,8 @@
 [This page](https://kubernetes.io/docs/concepts/configuration/windows-resource-management/) outlines the differences in how resources are managed between Linux and Windows.
 
-On Linux nodes, [cgroups](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) are used as a pod boundary for resource control. Containers are created within that boundary for network, process and file system isolation. The Linux cgroup APIs can be used to gather CPU, I/O, and memory use statistics.
+On Linux nodes, [](https://kubernetes.io/docs/reference/glossary/?all=true#term-cgroup) are used as a pod boundary for resource control. Containers are created within that boundary for network, process and file system isolation. The Linux cgroup APIs can be used to gather CPU, I/O, and memory use statistics.
 
-In contrast, Windows uses a [_job object_](https://docs.microsoft.com/windows/win32/procthread/job-objects) per container with a system namespace filter to contain all processes in a container and provide logical isolation from the host. (Job objects are a Windows process isolation mechanism and are different from what Kubernetes refers to as a [Job](Job.md)).
+In contrast, Windows uses a [_job object_](https://docs.microsoft.com/windows/win32/procthread/job-objects) per container with a system namespace filter to contain all processes in a container and provide logical isolation from the host. (Job objects are a Windows process isolation mechanism and are different from what Kubernetes refers to as a [Job](../Workloads/Workload%20Management/Job.md)).
 
 There is no way to run a Windows container without the namespace filtering in place. This means that system privileges cannot be asserted in the context of the host, and thus privileged containers are not available on Windows. Containers cannot assume an identity from the host because the Security Account Manager (SAM) is separate.
 
@@ -16,11 +16,11 @@ Windows nodes do not overcommit memory for processes. The net effect is that Win
 
 Windows can limit the amount of CPU time allocated for different processes but cannot guarantee a minimum amount of CPU time.
 
-On Windows, the kubelet supports a command-line flag to set the [scheduling priority](https://docs.microsoft.com/windows/win32/procthread/scheduling-priorities) of the kubelet process: `--windows-priorityclass`. This flag allows the kubelet process to get more CPU time slices when compared to other processes running on the Windows host. More information on the allowable values and their meaning is available at [Windows Priority Classes](https://docs.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities#priority-class). To ensure that running Pods do not starve the kubelet of CPU cycles, set this flag to `ABOVE_NORMAL_PRIORITY_CLASS` or above.
+On Windows, the kubelet supports a command-line flag to set the [scheduling priority](https://docs.microsoft.com/windows/win32/procthread/scheduling-priorities) of the kubelet process: `--windows-priorityclass`. This flag allows the kubelet process to get more CPU time slices when compared to other processes running on the Windows host. More information on the allowable values and their meaning is available at [](https://docs.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities#priority-class). To ensure that running Pods do not starve the kubelet of CPU cycles, set this flag to `ABOVE_NORMAL_PRIORITY_CLASS` or above.
 
 ## Resource reservation[](https://kubernetes.io/docs/concepts/configuration/windows-resource-management/#resource-reservation)
 
-To account for memory and CPU used by the operating system, the container runtime, and by Kubernetes host processes such as the kubelet, you can (and should) reserve memory and CPU resources with the `--kube-reserved` and/or `--system-reserved` kubelet flags. On Windows these values are only used to calculate the node's [allocatable](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) resources.
+To account for memory and CPU used by the operating system, the container runtime, and by Kubernetes host processes such as the kubelet, you can (and should) reserve memory and CPU resources with the `--kube-reserved` and/or `--system-reserved` kubelet flags. On Windows these values are only used to calculate the node's [](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) resources.
 
 #### Caution:
 

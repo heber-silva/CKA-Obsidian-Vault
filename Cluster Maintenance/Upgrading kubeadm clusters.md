@@ -28,7 +28,7 @@ The upgrade workflow at high level is the following:
 ### Additional information[](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#additional-information)
 
 - The instructions below outline when to drain each node during the upgrade process. If you are performing a **minor** version upgrade for any kubelet, you **must** first drain the node (or nodes) that you are upgrading. In the case of control plane nodes, they could be running CoreDNS Pods or other critical workloads. For more information see [Draining nodes](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
-- The Kubernetes project recommends that you match your kubelet and kubeadm versions. You can instead use a version of kubelet that is older than kubeadm, provided it is within the range of supported versions. For more details, please visit [kubeadm's skew against the kubelet](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#kubeadm-s-skew-against-the-kubelet).
+- The Kubernetes project recommends that you match your kubelet and kubeadm versions. You can instead use a version of kubelet that is older than kubeadm, provided it is within the range of supported versions. For more details, please visit [](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#kubeadm-s-skew-against-the-kubelet).
 - All containers are restarted after upgrade, because the container spec hash value is changed.
 - To verify that the kubelet service has successfully restarted after the kubelet has been upgraded, you can execute `systemctl status kubelet` or view the service logs with `journalctl -xeu kubelet`.
 - `kubeadm upgrade` supports `--config` with a [`UpgradeConfiguration` API type](https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/) which can be used to configure the upgrade process.
@@ -54,8 +54,8 @@ If you're using the community-owned package repositories (`pkgs.k8s.io`), you ne
 
 Find the latest patch release for Kubernetes 1.31 using the OS package manager:
 
-- [Ubuntu, Debian or HypriotOS](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-versions-0)
-- [CentOS, RHEL or Fedora](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-versions-1)
+- [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-versions-0)
+- [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-versions-1)
 
 ```shell
 # Find the latest 1.31 version in the list.
@@ -74,8 +74,8 @@ The upgrade procedure on control plane nodes should be executed one node at a ti
 
 1. Upgrade kubeadm:
     
-    - [Ubuntu, Debian or HypriotOS](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubeadm-first-cp-0)
-    - [CentOS, RHEL or Fedora](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubeadm-first-cp-1)
+    - [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubeadm-first-cp-0)
+    - [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubeadm-first-cp-1)
     
     ```shell
     # replace x in 1.31.x-* with the latest patch version
@@ -157,8 +157,8 @@ kubectl drain <node-to-drain> --ignore-daemonsets
 
 1. Upgrade the kubelet and kubectl:
     
-    - [Ubuntu, Debian or HypriotOS](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubelet-0)
-    - [CentOS, RHEL or Fedora](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubelet-1)
+    - [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubelet-0)
+    - [](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#k8s-install-kubelet-1)
     
     ```shell
     # replace x in 1.31.x-* with the latest patch version

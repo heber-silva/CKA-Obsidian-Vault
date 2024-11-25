@@ -1,6 +1,6 @@
 [Doc](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/)
 
-This page explains how to debug [Pod](Pod.md)s running (or crashing) on a [Node](Node.md).
+This page explains how to debug [Pod](../../Workloads/Pod.md)s running (or crashing) on a [Node](../../Kubernetes%20Achitecture/Node.md).
 
 ## Before you begin[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#before-you-begin)
 
@@ -356,7 +356,7 @@ kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
 
 ## Debugging with container exec[](https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#container-exec)
 
-If the [container image](https://kubernetes.io/docs/reference/glossary/?all=true#term-image) includes debugging utilities, as is the case with images built from Linux and Windows OS base images, you can run commands inside a specific container with `kubectl exec`:
+If the [](https://kubernetes.io/docs/reference/glossary/?all=true#term-image) includes debugging utilities, as is the case with images built from Linux and Windows OS base images, you can run commands inside a specific container with `kubectl exec`:
 
 ```shell
 kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ${CMD} ${ARG1} ${ARG2} ... ${ARGN}
@@ -605,8 +605,8 @@ A static profile is a set of predefined properties, and you can apply them using
 |---|---|
 |legacy|A set of properties backwards compatibility with 1.22 behavior|
 |general|A reasonable set of generic properties for each debugging journey|
-|baseline|A set of properties compatible with [PodSecurityStandard baseline policy](https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline)|
-|restricted|A set of properties compatible with [PodSecurityStandard restricted policy](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted)|
+|baseline|A set of properties compatible with [](https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline)|
+|restricted|A set of properties compatible with [](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted)|
 |netadmin|A set of properties including Network Administrator privileges|
 |sysadmin|A set of properties including System Administrator (root) privileges|
 
@@ -646,7 +646,7 @@ CapEff:	000001ffffffffff
 ...
 ```
 
-This means the container process is granted full capabilities as a privileged container by applying `sysadmin` profile. See more details about [capabilities](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container).
+This means the container process is granted full capabilities as a privileged container by applying `sysadmin` profile. See more details about [](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container).
 
 You can also check that the ephemeral container was created as a privileged container:
 

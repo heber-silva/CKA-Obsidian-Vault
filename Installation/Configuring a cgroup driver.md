@@ -18,7 +18,7 @@ kubeadm allows you to pass a `KubeletConfiguration` structure during `kubeadm
 
 In v1.22 and later, if the user does not set the `cgroupDriver` field under `KubeletConfiguration`, kubeadm defaults it to `systemd`.
 
-In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [systemd cgroup driver](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
+In Kubernetes v1.28, you can enable automatic detection of the cgroup driver as an alpha feature. See [](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) for more details.
 
 A minimal example of configuring the field explicitly:
 
@@ -49,7 +49,7 @@ Executing the sub commands `init`, `join` and `upgrade` would result in kub
 
 To use `cgroupfs` and to prevent `kubeadm upgrade` from modifying the `KubeletConfiguration` cgroup driver on existing setups, you must be explicit about its value. This applies to a case where you do not wish future versions of kubeadm to apply the `systemd` driver by default.
 
-See the below section on "[Modify the kubelet ConfigMap](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/#modify-the-kubelet-configmap)" for details on how to be explicit about the value.
+See the below section on "[](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/#modify-the-kubelet-configmap)" for details on how to be explicit about the value.
 
 If you wish to configure a container runtime to use the `cgroupfs` driver, you must refer to the documentation of the container runtime of your choice.
 

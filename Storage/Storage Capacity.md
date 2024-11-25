@@ -13,21 +13,21 @@ Kubernetes v1.31 includes cluster-level API support for storage capacity trackin
 There are two API extensions for this feature:
 
 - [CSIStorageCapacity](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/csi-storage-capacity-v1/) objects: these get produced by a CSI driver in the namespace where the driver is installed. Each object contains capacity information for one storage class and defines which nodes have access to that storage.
-- [The `CSIDriverSpec.StorageCapacity` field](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/csi-driver-v1/#CSIDriverSpec): when set to `true`, the Kubernetes scheduler will consider storage capacity for volumes that use the CSI driver.
+- [](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/csi-driver-v1/#CSIDriverSpec): when set to `true`, the Kubernetes scheduler will consider storage capacity for volumes that use the CSI driver.
 
 ## Scheduling[](https://kubernetes.io/docs/concepts/storage/storage-capacity/#scheduling)
 
 Storage capacity information is used by the Kubernetes scheduler if:
 
-- a [Pod](Pod.md) uses a [Volume](volume.md) that has not been created yet,
-- that volume uses a [StorageClass](StorageClass.md) which references a CSI driver and uses `WaitForFirstConsumer` [volume binding mode](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode), and
+- a [Pod](../Workloads/Pod.md) uses a [Volume](Volume.md) that has not been created yet,
+- that volume uses a [StorageClass](StorageClass.md) which references a CSI driver and uses `WaitForFirstConsumer` [](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode), and
 - the `CSIDriver` object for the driver has `StorageCapacity` set to true.
 
 In that case, the scheduler only considers nodes for the Pod which have enough storage available to them. This check is very simplistic and only compares the size of the volume against the capacity listed in `CSIStorageCapacity` objects with a topology that includes the node.
 
 For volumes with `Immediate` volume binding mode, the storage driver decides where to create the volume, independently of Pods that will use the volume. The scheduler then schedules Pods onto nodes where the volume is available after the volume has been created.
 
-For [CSI ephemeral volumes](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes), scheduling always happens without considering storage capacity. This is based on the assumption that this volume type is only used by special CSI drivers which are local to a node and do not need significant resources there.
+For [](https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#csi-ephemeral-volumes), scheduling always happens without considering storage capacity. This is based on the assumption that this volume type is only used by special CSI drivers which are local to a node and do not need significant resources there.
 
 ## Rescheduling[](https://kubernetes.io/docs/concepts/storage/storage-capacity/#rescheduling)
 

@@ -1,5 +1,5 @@
 
-Resources that Kubernetes provides for configuring [Pod](Pod.md)s.
+Resources that Kubernetes provides for configuring [Pod](../Workloads/Pod.md)s.
 - [Configuration Best Practices](Configuration%20Best%20Practices.md)
 - [ConfigMap](ConfigMap.md)
 - [Secret](Secret.md)

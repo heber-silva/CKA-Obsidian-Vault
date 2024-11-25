@@ -1,7 +1,7 @@
 [Doc](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 You can use _topology spread constraints_ to control how [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are spread across your cluster among failure-domains such as regions, zones, nodes, and other user-defined topology domains. This can help to achieve high availability as well as efficient resource utilization.
 
-You can set [cluster-level constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#cluster-level-default-constraints) as a default, or configure topology spread constraints for individual workloads.
+You can set [](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#cluster-level-default-constraints) as a default, or configure topology spread constraints for individual workloads.
 
 ## Motivation[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#motivation)
 
@@ -39,7 +39,7 @@ spec:
   ### other Pod fields go here
 ```
 
-You can read more about this field by running `kubectl explain Pod.spec.topologySpreadConstraints` or refer to the [scheduling](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) section of the API reference for Pod.
+You can read more about this field by running `kubectl explain Pod.spec.topologySpreadConstraints` or refer to the [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) section of the API reference for Pod.
 
 ### Spread constraint definition[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#spread-constraint-definition)
 
@@ -59,17 +59,17 @@ You can define one or multiple `topologySpreadConstraints` entries to instruct
     - When the number of eligible domains with match topology keys is less than `minDomains`, Pod topology spread treats global minimum as 0, and then the calculation of `skew` is performed. The global minimum is the minimum number of matching Pods in an eligible domain, or zero if the number of eligible domains is less than `minDomains`.
     - When the number of eligible domains with matching topology keys equals or is greater than `minDomains`, this value has no effect on scheduling.
     - If you do not specify `minDomains`, the constraint behaves as if `minDomains` is 1.
-- **topologyKey** is the key of [node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels). Nodes that have a label with this key and identical values are considered to be in the same topology. We call each instance of a topology (in other words, a <key, value> pair) a domain. The scheduler will try to put a balanced number of pods into each domain. Also, we define an eligible domain as a domain whose nodes meet the requirements of nodeAffinityPolicy and nodeTaintsPolicy.
+- **topologyKey** is the key of [](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels). Nodes that have a label with this key and identical values are considered to be in the same topology. We call each instance of a topology (in other words, a <key, value> pair) a domain. The scheduler will try to put a balanced number of pods into each domain. Also, we define an eligible domain as a domain whose nodes meet the requirements of nodeAffinityPolicy and nodeTaintsPolicy.
  
 - **whenUnsatisfiable** indicates how to deal with a Pod if it doesn't satisfy the spread constraint:
     
     - `DoNotSchedule` (default) tells the scheduler not to schedule it.
     - `ScheduleAnyway` tells the scheduler to still schedule it while prioritizing nodes that minimize the skew.
-- **labelSelector** is used to find matching Pods. Pods that match this label selector are counted to determine the number of Pods in their corresponding topology domain. See [Label Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors) for more details.
+- **labelSelector** is used to find matching Pods. Pods that match this label selector are counted to determine the number of Pods in their corresponding topology domain. See [](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors) for more details.
 
 - **matchLabelKeys** is a list of pod label keys to select the pods over which spreading will be calculated. The keys are used to lookup values from the pod labels, those key-value labels are ANDed with `labelSelector` to select the group of existing pods over which spreading will be calculated for the incoming pod. The same key is forbidden to exist in both `matchLabelKeys` and `labelSelector`. `matchLabelKeys` cannot be set when `labelSelector` isn't set. Keys that don't exist in the pod labels will be ignored. A null or empty list means only match against the `labelSelector`.
     
-    With `matchLabelKeys`, you don't need to update the `pod.spec` between different revisions. The controller/operator just needs to set different values to the same label key for different revisions. The scheduler will assume the values automatically based on `matchLabelKeys`. For example, if you are configuring a Deployment, you can use the label keyed with [pod-template-hash](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label), which is added automatically by the Deployment controller, to distinguish between different revisions in a single Deployment.
+    With `matchLabelKeys`, you don't need to update the `pod.spec` between different revisions. The controller/operator just needs to set different values to the same label key for different revisions. The scheduler will assume the values automatically based on `matchLabelKeys`. For example, if you are configuring a Deployment, you can use the label keyed with [](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label), which is added automatically by the Deployment controller, to distinguish between different revisions in a single Deployment.
     
     ```yaml
         topologySpreadConstraints:
@@ -136,8 +136,8 @@ node4   Ready    <none>   2m43s   v1.16.0   node=node4,zone=zoneB
 ```
 
 Then the cluster is logically viewed as below:
-[0b52b758464681bacc878153c3dcf22d_MD5](0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
-![0b52b758464681bacc878153c3dcf22d_MD5](0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
+[0b52b758464681bacc878153c3dcf22d_MD5](../Images/0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
+![0b52b758464681bacc878153c3dcf22d_MD5](../Images/0b52b758464681bacc878153c3dcf22d_MD5.jpeg)
 
 ## Consistency[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#consistency)
 
@@ -153,8 +153,8 @@ You need a mechanism to ensure that all the nodes in a topology domain (such as 
 
 Suppose you have a 4-node cluster where 3 Pods labeled `foo: bar` are located in node1, node2 and node3 respectively:
 
-[Open: Pasted image 20241117151945.png](Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
-![726c900910ecc65016d362a32a30e07f_MD5](Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
+[Open: Pasted image 20241117151945.png](../Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
+![726c900910ecc65016d362a32a30e07f_MD5](../Images/726c900910ecc65016d362a32a30e07f_MD5.jpeg)
 
 If you want an incoming Pod to be evenly spread with existing Pods across zones, you can use a manifest similar to:
 
@@ -182,13 +182,13 @@ From that manifest, `topologyKey: zone` implies the even distribution will onl
 
 If the scheduler placed this incoming Pod into zone `A`, the distribution of Pods would become `[3, 1]`. That means the actual skew is then 2 (calculated as `3 - 1`), which violates `maxSkew: 1`. To satisfy the constraints and context for this example, the incoming Pod can only be placed onto a node in zone `B`:
 
-[Open: Pasted image 20241117152208.png](Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
-![78f75b95d827e4ed4c40298dedb79fcf_MD5](Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
+[Open: Pasted image 20241117152208.png](../Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
+![78f75b95d827e4ed4c40298dedb79fcf_MD5](../Images/78f75b95d827e4ed4c40298dedb79fcf_MD5.jpeg)
 
 OR
 
-[Open: Pasted image 20241117152247.png](Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
-![49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5](Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
+[Open: Pasted image 20241117152247.png](../Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
+![49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5](../Images/49d2fb637cdc02e2aa8f1a2ee16fd8df_MD5.jpeg)
 
 You can tweak the Pod spec to meet various kinds of requirements:
 
@@ -200,8 +200,8 @@ You can tweak the Pod spec to meet various kinds of requirements:
 
 This builds upon the previous example. Suppose you have a 4-node cluster where 3 existing Pods labeled `foo: bar` are located on node1, node2 and node3 respectively:
 
-[Open: Pasted image 20241117152322.png](Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
-![4dec2a9584d12fee066b553ac1b367e5_MD5](Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
+[Open: Pasted image 20241117152322.png](../Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
+![4dec2a9584d12fee066b553ac1b367e5_MD5](../Images/4dec2a9584d12fee066b553ac1b367e5_MD5.jpeg)
 
 You can combine two topology spread constraints to control the spread of Pods both by node and by zone:
 
@@ -237,8 +237,8 @@ In this case, to match the first constraint, the incoming Pod can only be placed
 
 Multiple constraints can lead to conflicts. Suppose you have a 3-node cluster across 2 zones:
 
-[Open: Pasted image 20241117152418.png](Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
-![28cf0dd18c7750a1bb305a061e565eff_MD5](Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
+[Open: Pasted image 20241117152418.png](../Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
+![28cf0dd18c7750a1bb305a061e565eff_MD5](../Images/28cf0dd18c7750a1bb305a061e565eff_MD5.jpeg)
 
 If you were to apply [`two-constraints.yaml`](https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/pods/topology-spread-constraints/two-constraints.yaml) (the manifest from the previous example) to **this** cluster, you would see that the Pod `mypod` stays in the `Pending` state. This happens because: to satisfy the first constraint, the Pod `mypod` can only be placed into zone `B`; while in terms of the second constraint, the Pod `mypod` can only schedule to node `node2`. The intersection of the two constraints returns an empty set, and the scheduler cannot place the Pod.
 
@@ -252,8 +252,8 @@ The scheduler will skip the non-matching nodes from the skew calculations if the
 
 Suppose you have a 5-node cluster ranging across zones A to C:
 
-[Open: Pasted image 20241117152456.png](Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
-![6094a89a811608a9e6a57c53b4b0d3c7_MD5](Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
+[Open: Pasted image 20241117152456.png](../Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
+![6094a89a811608a9e6a57c53b4b0d3c7_MD5](../Images/6094a89a811608a9e6a57c53b4b0d3c7_MD5.jpeg)
 
 and you know that zone `C` must be excluded. In this case, you can compose a manifest as below, so that Pod `mypod` will be placed into zone `B` instead of zone `C`. Similarly, Kubernetes also respects `spec.nodeSelector`.
 
@@ -294,7 +294,7 @@ There are some implicit conventions worth noting here:
     
 - The scheduler only considers nodes that have all `topologySpreadConstraints[*].topologyKey` present at the same time. Nodes missing any of these `topologyKeys` are bypassed. This implies that:
     
-    1. any Pods located on those bypassed nodes do not impact `maxSkew` calculation - in the above [example](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#example-conflicting-topologyspreadconstraints), suppose the node `node1` does not have a label "zone", then the 2 Pods will be disregarded, hence the incoming Pod will be scheduled into zone `A`.
+    1. any Pods located on those bypassed nodes do not impact `maxSkew` calculation - in the above [](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#example-conflicting-topologyspreadconstraints), suppose the node `node1` does not have a label "zone", then the 2 Pods will be disregarded, hence the incoming Pod will be scheduled into zone `A`.
     2. the incoming Pod has no chances to be scheduled onto this kind of nodes - in the above example, suppose a node `node5` has the **mistyped** label `zone-typo: zoneC` (and no `zone` label set). After node `node5` joins the cluster, it will be bypassed and Pods for this workload aren't scheduled there.
 - Be aware of what will happen if the incoming Pod's `topologySpreadConstraints[*].labelSelector` doesn't match its own labels. In the above example, if you remove the incoming Pod's labels, it can still be placed onto nodes in zone `B`, since the constraints are still satisfied. However, after that placement, the degree of imbalance of the cluster remains unchanged - it's still zone `A` having 2 Pods labeled as `foo: bar`, and zone `B` having 1 Pod labeled as `foo: bar`. If this is not what you expect, update the workload's `topologySpreadConstraints[*].labelSelector` to match the labels in the pod template.
 
@@ -305,7 +305,7 @@ It is possible to set default topology spread constraints for a cluster. Default
 - It doesn't define any constraints in its `.spec.topologySpreadConstraints`.
 - It belongs to a Service, ReplicaSet, StatefulSet or ReplicationController.
 
-Default constraints can be set as part of the `PodTopologySpread` plugin arguments in a [scheduling profile](https://kubernetes.io/docs/reference/scheduling/config/#profiles). The constraints are specified with the same [API above](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field), except that `labelSelector` must be empty. The selectors are calculated from the Services, ReplicaSets, StatefulSets or ReplicationControllers that the Pod belongs to.
+Default constraints can be set as part of the `PodTopologySpread` plugin arguments in a [](https://kubernetes.io/docs/reference/scheduling/config/#profiles). The constraints are specified with the same [](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field), except that `labelSelector` must be empty. The selectors are calculated from the Services, ReplicaSets, StatefulSets or ReplicationControllers that the Pod belongs to.
 
 An example configuration might look like follows:
 
@@ -366,7 +366,7 @@ profiles:
 
 ## Comparison with podAffinity and podAntiAffinity[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#comparison-with-podaffinity-podantiaffinity)
 
-In Kubernetes, [inter-Pod affinity and anti-affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) control how Pods are scheduled in relation to one another - either more packed or more scattered.
+In Kubernetes, [](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) control how Pods are scheduled in relation to one another - either more packed or more scattered.
 
 `podAffinity`
 
@@ -378,7 +378,7 @@ repels Pods. If you set this to `requiredDuringSchedulingIgnoredDuringExecution
 
 For finer control, you can specify topology spread constraints to distribute Pods across different topology domains - to achieve either high availability or cost-saving. This can also help on rolling update workloads and scaling out replicas smoothly.
 
-For more context, see the [Motivation](https://github.com/kubernetes/enhancements/tree/master/keps/sig-scheduling/895-pod-topology-spread#motivation) section of the enhancement proposal about Pod topology spread constraints.
+For more context, see the [](https://github.com/kubernetes/enhancements/tree/master/keps/sig-scheduling/895-pod-topology-spread#motivation) section of the enhancement proposal about Pod topology spread constraints.
 
 ## Known limitations[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#known-limitations)
 
@@ -396,4 +396,4 @@ For more context, see the [Motivation](https://github.com/kubernetes/enhancemen
 ## What's next[](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#what-s-next)
 
 - The blog article [Introducing PodTopologySpread](https://kubernetes.io/blog/2020/05/introducing-podtopologyspread/) explains `maxSkew` in some detail, as well as covering some advanced usage examples.
-- Read the [scheduling](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) section of the API reference for Pod.
+- Read the [](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) section of the API reference for Pod.

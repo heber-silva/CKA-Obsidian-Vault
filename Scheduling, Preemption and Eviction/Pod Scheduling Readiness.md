@@ -9,8 +9,8 @@ By specifying/removing a Pod's `.spec.schedulingGates`, you can control when a 
 
 The `schedulingGates` field contains a list of strings, and each string literal is perceived as a criteria that Pod should be satisfied before considered schedulable. This field can be initialized only when a Pod is created (either by the client, or mutated during admission). After creation, each schedulingGate can be removed in arbitrary order, but addition of a new scheduling gate is disallowed.
 
-[Open: Pasted image 20241117160231.png](Images/1c746930af2f4c3d26c40ca895790bc3_MD5.jpeg)
-![1c746930af2f4c3d26c40ca895790bc3_MD5](Images/1c746930af2f4c3d26c40ca895790bc3_MD5.jpeg)
+[Open: Pasted image 20241117160231.png](../Images/1c746930af2f4c3d26c40ca895790bc3_MD5.jpeg)
+![1c746930af2f4c3d26c40ca895790bc3_MD5](../Images/1c746930af2f4c3d26c40ca895790bc3_MD5.jpeg)
 
 Figure. Pod SchedulingGates
 

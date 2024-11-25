@@ -1,5 +1,5 @@
 #prova 
-Ways to provide both long-term and temporary storage to [Pod](Pod.md)s in your cluster.
+Ways to provide both long-term and temporary storage to [Pod](../Workloads/Pod.md)s in your cluster.
 
 ---
 

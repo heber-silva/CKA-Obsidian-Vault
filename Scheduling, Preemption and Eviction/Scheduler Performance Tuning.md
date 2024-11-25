@@ -1,6 +1,6 @@
 FEATURE STATE: `Kubernetes v1.14 [beta]`
 
-[kube-scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler) is the Kubernetes default scheduler. It is responsible for placement of Pods on Nodes in a cluster.
+[](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler) is the Kubernetes default scheduler. It is responsible for placement of Pods on Nodes in a cluster.
 
 Nodes in a cluster that meet the scheduling requirements of a Pod are called _feasible_ Nodes for the Pod. The scheduler finds feasible Nodes for a Pod and then runs a set of functions to score the feasible Nodes, picking a Node with the highest score among the feasible ones to run the Pod. The scheduler then notifies the API server about this decision in a process called _Binding_.
 
@@ -28,9 +28,9 @@ to verify that the kube-scheduler component is healthy.
 
 To improve scheduling performance, the kube-scheduler can stop looking for feasible nodes once it has found enough of them. In large clusters, this saves time compared to a naive approach that would consider every node.
 
-You specify a threshold for how many nodes are enough, as a whole number percentage of all the nodes in your cluster. The kube-scheduler converts this into an integer number of nodes. During scheduling, if the kube-scheduler has identified enough feasible nodes to exceed the configured percentage, the kube-scheduler stops searching for more feasible nodes and moves on to the [scoring phase](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler-implementation).
+You specify a threshold for how many nodes are enough, as a whole number percentage of all the nodes in your cluster. The kube-scheduler converts this into an integer number of nodes. During scheduling, if the kube-scheduler has identified enough feasible nodes to exceed the configured percentage, the kube-scheduler stops searching for more feasible nodes and moves on to the [](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/#kube-scheduler-implementation).
 
-[How the scheduler iterates over Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/#how-the-scheduler-iterates-over-nodes) describes the process in detail.
+[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/#how-the-scheduler-iterates-over-nodes) describes the process in detail.
 
 ### Default threshold[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/#default-threshold)
 
@@ -94,4 +94,4 @@ After going over all the Nodes, it goes back to Node 1.
 
 ## What's next[](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/#what-s-next)
 
-- Check the [kube-scheduler configuration reference (v1)](https://kubernetes.io/docs/reference/config-api/kube-scheduler-config.v1/)
+- Check the [kube-scheduler configuration reference (v1)](v1))
