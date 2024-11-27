@@ -34,7 +34,7 @@ Only a few parts of this model are implemented by Kubernetes itself. For the oth
 
 - Pod network namespace setup is handled by system-level software implementing the [Container Runtime Interface (CRI)](CRI)).md).
     
-- The pod network itself is managed by a [](https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy). On Linux, most container runtimes use the [Container Networking Interface (CNI)](CNI)) to interact with the pod network implementation, so these implementations are often called _CNI plugins_.
+- The pod network itself is managed by a [](https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy). On Linux, most container runtimes use the [Container Networking Interface (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)) to interact with the pod network implementation, so these implementations are often called _CNI plugins_.
     
 - Kubernetes provides a default implementation of service proxying, called [kube-proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/), but some pod network implementations instead use their own service proxy that is more tightly integrated with the rest of the implementation.
     

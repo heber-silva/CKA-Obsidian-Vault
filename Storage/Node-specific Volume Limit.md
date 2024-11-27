@@ -6,11 +6,11 @@ Cloud providers like Google, Amazon, and Microsoft typically have a limit on how
 
 The Kubernetes scheduler has default limits on the number of volumes that can be attached to a Node:
 
-|Cloud service|Maximum volumes per Node|
-|---|---|
-|[Amazon Elastic Block Store (EBS)](EBS))|39|
-|[Google Persistent Disk](https://cloud.google.com/persistent-disk/)|16|
-|[Microsoft Azure Disk Storage](https://azure.microsoft.com/en-us/services/storage/main-disks/)|16|
+| Cloud service                                                                                  | Maximum volumes per Node |
+| ---------------------------------------------------------------------------------------------- | ------------------------ |
+| [Amazon Elastic Block Store (EBS)](https://aws.amazon.com/ebs/))                               | 39                       |
+| [Google Persistent Disk](https://cloud.google.com/persistent-disk/)                            | 16                       |
+| [Microsoft Azure Disk Storage](https://azure.microsoft.com/en-us/services/storage/main-disks/) | 16                       |
 
 ## Custom limits[](https://kubernetes.io/docs/concepts/storage/storage-limits/#custom-limits)
 

@@ -20,7 +20,7 @@ By default, Secret objects are stored unencrypted in [etcd](https://kubernetes.
 
 ### Configure least-privilege access to Secrets[](https://kubernetes.io/docs/concepts/security/secrets-good-practices/#least-privilege-secrets)
 
-When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](RBAC)), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md).
+When planning your access control mechanism, such as Kubernetes [Role-based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) [(RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)), consider the following guidelines for access to `Secret` objects. You should also follow the other guidelines in [Role Based Access Control Good Practices](Role%20Based%20Access%20Control%20Good%20Practices.md).
 
 - **Components**: Restrict `watch` or `list` access to only the most privileged, system-level components. Only grant `get` access for Secrets if the component's normal behavior requires it.
 - **Humans**: Restrict `get`, `watch`, or `list` access to Secrets. Only allow cluster administrators to access `etcd`. This includes read-only access. For more complex access control, such as restricting access to Secrets with specific annotations, consider using third-party authorization mechanisms.

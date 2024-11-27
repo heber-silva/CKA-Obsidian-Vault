@@ -34,7 +34,7 @@ After bootstrapping, neither users nor components should authenticate to the Kub
 - [ ]  Access from the workloads to the cloud metadata API is filtered.
 - [ ]  Use of LoadBalancer and ExternalIPs is restricted.
 
-A number of [Container Network Interface (CNI) plugins](CNI)%20plugins) plugins provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [NetworkPolicy](../Networking/NetworkPolicy.md) which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
+A number of [Container Network Interface (CNI) plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)) provide the functionality to restrict network resources that pods may communicate with. This is most commonly done through [NetworkPolicy](../Networking/NetworkPolicy.md) which provide a namespaced resource to define rules. Default network policies blocking everything egress and ingress, in each namespace, selecting all the pods, can be useful to adopt an allow list approach, ensuring that no workloads is missed.
 
 Not all CNI plugins provide encryption in transit. If the chosen plugin lacks this feature, an alternative solution could be to use a service mesh to provide that functionality.
 
@@ -150,7 +150,7 @@ Build images to directly start with an unprivileged user by using the [](https:
 
 Avoid using image tags to reference an image, especially the `latest` tag, the image behind a tag can be easily modified in a registry. Prefer using the complete `sha256` digest which is unique to the image manifest. This policy can be enforced via an [](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook). Image signatures can also be automatically [](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/#verifying-image-signatures-with-admission-controller) at deploy time to validate their authenticity and integrity.
 
-Scanning a container image can prevent critical vulnerabilities from being deployed to the cluster alongside the container image. Image scanning should be completed before deploying a container image to a cluster and is usually done as part of the deployment process in a CI/CD pipeline. The purpose of an image scan is to obtain information about possible vulnerabilities and their prevention in the container image, such as a [Common Vulnerability Scoring System (CVSS)](CVSS)) score. If the result of the image scans is combined with the pipeline compliance rules, only properly patched container images will end up in Production.
+Scanning a container image can prevent critical vulnerabilities from being deployed to the cluster alongside the container image. Image scanning should be completed before deploying a container image to a cluster and is usually done as part of the deployment process in a CI/CD pipeline. The purpose of an image scan is to obtain information about possible vulnerabilities and their prevention in the container image, such as a [Common Vulnerability Scoring System (CVSS)](https://www.first.org/cvss/)) score. If the result of the image scans is combined with the pipeline compliance rules, only properly patched container images will end up in Production.
 
 ## Admission controllers[](https://kubernetes.io/docs/concepts/security/security-checklist/#admission-controllers)
 

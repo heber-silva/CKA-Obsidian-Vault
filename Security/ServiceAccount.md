@@ -60,7 +60,7 @@ For instructions, refer to [Configure Service Accounts for Pods](https://kubern
 
 ### Grant permissions to a ServiceAccount[](https://kubernetes.io/docs/concepts/security/service-accounts/#grant-permissions)
 
-You can use the built-in Kubernetes [role-based access control (RBAC)](RBAC)) mechanism to grant the minimum permissions required by each service account. You create a _role_, which grants access, and then _bind_ the role to your ServiceAccount. RBAC lets you define a minimum set of permissions so that the service account permissions follow the principle of least privilege. Pods that use that service account don't get more permissions than are required to function correctly.
+You can use the built-in Kubernetes [role-based access control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)) mechanism to grant the minimum permissions required by each service account. You create a _role_, which grants access, and then _bind_ the role to your ServiceAccount. RBAC lets you define a minimum set of permissions so that the service account permissions follow the principle of least privilege. Pods that use that service account don't get more permissions than are required to function correctly.
 
 For instructions, refer to [](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#service-account-permissions).
 

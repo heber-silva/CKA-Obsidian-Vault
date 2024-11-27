@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"865cf5679cac7029","x":327,"y":200,"width":400,"height":400,"type":"file","file":"Workloads/Workload Management/Deployment.md"},
+		{"id":"009054aab5a58860","x":-440,"y":-150,"width":400,"height":400,"type":"file","file":"Workloads/Pod.md"},
+		{"id":"cb8a189bb70086c5","x":327,"y":-440,"width":400,"height":400,"type":"file","file":"Workloads/Workload Management/DaemonSet.md"}
+	],
+	"edges":[
+		{"id":"46cb72f3e652445f","fromNode":"009054aab5a58860","fromSide":"right","toNode":"865cf5679cac7029","toSide":"left"},
+		{"id":"df98262faa431e96","fromNode":"009054aab5a58860","fromSide":"right","toNode":"cb8a189bb70086c5","toSide":"left","color":"3"}
+	]
+}

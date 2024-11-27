@@ -204,7 +204,7 @@ As previously mentioned, you should consider isolating each workload in its own 
 
 Conversely, there are also advantages to assigning namespaces at the tenant level, not just the workload level, since there are often policies that apply to all workloads owned by a single tenant. However, this raises its own problems. Firstly, this makes it difficult or impossible to customize policies to individual workloads, and secondly, it may be challenging to come up with a single level of "tenancy" that should be given a namespace. For example, an organization may have divisions, teams, and subteams - which should be assigned a namespace?
 
-To solve this, Kubernetes provides the [Hierarchical Namespace Controller (HNC)](HNC)), which allows you to organize your namespaces into hierarchies, and share certain policies and resources between them. It also helps you manage namespace labels, namespace lifecycles, and delegated management, and share resource quotas across related namespaces. These capabilities can be useful in both multi-team and multi-customer scenarios.
+To solve this, Kubernetes provides the [Hierarchical Namespace Controller (HNC)](https://github.com/kubernetes-sigs/hierarchical-namespaces)), which allows you to organize your namespaces into hierarchies, and share certain policies and resources between them. It also helps you manage namespace labels, namespace lifecycles, and delegated management, and share resource quotas across related namespaces. These capabilities can be useful in both multi-team and multi-customer scenarios.
 
 Other projects that provide similar capabilities and aid in managing namespaced resources are listed below.
 
@@ -238,7 +238,7 @@ By using per-tenant dedicated control planes, most of the isolation problems due
 
 The improved isolation comes at the cost of running and maintaining an individual virtual control plane per tenant. In addition, per-tenant control planes do not solve isolation problems in the data plane, such as node-level noisy neighbors or security threats. These must still be addressed separately.
 
-The Kubernetes [Cluster API - Nested (CAPN)](CAPN)) project provides an implementation of virtual control planes.
+The Kubernetes [Cluster API - Nested (CAPN)](https://github.com/kubernetes-sigs/cluster-api-provider-nested/tree/main/virtualcluster)(CAPN)) project provides an implementation of virtual control planes.
 
 #### Other implementations[](https://kubernetes.io/docs/concepts/security/multi-tenancy/#other-implementations)
 
